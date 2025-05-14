@@ -1,0 +1,78 @@
+package org.openjfx.Controleur;
+
+import org.openjfx.Pane.GammePane;
+import org.openjfx.Pane.GammePane;
+
+import javafx.collections.ObservableList;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import org.openjfx.Class.*;
+
+public class GammeControleur {
+
+    private GammePane vue;
+
+    public GammeControleur(GammePane v){
+        this.vue = v;
+    }
+
+    public void creationGamme(){
+        List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
+        List<Equipement> equipements = new ArrayList<>();
+        for(Operation o : selection){
+            equipements.addAll(o.getEquipements());
+        }
+        Gamme g = new Gamme(this.vue.getRef().getText(),
+                            new ArrayList<>(selection),
+                            new HashSet<>(equipements));
+        this.vue.getModel().add(g);
+        this.vue.getRef().clear();
+        System.out.println("Gamme: " + this.vue.getRef().getText() + " ajouté à la liste");
+    }
+
+    public void modifierGamme(){
+        Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
+        if(selected != null){
+            if(!this.vue.getRef().getText().trim().isEmpty()){
+                selected.setRefGamme(this.vue.getRef().getText().trim());
+            }
+            if(!this.vue.getListOperation().getSelectionModel().isEmpty()){
+                List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
+                List<Equipement> equipements = new ArrayList<>();
+                for(Operation o : selection){
+                equipements.addAll(o.getEquipements());
+                }
+                selected.setOperations(new ArrayList<>(selection));
+                selected.setEquipements(new HashSet<>(equipements));
+            }
+        }
+        this.vue.getTableGammes().refresh();
+    }
+
+    public void supprimerGamme(){
+        Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
+        this.vue.getModel().remove(selected);
+    }
+
+    public void sauvegarderGamme(){
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new FileOutputStream("Gammes.txt"));
+            for (Gamme g : this.vue.getModel()){
+                pw.println(g.getRefGamme()+";"+g.opString()+";"+g.eqString());
+            }
+            pw.close();
+            System.out.println("Gamme ajouté au fichier");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}

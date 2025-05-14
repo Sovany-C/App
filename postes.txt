@@ -1,0 +1,2 @@
+PT02;poste2;MC01
+PT03;post3;MC02,MC01,MC03
