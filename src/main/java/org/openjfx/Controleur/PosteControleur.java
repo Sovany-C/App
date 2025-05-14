@@ -57,7 +57,7 @@ public class PosteControleur {
     public void sauvegarderPoste(){
         PrintWriter pw;
         try {
-            pw = new PrintWriter(new FileOutputStream("postes.txt"));
+            pw = new PrintWriter(new FileOutputStream("data/postes.txt"));
             for (Equipement e : this.vue.getModel()){
                 if(e instanceof Poste){
                     Poste p = (Poste) e;

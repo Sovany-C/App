@@ -68,26 +68,26 @@ public class AtelierControleur {
         posteStage.show();
     }
 
-    // public void dessinerAtelier(){
-    //     for(int i=0; i<this.vue.getModel().getMachine().size();i++){
-    //         Text text = new Text(this.vue.getModel().getMachine().get(i).getRefEquipement());
-    //         StackPane stack = new StackPane();
-    //         Rectangle machine = new Rectangle();
-    //         machine.setX(this.vue.getModel().getMachine().get(i).getX());
-    //         machine.setY(this.vue.getModel().getMachine().get(i).getY());
-    //         machine.setWidth(10);
-    //         machine.setHeight(10);
-    //         machine.setStroke(Color.BLACK);
-    //         machine.setFill(Color.WHITE); 
+    public void dessinerAtelier(){
+        for(int i=0; i<this.vue.getModel().getMachine().size();i++){
+            Text text = new Text(this.vue.getModel().getMachine().get(i).getRefEquipement());
+            StackPane stack = new StackPane();
+            Rectangle machine = new Rectangle();
+            machine.setX(this.vue.getModel().getMachine().get(i).getX());
+            machine.setY(this.vue.getModel().getMachine().get(i).getY());
+            machine.setWidth(30);
+            machine.setHeight(30);
+            machine.setStroke(Color.BLACK);
+            machine.setFill(Color.WHITE); 
 
-    //         stack.setAlignment(Pos.CENTER);
-    //         stack.getChildren().addAll(machine, text);
-    //         stack.setLayoutX(this.vue.getModel().getMachine().get(i).getX());
-    //         stack.setLayoutY(this.vue.getModel().getMachine().get(i).getY());
+            stack.setAlignment(Pos.CENTER);
+            stack.getChildren().addAll(machine, text);
+            stack.setLayoutX(this.vue.getModel().getMachine().get(i).getX());
+            stack.setLayoutY(this.vue.getModel().getMachine().get(i).getY());
 
-    //         this.vue.getEspace_affichage().getChildren().addAll(stack);
-    //     }
-    // }
+            this.vue.getEspace_affichage().getChildren().addAll(stack);
+        }
+    }
 
 
     

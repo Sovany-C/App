@@ -1,3 +1,0 @@
-OP02;operation2;MC01,MC02;3.0
-OP01;operation;MC01,MC02;0.3
-OP03;operation;MC03,PT01;2.0

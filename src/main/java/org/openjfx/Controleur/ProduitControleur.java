@@ -28,7 +28,7 @@ public class ProduitControleur {
     public void sauvegarderProduit(){
         PrintWriter pw;
         try {
-            pw = new PrintWriter(new FileOutputStream("Produits.txt"));
+            pw = new PrintWriter(new FileOutputStream("data/produits.txt"));
             for (Produit p : this.vue.getModel()){
                 pw.println(p.getCodeProduit()+";"+p.getdProduit()+";"+p.gammeString());
             }

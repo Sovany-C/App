@@ -1,2 +1,0 @@
-PR02;produit;G03
-PR06;produit01;G01,G02

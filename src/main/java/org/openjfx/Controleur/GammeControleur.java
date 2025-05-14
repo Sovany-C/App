@@ -59,7 +59,7 @@ public class GammeControleur {
     public void sauvegarderGamme(){
         PrintWriter pw;
         try {
-            pw = new PrintWriter(new FileOutputStream("Gammes.txt"));
+            pw = new PrintWriter(new FileOutputStream("data/gammes.txt"));
             for (Gamme g : this.vue.getModel()){
                 pw.println(g.getRefGamme()+";"+g.opString()+";"+g.eqString());
             }

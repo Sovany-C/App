@@ -59,7 +59,7 @@ public class OperationControleur {
     public void sauvegarderOperation(){
         PrintWriter pw;
         try {
-            pw = new PrintWriter(new FileOutputStream("Operations.txt"));
+            pw = new PrintWriter(new FileOutputStream("data/operations.txt"));
             for (Operation op : this.vue.getModel()){
                 pw.println(op.getRefOperation()+";"+op.getdOperation()+";"+op.equipementString()+";"+op.getDureeOperation());
             }

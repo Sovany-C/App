@@ -31,7 +31,7 @@ public class OperateurControleur {
     public void sauvegarderOperateur(){
         PrintWriter pw;
         try {
-            pw = new PrintWriter(new FileOutputStream("Operateurs.txt"));
+            pw = new PrintWriter(new FileOutputStream("data/operateurs.txt"));
             for (Operateur p : this.vue.getModel()){
                 pw.println(p.getCode()+";"+p.getNom()+";"+p.getPrenom()+";"+p.compString());
             }

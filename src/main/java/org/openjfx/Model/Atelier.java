@@ -81,10 +81,6 @@ public class Atelier {
         this.operations = FXCollections.observableArrayList();
     }
     
-    // Méthode
-    public void addEq(Equipement e){
-        this.equipements.add(e);
-    }
 
     public String affiche(){
         ArrayList<String> refEq = new ArrayList<>();
@@ -105,6 +101,9 @@ public class Atelier {
         return machines;
     }
 
+    public void initialisation(){
+        
+    }
     
 
     
