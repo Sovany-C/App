@@ -21,21 +21,23 @@ import javafx.scene.layout.VBox;
 
 public class OperateurPane extends VBox {
 
-    private ObservableList<Produit> model;
-    private ProduitControleur controleur;
+    private ObservableList<Operateur> model;
+    private OperateurControleur controleur;
     
-    private ObservableList<Gamme> gammes;
-    private Label codeProduit;
-    private Label dProduit;
-    private Label gLabel;
+    private ObservableList<Machine> machines;
+    private Label codeOperateur;
+    private Label nomLabel;
+    private Label prenomLabel;
+    private Label competLabel;
 
     private TextField code;
-    private TextField des;
-    private ListView<Gamme> listGamme;
+    private TextField prenom;
+    private TextField nom;
+    private ListView<Machine> listMachine;
 
-    private ComboBox<Produit> choix;
+    private ComboBox<Operateur> choix;
 
-    private TableView<Produit> tableProduits;
+    private TableView<Operateur> tableOperateurs;
     
     private Button bt_creer;
     private Button bt_sauvegarder;
@@ -43,36 +45,48 @@ public class OperateurPane extends VBox {
     private Button bt_supprimer;
 
     private GridPane pane_saisiedesinfo;
-    
-    public ObservableList<Produit> getModel() {
+
+    public ObservableList<Operateur> getModel() {
         return model;
     }
-    public void setModel(ObservableList<Produit> model) {
+    public void setModel(ObservableList<Operateur> model) {
         this.model = model;
     }
-    public ProduitControleur getControleur() {
+    public OperateurControleur getControleur() {
         return controleur;
     }
-    public void setControleur(ProduitControleur controleur) {
+    public void setControleur(OperateurControleur controleur) {
         this.controleur = controleur;
     }
-    public Label getCodeProduit() {
-        return codeProduit;
+    public ObservableList<Machine> getMachines() {
+        return machines;
     }
-    public void setCodeProduit(Label codeProduit) {
-        this.codeProduit = codeProduit;
+    public void setMachines(ObservableList<Machine> machines) {
+        this.machines = machines;
     }
-    public Label getdProduit() {
-        return dProduit;
+    public Label getCodeOperateur() {
+        return codeOperateur;
     }
-    public void setdProduit(Label dProduit) {
-        this.dProduit = dProduit;
+    public void setCodeOperateur(Label codeOperateur) {
+        this.codeOperateur = codeOperateur;
     }
-    public Label getgLabel() {
-        return gLabel;
+    public Label getNomLabel() {
+        return nomLabel;
     }
-    public void setgLabel(Label gLabel) {
-        this.gLabel = gLabel;
+    public void setNomLabel(Label nomLabel) {
+        this.nomLabel = nomLabel;
+    }
+    public Label getPrenomLabel() {
+        return prenomLabel;
+    }
+    public void setPrenomLabel(Label prenomLabel) {
+        this.prenomLabel = prenomLabel;
+    }
+    public Label getCompetLabel() {
+        return competLabel;
+    }
+    public void setCompetLabel(Label competLabel) {
+        this.competLabel = competLabel;
     }
     public TextField getCode() {
         return code;
@@ -80,23 +94,35 @@ public class OperateurPane extends VBox {
     public void setCode(TextField code) {
         this.code = code;
     }
-    public TextField getDes() {
-        return des;
+    public TextField getPrenom() {
+        return prenom;
     }
-    public void setDes(TextField des) {
-        this.des = des;
+    public void setPrenom(TextField prenom) {
+        this.prenom = prenom;
     }
-    public ComboBox<Produit> getChoix() {
+    public TextField getNom() {
+        return nom;
+    }
+    public void setNom(TextField nom) {
+        this.nom = nom;
+    }
+    public ListView<Machine> getListMachine() {
+        return listMachine;
+    }
+    public void setListMachine(ListView<Machine> listMachine) {
+        this.listMachine = listMachine;
+    }
+    public ComboBox<Operateur> getChoix() {
         return choix;
     }
-    public void setChoix(ComboBox<Produit> choix) {
+    public void setChoix(ComboBox<Operateur> choix) {
         this.choix = choix;
     }
-    public TableView<Produit> getTableProduits() {
-        return tableProduits;
+    public TableView<Operateur> getTableOperateurs() {
+        return tableOperateurs;
     }
-    public void setTableProduits(TableView<Produit> tableProduits) {
-        this.tableProduits = tableProduits;
+    public void setTableOperateurs(TableView<Operateur> tableOperateurs) {
+        this.tableOperateurs = tableOperateurs;
     }
     public Button getBt_creer() {
         return bt_creer;
@@ -128,84 +154,77 @@ public class OperateurPane extends VBox {
     public void setPane_saisiedesinfo(GridPane pane_saisiedesinfo) {
         this.pane_saisiedesinfo = pane_saisiedesinfo;
     }
-    public ObservableList<Gamme> getGammes() {
-        return gammes;
-    }
-    public void setGammes(ObservableList<Gamme> gammes) {
-        this.gammes = gammes;
-    }
-    public ListView<Gamme> getListGamme() {
-        return listGamme;
-    }
-    public void setListGamme(ListView<Gamme> listGamme) {
-        this.listGamme = listGamme;
-    }
-    
     public OperateurPane(Atelier a){
+        int c=0, l=0;
+        this.model = a.getOperateurs();
 
-        this.model = a.getProduits();
-
-        this.gammes = a.getGammes();
-        this.codeProduit = new Label("Référence:");
-        this.dProduit = new Label("Désignation:");
-        this.gLabel = new Label("Gammes");
+        this.machines = a.getMachine();
+        this.codeOperateur = new Label("Code:");
+        this.nomLabel = new Label("Nom:");
+        this.prenomLabel = new Label("Prenom:");
+        this.competLabel = new Label("Compétences:");
 
         this.code = new TextField();
-        this.des = new TextField();
+        this.nom = new TextField();
+        this.prenom = new TextField();
 
-        this.listGamme = new ListView<>();
-        this.listGamme.getItems().addAll(gammes);
-        this.listGamme.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        this.listMachine = new ListView<>();
+        this.listMachine.getItems().addAll(machines);
+        this.listMachine.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
-        this.pane_saisiedesinfo.add(this.codeProduit, 0, 0);
-        this.pane_saisiedesinfo.add(this.code,1,0);
-        this.pane_saisiedesinfo.add(this.dProduit,0,1);
-        this.pane_saisiedesinfo.add(this.des, 1,1);
-        this.pane_saisiedesinfo.add(this.gLabel, 0,2);
-        this.pane_saisiedesinfo.add(listGamme,1,2);
+        this.pane_saisiedesinfo.add(this.codeOperateur, c, l);
+        this.pane_saisiedesinfo.add(this.code,c+1,l);
+        this.pane_saisiedesinfo.add(this.nomLabel,c,l+1);
+        this.pane_saisiedesinfo.add(this.nom, c+1,l+1);
+        this.pane_saisiedesinfo.add(this.prenomLabel, c, l+2);
+        this.pane_saisiedesinfo.add(this.prenom, c, l+2);
+        this.pane_saisiedesinfo.add(this.competLabel, c+1,l+3);
+        this.pane_saisiedesinfo.add(listMachine,c+1,l+3);
 
         this.choix = new ComboBox<>(model);
         this.pane_saisiedesinfo.add(choix, 0,6);
 
-        this.tableProduits = new TableView<Produit>();
-        this.tableProduits.setItems(model);
-        TableColumn<Produit, String> codeCol = new TableColumn<Produit, String>("Référence");
-        codeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCodeProduit()));
-        TableColumn<Produit, String> desCol = new TableColumn<Produit, String>("Désignation");
-        desCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getdProduit()));
-        TableColumn<Produit, String> gamCol = new TableColumn<Produit, String>("Type");
-        gamCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().gammeString()));
-        this.tableProduits.getColumns().addAll(codeCol, desCol,gamCol);
-        this.pane_saisiedesinfo.add(tableProduits, 0, 8);
-        this.pane_saisiedesinfo.setColumnSpan(tableProduits,5);
+        this.tableOperateurs = new TableView<Operateur>();
+        this.tableOperateurs.setItems(model);
+        TableColumn<Operateur, String> codeCol = new TableColumn<Operateur, String>("Code");
+        codeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCode()));
+        TableColumn<Operateur, String> nomCol = new TableColumn<Operateur, String>("Nom");
+        nomCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNom()));
+        TableColumn<Operateur, String> prenomCol = new TableColumn<Operateur, String>("Prénom");
+        prenomCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getPrenom()));
+        TableColumn<Operateur, String> machCol = new TableColumn<Operateur, String>("Type");
+        machCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().compString()));
+        this.tableOperateurs.getColumns().addAll(codeCol, nomCol,prenomCol,machCol);
+        this.pane_saisiedesinfo.add(tableOperateurs, 0, 8);
+        this.pane_saisiedesinfo.setColumnSpan(tableOperateurs,5);
 
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, 7);
         this.bt_creer.setOnAction(evt -> {
-            this.controleur.creationProduit(model);
+            this.controleur.creationOperateur();
         });
 
         this.bt_modifier = new Button("Modifier");
         this.pane_saisiedesinfo.add(bt_modifier, 1, 7);
         this.bt_modifier.setOnAction(evt -> {
-            this.controleur.modifierProduit();
+            this.controleur.modifierOperateur();
         });
 
         this.bt_supprimer = new Button("Supprimer");
         this.pane_saisiedesinfo.add(bt_supprimer, 2, 7);
         this.bt_supprimer.setOnAction(evt -> {
-            this.controleur.supprimerProduit(model);
+            this.controleur.supprimerOperateur();
         });
 
         this.bt_sauvegarder = new Button("Sauvegarder");
         this.pane_saisiedesinfo.add(bt_sauvegarder, 4, 7);
         this.bt_sauvegarder.setOnAction(evt -> {
-            this.controleur.sauvegarderProduit();
+            this.controleur.sauvegarderOperateur();
         });
         
 

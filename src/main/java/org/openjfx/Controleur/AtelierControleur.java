@@ -1,6 +1,5 @@
 package org.openjfx.Controleur;
 
-import java.util.ArrayList;
 import org.openjfx.Pane.*;
 import org.openjfx.Class.*;
 
@@ -56,7 +55,7 @@ public class AtelierControleur {
     }
 
     public void openOperateur(Atelier a){
-        Scene scene = new Scene(new OperationPane(a), 600, 500);
+        Scene scene = new Scene(new OperateurPane(a), 600, 500);
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Operateur");

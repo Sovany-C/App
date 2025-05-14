@@ -2,8 +2,6 @@ package org.openjfx.Controleur;
 
 import org.openjfx.Pane.ProduitPane;
 
-import javafx.collections.ObservableList;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;

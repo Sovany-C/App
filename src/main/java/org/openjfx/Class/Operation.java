@@ -65,5 +65,8 @@ public class Operation {
                    .collect(Collectors.joining(","));
     }
     
+    public String toString(){
+        return getRefOperation();
+    }
     
 }

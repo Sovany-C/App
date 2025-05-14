@@ -5,6 +5,7 @@
 package org.openjfx.Class;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Operateur {
     private String nom;
     private String prenom;
     private ArrayList<Machine> competences;
-    private String statut;
+    private boolean statut;
 
     // Getters and Setters
     public String getCode() {
@@ -35,7 +36,7 @@ public class Operateur {
         return competences;
     }
 
-    public String getStatut() {
+    public Boolean getStatut() {
         return statut;
     }
 
@@ -55,20 +56,24 @@ public class Operateur {
         this.competences = competences;
     }
 
-    public void setStatut(String statut) {
+    public void setStatut(Boolean statut) {
         this.statut = statut;
     }
 
     // Constructeur
-    public Operateur(String code, String nom, String prenom, ArrayList<Machine> competences, String statut) {
+    public Operateur(String code, String nom, String prenom, ArrayList<Machine> competences) {
         this.code = code;
         this.nom = nom;
         this.prenom = prenom;
         this.competences = competences;
-        this.statut = statut;
+        this.statut = false;
     }
     
-    
+    public String compString(){
+        return competences.stream()
+                   .map(Equipement::getRefEquipement)
+                   .collect(Collectors.joining(","));
+    }
     
             
 }

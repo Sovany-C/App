@@ -1,9 +1,6 @@
 package org.openjfx.Controleur;
 
 import org.openjfx.Pane.GammePane;
-import org.openjfx.Pane.GammePane;
-
-import javafx.collections.ObservableList;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
