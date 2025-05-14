@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.openjfx.Class;
+package org.openjfx.Model;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -75,5 +75,8 @@ public class Operateur {
                    .collect(Collectors.joining(","));
     }
     
+    public String toString(){
+        return this.getCode();
+    }
             
 }

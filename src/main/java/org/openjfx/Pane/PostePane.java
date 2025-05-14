@@ -1,7 +1,7 @@
 package org.openjfx.Pane;
 
-import org.openjfx.Class.*;
 import org.openjfx.Controleur.*;
+import org.openjfx.Model.*;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;

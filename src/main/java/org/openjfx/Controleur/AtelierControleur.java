@@ -1,10 +1,16 @@
 package org.openjfx.Controleur;
 
 import org.openjfx.Pane.*;
-import org.openjfx.Class.*;
+import org.openjfx.Model.Atelier;
+import org.openjfx.Model.Equipement;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AtelierControleur {
@@ -61,6 +67,27 @@ public class AtelierControleur {
         posteStage.setTitle("Operateur");
         posteStage.show();
     }
+
+    // public void dessinerAtelier(){
+    //     for(int i=0; i<this.vue.getModel().getMachine().size();i++){
+    //         Text text = new Text(this.vue.getModel().getMachine().get(i).getRefEquipement());
+    //         StackPane stack = new StackPane();
+    //         Rectangle machine = new Rectangle();
+    //         machine.setX(this.vue.getModel().getMachine().get(i).getX());
+    //         machine.setY(this.vue.getModel().getMachine().get(i).getY());
+    //         machine.setWidth(10);
+    //         machine.setHeight(10);
+    //         machine.setStroke(Color.BLACK);
+    //         machine.setFill(Color.WHITE); 
+
+    //         stack.setAlignment(Pos.CENTER);
+    //         stack.getChildren().addAll(machine, text);
+    //         stack.setLayoutX(this.vue.getModel().getMachine().get(i).getX());
+    //         stack.setLayoutY(this.vue.getModel().getMachine().get(i).getY());
+
+    //         this.vue.getEspace_affichage().getChildren().addAll(stack);
+    //     }
+    // }
 
 
     

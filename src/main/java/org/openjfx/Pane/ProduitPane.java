@@ -1,9 +1,8 @@
 package org.openjfx.Pane;
 
-import org.openjfx.Class.*;
 import org.openjfx.Controleur.*;
+import org.openjfx.Model.*;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -147,7 +146,7 @@ public class ProduitPane extends VBox {
         this.controleur = new ProduitControleur(this);
 
         this.gammes = a.getGammes();
-        this.codeProduit = new Label("Référence:");
+        this.codeProduit = new Label("Code:");
         this.dProduit = new Label("Désignation:");
         this.gLabel = new Label("Gammes");
 

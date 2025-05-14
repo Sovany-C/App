@@ -1,5 +1,6 @@
 package org.openjfx.Controleur;
 
+import org.openjfx.Model.*;
 import org.openjfx.Pane.GammePane;
 
 import java.io.FileNotFoundException;
@@ -8,8 +9,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-import org.openjfx.Class.*;
 
 public class GammeControleur {
 

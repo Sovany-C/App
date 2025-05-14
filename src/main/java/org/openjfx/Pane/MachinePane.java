@@ -1,9 +1,9 @@
 package org.openjfx.Pane;
 
-import org.openjfx.Class.Equipement;
-import org.openjfx.Class.Machine;
-import org.openjfx.Class.Utilitaire;
 import org.openjfx.Controleur.MachineControleur;
+import org.openjfx.Model.Equipement;
+import org.openjfx.Model.Machine;
+import org.openjfx.Model.Utilitaire;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.openjfx.Class;
+package org.openjfx.Model;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
@@ -76,5 +76,8 @@ public class Produit {
                    .map(Gamme::getRefGamme)
                    .collect(Collectors.joining(","));
     }
-  
+    
+    public String toString(){
+        return this.getCodeProduit();
+    }
 }

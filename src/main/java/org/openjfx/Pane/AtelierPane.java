@@ -1,7 +1,7 @@
 package org.openjfx.Pane;
 
-import org.openjfx.Class.*;
 import org.openjfx.Controleur.AtelierControleur;
+import org.openjfx.Model.*;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +20,8 @@ public class AtelierPane extends VBox {
     private Button bt_produit;
     private Button bt_gamme;
     private Button bt_operateur;
+
+    private Button bt_dessiner;
 
     private GridPane pane_saisiedesinfo;
     private Pane espace_affichage;
@@ -84,6 +86,13 @@ public class AtelierPane extends VBox {
     public void setBt_operateur(Button bt_operateur) {
         this.bt_operateur = bt_operateur;
     }
+    public Button getBt_dessiner() {
+        return bt_dessiner;
+    }
+    public void setBt_dessiner(Button bt_dessiner) {
+        this.bt_dessiner = bt_dessiner;
+    }
+
 
     public AtelierPane(Atelier a){
         int c=0 ,l=0;
@@ -129,6 +138,12 @@ public class AtelierPane extends VBox {
         this.pane_saisiedesinfo.add(bt_operateur, c+5, l);
         this.bt_operateur.setOnAction(evt -> {
             this.controleur.openOperateur(a);
+        });
+
+        this.bt_dessiner = new Button("dessiner");
+        this.pane_saisiedesinfo.add(bt_dessiner, c, l+1);
+        this.bt_dessiner.setOnAction(evt -> {
+            this.controleur.dessinerAtelier();
         });
 
         this.espace_affichage = new Pane();

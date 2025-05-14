@@ -1,5 +1,6 @@
 package org.openjfx.Controleur;
 
+import org.openjfx.Model.*;
 import org.openjfx.Pane.ProduitPane;
 
 import java.io.FileNotFoundException;
@@ -7,8 +8,6 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openjfx.Class.*;
 
 public class ProduitControleur {
 
@@ -46,8 +45,8 @@ public class ProduitControleur {
             if(!this.vue.getCode().getText().trim().isEmpty()){
                 selected.setCodeProduit(this.vue.getCode().getText().trim());
             }
-            if(!this.vue.getdProduit().getText().trim().isEmpty()){
-                selected.setCodeProduit(this.vue.getdProduit().getText().trim());
+            if(!this.vue.getDes().getText().trim().isEmpty()){
+                selected.setCodeProduit(this.vue.getDes().getText().trim());
             }
             if(!this.vue.getListGamme().getSelectionModel().isEmpty()){
                 List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();

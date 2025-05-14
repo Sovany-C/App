@@ -1,5 +1,6 @@
 package org.openjfx.Controleur;
 
+import org.openjfx.Model.*;
 import org.openjfx.Pane.PostePane;
 
 import javafx.collections.ObservableList;
@@ -9,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
-
-import org.openjfx.Class.*;
 
 public class PosteControleur {
 

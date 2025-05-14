@@ -1,7 +1,7 @@
 package org.openjfx.Pane;
 
-import org.openjfx.Class.*;
 import org.openjfx.Controleur.*;
+import org.openjfx.Model.*;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -157,6 +157,7 @@ public class OperateurPane extends VBox {
     public OperateurPane(Atelier a){
         int c=0, l=0;
         this.model = a.getOperateurs();
+        this.controleur = new OperateurControleur(this);
 
         this.machines = a.getMachine();
         this.codeOperateur = new Label("Code:");
@@ -182,8 +183,8 @@ public class OperateurPane extends VBox {
         this.pane_saisiedesinfo.add(this.nomLabel,c,l+1);
         this.pane_saisiedesinfo.add(this.nom, c+1,l+1);
         this.pane_saisiedesinfo.add(this.prenomLabel, c, l+2);
-        this.pane_saisiedesinfo.add(this.prenom, c, l+2);
-        this.pane_saisiedesinfo.add(this.competLabel, c+1,l+3);
+        this.pane_saisiedesinfo.add(this.prenom, c+1, l+2);
+        this.pane_saisiedesinfo.add(this.competLabel, c,l+3);
         this.pane_saisiedesinfo.add(listMachine,c+1,l+3);
 
         this.choix = new ComboBox<>(model);

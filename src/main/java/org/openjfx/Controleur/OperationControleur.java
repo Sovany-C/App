@@ -1,5 +1,6 @@
 package org.openjfx.Controleur;
 
+import org.openjfx.Model.*;
 import org.openjfx.Pane.OperationPane;
 
 
@@ -8,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openjfx.Class.*;
 
 public class OperationControleur {
 

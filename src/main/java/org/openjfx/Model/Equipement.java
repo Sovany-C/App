@@ -1,4 +1,4 @@
-package org.openjfx.Class;
+package org.openjfx.Model;
 
 public class Equipement {
     private String refEquipement;

@@ -1,6 +1,6 @@
 package org.openjfx;
 
-import org.openjfx.Class.*;
+import org.openjfx.Model.*;
 import org.openjfx.Pane.*;
 
 import javafx.application.Application;
