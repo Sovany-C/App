@@ -102,7 +102,12 @@ public class Atelier {
     }
 
     public void initialisation(){
-        
+        Lecture.lectureMachine(this);
+        Lecture.lecturePoste(this);
+        Lecture.lectureOperation(this);
+        Lecture.lectureGamme(this);
+        Lecture.lectureProduit(this);
+        Lecture.lectureOperateur(this);
     }
     
 

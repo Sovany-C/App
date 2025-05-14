@@ -22,6 +22,8 @@ public class ProduitControleur {
         Produit m = new Produit(this.vue.getCode().getText().trim(), this.vue.getDes().getText().trim(), new ArrayList<>(selection));
         this.vue.getModel().add(m);
         System.out.println("Equipement: " + this.vue.getCode().getText() + " ajouté à la liste");
+        this.vue.getCode().clear();
+        this.vue.getDes().clear();
         this.vue.getTableProduits().refresh();
     }
 

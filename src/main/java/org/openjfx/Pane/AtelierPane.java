@@ -99,6 +99,8 @@ public class AtelierPane extends VBox {
         this.model = a;
         this.controleur = new AtelierControleur(this);
 
+        this.model.initialisation();
+
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
         this.pane_saisiedesinfo.setHgap(5.5);
@@ -140,7 +142,7 @@ public class AtelierPane extends VBox {
             this.controleur.openOperateur(a);
         });
 
-        this.bt_dessiner = new Button("dessiner");
+        this.bt_dessiner = new Button("Plan");
         this.pane_saisiedesinfo.add(bt_dessiner, c, l+1);
         this.bt_dessiner.setOnAction(evt -> {
             this.controleur.dessinerAtelier();

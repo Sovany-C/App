@@ -6,7 +6,6 @@ import org.openjfx.Pane.MachinePane;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -29,10 +28,10 @@ public class MachineControleur {
                                 Float.parseFloat(attributs[5].getText()));
         this.vue.getModel().add(m);
         choix.add(m);
+        System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
         for(int i=0; i<6; i++){
             attributs[i].clear();
         }
-        System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
         this.vue.getTableMachines().refresh();
     }
 

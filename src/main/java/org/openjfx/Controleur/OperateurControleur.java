@@ -25,6 +25,9 @@ public class OperateurControleur {
                                     new ArrayList<>(selection));
         this.vue.getModel().add(op);
         System.out.println("Operateur: " + this.vue.getCode().getText() + " ajouté à la liste");
+        this.vue.getCode().clear();
+        this.vue.getNom().clear();
+        this.vue.getPrenom().clear();
         this.vue.getTableOperateurs().refresh();
     }
 

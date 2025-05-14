@@ -153,8 +153,8 @@ public class Lecture {
                     //* -Décomposer une chaine de caratères avec la méthode split de la classe String
                     mots = lignelue.split(";");
                     ref = mots[0];
-                    operations = mots[2].split(",");
-                    equipement = mots[3].split(",");
+                    operations = mots[1].split(",");
+                    equipement = mots[2].split(",");
 
                     for(Operation o : atelier.getOperations()){
                         for(String op : operations){

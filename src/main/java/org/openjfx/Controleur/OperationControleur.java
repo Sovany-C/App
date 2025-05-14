@@ -25,10 +25,10 @@ public class OperationControleur {
                             new ArrayList<>(selection),
                             Float.parseFloat(this.vue.getDuree_value().getText().trim()));
         this.vue.getModel().add(op);
+        System.out.println("Operation: " + this.vue.getRef().getText() + " ajouté à la liste");
         this.vue.getRef().clear();
         this.vue.getDes().clear();
         this.vue.getDuree_value().clear();
-        System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
     }
 
     public void modifierOperation(){
