@@ -99,7 +99,7 @@ public class AtelierPane extends VBox {
         this.model = a;
         this.controleur = new AtelierControleur(this);
 
-        this.model.initialisation();
+        this.controleur.initialisation();
 
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
@@ -109,16 +109,16 @@ public class AtelierPane extends VBox {
         this.bt_machine = new Button("Machine");
         this.pane_saisiedesinfo.add(bt_machine,c,l);
         this.bt_machine.setOnAction(evt -> {
-            this.controleur.openMachine(a.getEquipements());
+            this.controleur.openMachine(a);
         });
 
         this.bt_poste = new Button("Poste");
         this.pane_saisiedesinfo.add(bt_poste, c+1,l);
         this.bt_poste.setOnAction(evt -> {
-            this.controleur.openPoste(a.getEquipements());
+            this.controleur.openPoste(a);
         });
 
-        this.bt_operation = new Button("Opereration");
+        this.bt_operation = new Button("Operation");
         this.pane_saisiedesinfo.add(bt_operation,c+2,l);
         this.bt_operation.setOnAction(evt -> {
             this.controleur.openOperation(a);

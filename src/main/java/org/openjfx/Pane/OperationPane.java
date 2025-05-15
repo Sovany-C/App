@@ -29,6 +29,7 @@ public class OperationPane extends VBox {
     private Label dOperation;
     private Label eLabel;
     private Label duree;
+    private Label moLabel;
 
     private TextField ref;
     private TextField des;
@@ -155,6 +156,12 @@ public class OperationPane extends VBox {
     public void setPane_saisiedesinfo(GridPane pane_saisiedesinfo) {
         this.pane_saisiedesinfo = pane_saisiedesinfo;
     }
+    public Label getMoLabel() {
+        return moLabel;
+    }
+    public void setMoLabel(Label moLabel) {
+        this.moLabel = moLabel;
+    }
 
     public OperationPane(Atelier a){
         int c=0, l=0;
@@ -166,6 +173,7 @@ public class OperationPane extends VBox {
         this.dOperation = new Label("Désignation:");
         this.duree = new Label("Durée:");
         this.eLabel = new Label("Equipement:");
+        this.moLabel = new Label("Modifier operation:");
 
         this.ref = new TextField();
         this.des = new TextField();
@@ -187,10 +195,11 @@ public class OperationPane extends VBox {
         this.pane_saisiedesinfo.add(this.duree,c,l+2);
         this.pane_saisiedesinfo.add(this.duree_value,c+1,l+2);
         this.pane_saisiedesinfo.add(this.eLabel, c,l+3);
-        this.pane_saisiedesinfo.add(listEquip,c+1,l+3);
+        this.pane_saisiedesinfo.add(this.listEquip,c+1,l+3);
 
+        this.pane_saisiedesinfo.add(this.moLabel, c, l+4);
         this.choix = new ComboBox<>(model);
-        this.pane_saisiedesinfo.add(choix, 0,l+4);
+        this.pane_saisiedesinfo.add(choix, 1,l+4);
 
         this.tableOperations = new TableView<Operation>();
         this.tableOperations.setItems(model);

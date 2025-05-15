@@ -3,7 +3,6 @@ package org.openjfx.Pane;
 import org.openjfx.Controleur.*;
 import org.openjfx.Model.*;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -29,6 +28,7 @@ public class OperateurPane extends VBox {
     private Label nomLabel;
     private Label prenomLabel;
     private Label competLabel;
+    private Label moLabel;
 
     private TextField code;
     private TextField prenom;
@@ -154,6 +154,13 @@ public class OperateurPane extends VBox {
     public void setPane_saisiedesinfo(GridPane pane_saisiedesinfo) {
         this.pane_saisiedesinfo = pane_saisiedesinfo;
     }
+    public Label getMoLabel() {
+        return moLabel;
+    }
+    public void setMoLabel(Label moLabel) {
+        this.moLabel = moLabel;
+    }
+
     public OperateurPane(Atelier a){
         int c=0, l=0;
         this.model = a.getOperateurs();
@@ -164,6 +171,7 @@ public class OperateurPane extends VBox {
         this.nomLabel = new Label("Nom:");
         this.prenomLabel = new Label("Prenom:");
         this.competLabel = new Label("Compétences:");
+        this.moLabel = new Label("Modifier operateur");
 
         this.code = new TextField();
         this.nom = new TextField();
@@ -180,15 +188,19 @@ public class OperateurPane extends VBox {
 
         this.pane_saisiedesinfo.add(this.codeOperateur, c, l);
         this.pane_saisiedesinfo.add(this.code,c+1,l);
-        this.pane_saisiedesinfo.add(this.nomLabel,c,l+1);
-        this.pane_saisiedesinfo.add(this.nom, c+1,l+1);
-        this.pane_saisiedesinfo.add(this.prenomLabel, c, l+2);
-        this.pane_saisiedesinfo.add(this.prenom, c+1, l+2);
-        this.pane_saisiedesinfo.add(this.competLabel, c,l+3);
-        this.pane_saisiedesinfo.add(listMachine,c+1,l+3);
-
+        l++;
+        this.pane_saisiedesinfo.add(this.nomLabel,c,l);
+        this.pane_saisiedesinfo.add(this.nom, c+1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.prenomLabel, c, l);
+        this.pane_saisiedesinfo.add(this.prenom, c+1, l);
+        l++;
+        this.pane_saisiedesinfo.add(this.competLabel, c,l);
+        this.pane_saisiedesinfo.add(this.listMachine,c+1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.moLabel,0,l);
         this.choix = new ComboBox<>(model);
-        this.pane_saisiedesinfo.add(choix, 0,6);
+        this.pane_saisiedesinfo.add(choix, 1,l);
 
         this.tableOperateurs = new TableView<Operateur>();
         this.tableOperateurs.setItems(model);
@@ -234,6 +246,7 @@ public class OperateurPane extends VBox {
         this.getChildren().add(this.pane_saisiedesinfo);
 
     }
+    
     
     
 }

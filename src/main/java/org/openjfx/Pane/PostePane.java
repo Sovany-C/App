@@ -26,6 +26,7 @@ public class PostePane extends VBox{
     private Label refPoste;
     private Label dPoste;
     private Label machinesLabel;
+    private Label modLabel;
     
     private TextField ref;
     private TextField des;
@@ -138,17 +139,22 @@ public class PostePane extends VBox{
     public void setTablePoste(TableView<Poste> tablePoste) {
         this.tablePoste = tablePoste;
     }
-    
+    public Label getModLabel() {
+        return modLabel;
+    }
+    public void setModLabel(Label modLabel) {
+        this.modLabel = modLabel;
+    }
 
-    public PostePane(ObservableList<Equipement> p){
-        ObservableList<Machine> machines = Utilitaire.getMachines(p);
-
-        this.model = p;
+    public PostePane(Atelier a){
+        this.model = a.getEquipements();
         this.controleur = new PosteControleur(this);
+        ObservableList<Machine> machines = Utilitaire.getMachines(this.model);
 
         this.refPoste = new Label("Référence:");
         this.dPoste = new Label("Désignation:");
         this.machinesLabel = new Label("Machines:");
+        this.modLabel = new Label("Modifier poste:");
 
         this.ref = new TextField();
         this.des = new TextField();
@@ -168,10 +174,11 @@ public class PostePane extends VBox{
         this.pane_saisiedesinfo.add(this.des, 1, 1);
         this.pane_saisiedesinfo.add(this.machinesLabel, 0, 2);
         this.pane_saisiedesinfo.add(this.listMachines, 1, 2);
+        this.pane_saisiedesinfo.add(this.modLabel,0,3);
 
-        ObservableList<Poste> posteObservable = Utilitaire.getPostes(p);
+        ObservableList<Poste> posteObservable = Utilitaire.getPostes(this.model);
         this.choix = new ComboBox<>(posteObservable);
-        this.pane_saisiedesinfo.add(choix, 0, 3);
+        this.pane_saisiedesinfo.add(choix, 1, 3);
 
         this.tablePoste = new TableView<Poste>();
         this.tablePoste.setItems(posteObservable);

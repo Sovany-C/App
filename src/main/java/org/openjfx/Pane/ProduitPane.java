@@ -27,6 +27,7 @@ public class ProduitPane extends VBox {
     private Label codeProduit;
     private Label dProduit;
     private Label gLabel;
+    private Label moLabel;
 
     private TextField code;
     private TextField des;

@@ -1,10 +1,11 @@
 package org.openjfx.Controleur;
 
 import org.openjfx.Pane.*;
-import org.openjfx.Model.Atelier;
-import org.openjfx.Model.Equipement;
 
-import javafx.collections.ObservableList;
+import java.io.File;
+
+import org.openjfx.Model.Atelier;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -20,16 +21,16 @@ public class AtelierControleur {
         this.vue = v;
     }
 
-    public void openMachine(ObservableList<Equipement> m){
-        Scene scene = new Scene(new MachinePane(m),600,500);
+    public void openMachine(Atelier a){
+        Scene scene = new Scene(new MachinePane(a),600,500);
         Stage machineStage = new Stage();
         machineStage.setScene(scene);
         machineStage.setTitle("Machine");
         machineStage.show();    
     }
 
-    public void openPoste(ObservableList<Equipement> p){
-        Scene scene = new Scene(new PostePane(p), 600, 500);
+    public void openPoste(Atelier a){
+        Scene scene = new Scene(new PostePane(a), 600, 500);
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Poste");
@@ -87,6 +88,14 @@ public class AtelierControleur {
 
             this.vue.getEspace_affichage().getChildren().addAll(stack);
         }
+    }
+
+    public void initialisation(){
+        File dossier = new File("data");
+        if (!dossier.exists()) {
+            dossier.mkdir(); // crée le dossier "data" s'il n'existe pas
+        }
+        this.vue.getModel().initialisation();
     }
 
 

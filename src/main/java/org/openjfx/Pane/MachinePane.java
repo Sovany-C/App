@@ -1,6 +1,7 @@
 package org.openjfx.Pane;
 
 import org.openjfx.Controleur.MachineControleur;
+import org.openjfx.Model.Atelier;
 import org.openjfx.Model.Equipement;
 import org.openjfx.Model.Machine;
 import org.openjfx.Model.Utilitaire;
@@ -31,6 +32,8 @@ public class MachinePane extends VBox {
     private Label cx;
     private Label cy;
     private Label cout;
+    private Label moLabel;
+
     
     private TextField ref;
     private TextField des;
@@ -177,10 +180,17 @@ public class MachinePane extends VBox {
         this.bt_supprimer = bt_supprimer;
     }
 
+    public Label getMoLabel() {
+        return moLabel;
+    }
+    public void setMoLabel(Label moLabel) {
+        this.moLabel = moLabel;
+    }
 
 
-    public MachinePane(ObservableList<Equipement> m){
-        this.model = m;
+
+    public MachinePane(Atelier a){
+        this.model = a.getEquipements();
         this.controleur = new MachineControleur(this);
 
         this.refMachine = new Label("Référence:");
@@ -189,6 +199,7 @@ public class MachinePane extends VBox {
         this.cx = new Label("Cx:");
         this.cy = new Label("Cy:");
         this.cout = new Label("Cout:");
+        this.moLabel = new Label("Modifier machine :");
 
         this.ref = new TextField();
         this.des = new TextField();
@@ -197,28 +208,34 @@ public class MachinePane extends VBox {
         this.cy_val = new TextField();
         this.cout_val = new TextField();
 
-
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
-        this.pane_saisiedesinfo.add(this.refMachine, 0, 0);
-        this.pane_saisiedesinfo.add(this.ref,1,0);
-        this.pane_saisiedesinfo.add(this.dMachine,0,1);
-        this.pane_saisiedesinfo.add(this.des, 1,1);
-        this.pane_saisiedesinfo.add(this.typeMachine,0,2);
-        this.pane_saisiedesinfo.add(this.type,1,2);
-        this.pane_saisiedesinfo.add(this.cx,0,3);
-        this.pane_saisiedesinfo.add(this.cx_val,1,3);
-        this.pane_saisiedesinfo.add(this.cy,0,4);
-        this.pane_saisiedesinfo.add(this.cy_val,1,4);
-        this.pane_saisiedesinfo.add(this.cout,0,5);
-        this.pane_saisiedesinfo.add(this.cout_val,1,5);
-
-        ObservableList<Machine> machinesObservable = Utilitaire.getMachines(m);
+        int l=0;
+        this.pane_saisiedesinfo.add(this.refMachine, 0, l);
+        this.pane_saisiedesinfo.add(this.ref,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.dMachine,0,l);
+        this.pane_saisiedesinfo.add(this.des, 1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.typeMachine,0,l);
+        this.pane_saisiedesinfo.add(this.type,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.cx,0,l);
+        this.pane_saisiedesinfo.add(this.cx_val,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.cy,0,l);
+        this.pane_saisiedesinfo.add(this.cy_val,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.cout,0,l);
+        this.pane_saisiedesinfo.add(this.cout_val,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.moLabel,0,l);
+        ObservableList<Machine> machinesObservable = Utilitaire.getMachines(this.model);
         this.choix = new ComboBox<>(machinesObservable);
-        this.pane_saisiedesinfo.add(choix, 0,6);
+        this.pane_saisiedesinfo.add(choix, 1,l);
 
         this.tableMachines = new TableView<Machine>();
         this.tableMachines.setItems(machinesObservable);

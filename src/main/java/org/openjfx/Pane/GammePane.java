@@ -28,6 +28,7 @@ public class GammePane extends VBox {
 
     private Label refGamme;
     private Label oLabel;
+    private Label moLabel;
 
     private TextField ref;
 
@@ -128,6 +129,13 @@ public class GammePane extends VBox {
     public void setPane_saisiedesinfo(GridPane pane_saisiedesinfo) {
         this.pane_saisiedesinfo = pane_saisiedesinfo;
     }
+    public Label getMoLabel() {
+        return moLabel;
+    }
+    public void setMoLabel(Label moLabel) {
+        this.moLabel = moLabel;
+    }
+
     public GammePane(Atelier a){
         int c=0, l=0;
         this.model = a.getGammes();
@@ -136,6 +144,7 @@ public class GammePane extends VBox {
         this.operations = a.getOperations();
         this.refGamme = new Label("Référence:");
         this.oLabel = new Label("Operations:");
+        this.moLabel = new Label("Modifier gamme ");
 
         this.ref = new TextField();
 
@@ -150,11 +159,14 @@ public class GammePane extends VBox {
 
         this.pane_saisiedesinfo.add(this.refGamme, c, l);
         this.pane_saisiedesinfo.add(this.ref,c+1,l);
-        this.pane_saisiedesinfo.add(this.oLabel,c,l+1);
-        this.pane_saisiedesinfo.add(this.listOperation, c+1,l+1);
-
+        l++;
+        this.pane_saisiedesinfo.add(this.oLabel,c,l);
+        this.pane_saisiedesinfo.add(this.listOperation,c+1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.getMoLabel(), c, l);
         this.choix = new ComboBox<>(model);
-        this.pane_saisiedesinfo.add(choix, 0,6);
+        this.pane_saisiedesinfo.add(choix, c+1,l);
+        
 
         this.tableGammes = new TableView<Gamme>();
         this.tableGammes.setItems(model);
@@ -164,7 +176,11 @@ public class GammePane extends VBox {
         opCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().opString()));
         TableColumn<Gamme, String> eqCol = new TableColumn<Gamme, String>("Equipements");
         eqCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().eqString()));
-        this.tableGammes.getColumns().addAll(refCol, opCol,eqCol);
+        TableColumn<Gamme, Float> coutCol = new TableColumn<Gamme, Float>("Cout");
+        coutCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().coutGamme()));
+        TableColumn<Gamme, Float> dureeCol = new TableColumn<Gamme, Float>("Durée");
+        dureeCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().dureeGamme()));
+        this.tableGammes.getColumns().addAll(refCol, opCol,eqCol,coutCol,dureeCol);
         this.pane_saisiedesinfo.add(tableGammes, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableGammes,5);
 
@@ -192,7 +208,6 @@ public class GammePane extends VBox {
             this.controleur.sauvegarderGamme();
         });
         
-
         this.setPadding(new Insets(10, 50, 50, 50));
         this.setSpacing(10);
         this.getChildren().add(this.pane_saisiedesinfo);

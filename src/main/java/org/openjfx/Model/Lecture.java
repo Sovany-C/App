@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Lecture {
@@ -41,8 +42,8 @@ public class Lecture {
                             }
                         }
                     }
-
-                    Poste p = new Poste(refPoste, dPoste, machinePoste);
+                    Poste p = new Poste(refPoste, dPoste,new HashSet<>(machinePoste));
+                    p.affiche();
                     atelier.getEquipements().add(p);
                     machinePoste.clear();
                 }
@@ -123,7 +124,7 @@ public class Lecture {
                             }
                         }
                     }
-                    Operateur op = new Operateur(code, nom, prenom, competences);
+                    Operateur op = new Operateur(code, nom, prenom, new ArrayList<>(competences));
                     atelier.getOperateurs().add(op);
                 }
                 flux.close();
@@ -164,6 +165,7 @@ public class Lecture {
                                 }
                             }
                     }
+
                     for(Equipement e : atelier.getEquipements()){
                         for(String eq : equipement){
                                 if(e.getRefEquipement().equals(eq)){
@@ -172,8 +174,10 @@ public class Lecture {
                                 }
                             }
                     }
-                    Gamme g = new Gamme(ref, Listop, Listequi);
+                    Gamme g = new Gamme(ref, new ArrayList<>(Listop), new HashSet<>(Listequi));
                     atelier.getGammes().add(g);
+                    Listequi.clear();
+                    Listop.clear();
                 }
                 flux.close();
             }
@@ -215,8 +219,9 @@ public class Lecture {
                                 }
                             }
                     }
-                    Operation op = new Operation(refOp, dOp, Listequi,duree);
+                    Operation op = new Operation(refOp, dOp, new ArrayList<>(Listequi),duree);
                     atelier.getOperations().add(op);
+                    Listequi.clear();
                 }
                 flux.close();
             }
@@ -237,7 +242,6 @@ public class Lecture {
             ArrayList<Gamme> Listgamme = new ArrayList<>();
             String[] mots;
 
-
             try{
                 BufferedReader flux=new BufferedReader(new FileReader(fichier));
                 String lignelue;
@@ -257,8 +261,9 @@ public class Lecture {
                                 }
                             }
                     }
-                    Produit pr = new Produit(codePro,dProd,Listgamme);
+                    Produit pr = new Produit(codePro,dProd,new ArrayList<>(Listgamme));
                     atelier.getProduits().add(pr);
+                    Listgamme.clear();
                 }
                 flux.close();
             }
