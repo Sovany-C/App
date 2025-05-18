@@ -4,7 +4,7 @@ import org.openjfx.Controleur.MachineControleur;
 import org.openjfx.Model.Atelier;
 import org.openjfx.Model.Equipement;
 import org.openjfx.Model.Machine;
-import org.openjfx.Model.Utilitaire;
+
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -25,6 +25,7 @@ public class MachinePane extends VBox {
     
     private ObservableList<Equipement> model;
     private MachineControleur controleur;
+    private Atelier atelier;
     
     private Label refMachine;
     private Label dMachine;
@@ -34,7 +35,6 @@ public class MachinePane extends VBox {
     private Label cout;
     private Label moLabel;
 
-    
     private TextField ref;
     private TextField des;
     private TextField type;
@@ -186,12 +186,17 @@ public class MachinePane extends VBox {
     public void setMoLabel(Label moLabel) {
         this.moLabel = moLabel;
     }
-
-
+    public Atelier getAtelier() {
+        return atelier;
+    }
+    public void setAtelier(Atelier atelier) {
+        this.atelier = atelier;
+    }
 
     public MachinePane(Atelier a){
         this.model = a.getEquipements();
         this.controleur = new MachineControleur(this);
+        this.atelier = a;
 
         this.refMachine = new Label("Référence:");
         this.dMachine = new Label("Désignation:");
@@ -233,7 +238,7 @@ public class MachinePane extends VBox {
         this.pane_saisiedesinfo.add(this.cout_val,1,l);
         l++;
         this.pane_saisiedesinfo.add(this.moLabel,0,l);
-        ObservableList<Machine> machinesObservable = Utilitaire.getMachines(this.model);
+        ObservableList<Machine> machinesObservable = this.atelier.getMachine();
         this.choix = new ComboBox<>(machinesObservable);
         this.pane_saisiedesinfo.add(choix, 1,l);
 

@@ -3,9 +3,7 @@ package org.openjfx.Controleur;
 import org.openjfx.Model.*;
 import org.openjfx.Pane.OperateurPane;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,17 +30,7 @@ public class OperateurControleur {
     }
 
     public void sauvegarderOperateur(){
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter(new FileOutputStream("data/operateurs.txt"));
-            for (Operateur p : this.vue.getModel()){
-                pw.println(p.getCode()+";"+p.getNom()+";"+p.getPrenom()+";"+p.compString());
-            }
-            pw.close();
-            System.out.println("Operateur ajouté au fichier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Sauvegarde.sauvegarderOperateur(this.vue.getA());
     }
 
     public void modifierOperateur(){

@@ -45,7 +45,14 @@ public class OperateurPane extends VBox {
     private Button bt_supprimer;
 
     private GridPane pane_saisiedesinfo;
+    private Atelier a;
 
+    public Atelier getA() {
+        return a;
+    }
+    public void setA(Atelier a) {
+        this.a = a;
+    }
     public ObservableList<Operateur> getModel() {
         return model;
     }
@@ -165,6 +172,7 @@ public class OperateurPane extends VBox {
         int c=0, l=0;
         this.model = a.getOperateurs();
         this.controleur = new OperateurControleur(this);
+        this.a = a;
 
         this.machines = a.getMachine();
         this.codeOperateur = new Label("Code:");

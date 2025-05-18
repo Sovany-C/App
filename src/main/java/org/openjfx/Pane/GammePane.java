@@ -44,7 +44,14 @@ public class GammePane extends VBox {
     private Button bt_supprimer;
 
     private GridPane pane_saisiedesinfo;
-    
+    private Atelier a;
+
+    public Atelier getA() {
+        return a;
+    }
+    public void setA(Atelier a) {
+        this.a = a;
+    }
     public ObservableList<Gamme> getModel() {
         return model;
     }
@@ -140,6 +147,7 @@ public class GammePane extends VBox {
         int c=0, l=0;
         this.model = a.getGammes();
         this.controleur = new GammeControleur(this);
+        this.a = a;
 
         this.operations = a.getOperations();
         this.refGamme = new Label("Référence:");

@@ -1,11 +1,13 @@
 package org.openjfx.Pane;
 
 import org.openjfx.Controleur.AtelierControleur;
+import org.openjfx.Controleur.SceneControleur;
 import org.openjfx.Model.*;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -13,13 +15,18 @@ import javafx.scene.layout.VBox;
 public class AtelierPane extends VBox {
     private Atelier model;
     private AtelierControleur controleur;
+    private SceneControleur sceneControleur;
 
+    private Label nom;
+    private Label plan;
+    
     private Button bt_machine;
     private Button bt_poste;
     private Button bt_operation;
     private Button bt_produit;
     private Button bt_gamme;
     private Button bt_operateur;
+    private Button bt_retour;
 
     private Button bt_dessiner;
 
@@ -92,68 +99,117 @@ public class AtelierPane extends VBox {
     public void setBt_dessiner(Button bt_dessiner) {
         this.bt_dessiner = bt_dessiner;
     }
+    public Label getNom() {
+        return nom;
+    }
+    public void setNom(Label nom) {
+        this.nom = nom;
+    }
+    public Label getPlan() {
+        return plan;
+    }
+    public void setPlan(Label plan) {
+        this.plan = plan;
+    }
+    public Button getBt_retour() {
+        return bt_retour;
+    }
+    public void setBt_retour(Button bt_retour) {
+        this.bt_retour = bt_retour;
+    }
+    public SceneControleur getSceneControleur() {
+        return sceneControleur;
+    }
+    public void setSceneControleur(SceneControleur sceneControleur) {
+        this.sceneControleur = sceneControleur;
+    }
 
-
-    public AtelierPane(Atelier a){
+    public AtelierPane(Atelier a, SceneControleur scene){
         int c=0 ,l=0;
         this.model = a;
         this.controleur = new AtelierControleur(this);
+        this.sceneControleur = scene;
 
-        this.controleur.initialisation();
-
+        this.nom = new Label(a.getNom());
+        this.nom.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family:Arial;");
+        this.plan = new Label("Plan de l'atelier");
+        this.plan.setStyle("-fx-font-size: 18;");
+    
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
+        this.pane_saisiedesinfo.add(this.nom, c, l);
+        GridPane.setColumnSpan(this.nom, 5);
+
+        this.controleur.initialisation();
+
+        this.bt_retour = new Button("Retour");
+        this.pane_saisiedesinfo.add(this.bt_retour,6,l);
+        this.bt_retour.setOnAction(evt -> {
+            this.controleur.retour();
+        });
+        l+=1;
+
         this.bt_machine = new Button("Machine");
         this.pane_saisiedesinfo.add(bt_machine,c,l);
         this.bt_machine.setOnAction(evt -> {
-            this.controleur.openMachine(a);
+            this.controleur.openMachine();
         });
-
+        c++;
         this.bt_poste = new Button("Poste");
-        this.pane_saisiedesinfo.add(bt_poste, c+1,l);
+        this.pane_saisiedesinfo.add(bt_poste, c,l);
         this.bt_poste.setOnAction(evt -> {
-            this.controleur.openPoste(a);
+            this.controleur.openPoste();
         });
-
+        c++;
         this.bt_operation = new Button("Operation");
-        this.pane_saisiedesinfo.add(bt_operation,c+2,l);
+        this.pane_saisiedesinfo.add(bt_operation,c,l);
         this.bt_operation.setOnAction(evt -> {
-            this.controleur.openOperation(a);
+            this.controleur.openOperation();
         });
-
+        c++;
         this.bt_gamme = new Button("Gamme");
-        this.pane_saisiedesinfo.add(bt_gamme, c+3, l);
+        this.pane_saisiedesinfo.add(bt_gamme, c, l);
         this.bt_gamme.setOnAction(evt -> {
-            this.controleur.openGamme(a);
+            this.controleur.openGamme();
         });
-        
+        c++;
         this.bt_produit = new Button("Produit");
-        this.pane_saisiedesinfo.add(bt_produit, c+4, l);
+        this.pane_saisiedesinfo.add(bt_produit, c, l);
         this.bt_produit.setOnAction(evt -> {
-            this.controleur.openProduit(a);
+            this.controleur.openProduit();
         });
-
+        c++;
         this.bt_operateur = new Button("Operateur");
-        this.pane_saisiedesinfo.add(bt_operateur, c+5, l);
+        this.pane_saisiedesinfo.add(bt_operateur, c, l);
         this.bt_operateur.setOnAction(evt -> {
-            this.controleur.openOperateur(a);
+            this.controleur.openOperateur();
         });
+        c++;
+        l++;
+        this.pane_saisiedesinfo.add(this.plan, 0, l);
+        GridPane.setColumnSpan(this.plan, 3);
 
         this.bt_dessiner = new Button("Plan");
-        this.pane_saisiedesinfo.add(bt_dessiner, c, l+1);
+        this.pane_saisiedesinfo.add(bt_dessiner, 3, l);
         this.bt_dessiner.setOnAction(evt -> {
             this.controleur.dessinerAtelier();
         });
 
         this.espace_affichage = new Pane();
+        this.espace_affichage.setPrefSize(400, 300);
+        this.espace_affichage.setMaxSize(600, 400);
+        this.espace_affichage.setStyle("-fx-background-color: #a9c0d6;");
+
+        this.setPrefSize(1000, 500);
         this.setPadding(new Insets(10, 50, 50, 50));
-        this.setSpacing(10);
+        this.setSpacing(100);
+        this.setAlignment(Pos.CENTER);
         this.getChildren().add(this.pane_saisiedesinfo);
         this.getChildren().add(this.espace_affichage);
-
     }
+
     
 }

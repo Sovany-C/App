@@ -46,8 +46,14 @@ public class OperationPane extends VBox {
     private Button bt_supprimer;
 
     private GridPane pane_saisiedesinfo;
-    
+    private Atelier a;
 
+    public Atelier getA() {
+        return a;
+    }
+    public void setA(Atelier a) {
+        this.a = a;
+    }
     public ObservableList<Operation> getModel() {
         return model;
     }
@@ -167,6 +173,7 @@ public class OperationPane extends VBox {
         int c=0, l=0;
         this.model = a.getOperations();
         this.controleur = new OperationControleur(this);
+        this.a = a;
 
         this.equipements = a.getEquipements();
         this.refOperation = new Label("Référence:");

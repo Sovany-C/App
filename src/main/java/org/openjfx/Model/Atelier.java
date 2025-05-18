@@ -101,6 +101,17 @@ public class Atelier {
         return machines;
     }
 
+    public ObservableList<Poste> getPostes(){
+        ObservableList<Poste> postes = FXCollections.observableArrayList();
+        for(Equipement e : this.getEquipements()){
+            if(e instanceof Poste){
+                Poste m = (Poste) e;
+                postes.add(m);
+            }
+        }
+        return postes;
+    }
+
     public void initialisation(){
         Lecture.lectureMachine(this);
         Lecture.lecturePoste(this);

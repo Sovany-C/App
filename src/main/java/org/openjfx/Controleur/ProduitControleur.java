@@ -3,9 +3,6 @@ package org.openjfx.Controleur;
 import org.openjfx.Model.*;
 import org.openjfx.Pane.ProduitPane;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,17 +25,7 @@ public class ProduitControleur {
     }
 
     public void sauvegarderProduit(){
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter(new FileOutputStream("data/produits.txt"));
-            for (Produit p : this.vue.getModel()){
-                pw.println(p.getCodeProduit()+";"+p.getdProduit()+";"+p.gammeString());
-            }
-            pw.close();
-            System.out.println("Produit ajouté au fichier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Sauvegarde.sauvegarderProduit(this.vue.getA());
     }
 
     public void modifierProduit(){

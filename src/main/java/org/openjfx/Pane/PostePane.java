@@ -42,7 +42,14 @@ public class PostePane extends VBox{
     private TableView<Poste> tablePoste;
 
     private GridPane pane_saisiedesinfo;
+    private Atelier atelier;
 
+    public Atelier getA() {
+        return atelier;
+    }
+    public void setA(Atelier a) {
+        this.atelier = a;
+    }
     public ObservableList<Equipement> getModel() {
         return model;
     }
@@ -149,7 +156,8 @@ public class PostePane extends VBox{
     public PostePane(Atelier a){
         this.model = a.getEquipements();
         this.controleur = new PosteControleur(this);
-        ObservableList<Machine> machines = Utilitaire.getMachines(this.model);
+        ObservableList<Machine> machines = this.atelier.getMachine();
+        this.atelier = a;
 
         this.refPoste = new Label("Référence:");
         this.dPoste = new Label("Désignation:");
@@ -176,7 +184,7 @@ public class PostePane extends VBox{
         this.pane_saisiedesinfo.add(this.listMachines, 1, 2);
         this.pane_saisiedesinfo.add(this.modLabel,0,3);
 
-        ObservableList<Poste> posteObservable = Utilitaire.getPostes(this.model);
+        ObservableList<Poste> posteObservable = this.atelier.getPostes();
         this.choix = new ComboBox<>(posteObservable);
         this.pane_saisiedesinfo.add(choix, 1, 3);
 
@@ -213,7 +221,7 @@ public class PostePane extends VBox{
         this.bt_sauvegarder = new Button("Sauvegarder");
         this.pane_saisiedesinfo.add(bt_sauvegarder, 4, 6);
         this.bt_sauvegarder.setOnAction(evt -> {
-            this.controleur.sauvegarderPoste();
+            this.controleur.sauvegarderPoste(a);
         });
 
 

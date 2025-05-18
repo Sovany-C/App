@@ -3,9 +3,6 @@ package org.openjfx.Controleur;
 import org.openjfx.Model.*;
 import org.openjfx.Pane.GammePane;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -57,17 +54,7 @@ public class GammeControleur {
     }
 
     public void sauvegarderGamme(){
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter(new FileOutputStream("data/gammes.txt"));
-            for (Gamme g : this.vue.getModel()){
-                pw.println(g.getRefGamme()+";"+g.opString()+";"+g.eqString());
-            }
-            pw.close();
-            System.out.println("Gamme ajouté au fichier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Sauvegarde.sauvegarderGamme(this.vue.getA());
     }
 
 

@@ -21,48 +21,78 @@ public class AtelierControleur {
         this.vue = v;
     }
 
-    public void openMachine(Atelier a){
-        Scene scene = new Scene(new MachinePane(a),600,500);
+    public void openMachine(){
+        Scene scene = new Scene(new MachinePane(this.vue.getModel()),800,500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Stage machineStage = new Stage();
         machineStage.setScene(scene);
         machineStage.setTitle("Machine");
         machineStage.show();    
     }
 
-    public void openPoste(Atelier a){
-        Scene scene = new Scene(new PostePane(a), 600, 500);
+    public void openPoste(){
+        Scene scene = new Scene(new PostePane(this.vue.getModel()), 800, 500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Poste");
         posteStage.show();
     }
 
-    public void openOperation(Atelier a){
-        Scene scene = new Scene(new OperationPane(a), 600, 500);
+    public void openOperation(){
+        Scene scene = new Scene(new OperationPane(this.vue.getModel()), 800, 500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Operation");
         posteStage.show();
     }
 
-    public void openGamme(Atelier a){
-        Scene scene = new Scene(new GammePane(a), 600, 500);
+    public void openGamme(){
+        Scene scene = new Scene(new GammePane(this.vue.getModel()), 800, 500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Gamme");
         posteStage.show();
     }
 
-    public void openProduit(Atelier a){
-        Scene scene = new Scene(new ProduitPane(a), 600, 500);
+    public void openProduit(){
+        Scene scene = new Scene(new ProduitPane(this.vue.getModel()), 800, 500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Produit");
         posteStage.show();
     }
 
-    public void openOperateur(Atelier a){
-        Scene scene = new Scene(new OperateurPane(a), 600, 500);
+    public void openOperateur(){
+        Scene scene = new Scene(new OperateurPane(this.vue.getModel()), 800, 500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Stage posteStage = new Stage();
         posteStage.setScene(scene);
         posteStage.setTitle("Operateur");
@@ -70,14 +100,15 @@ public class AtelierControleur {
     }
 
     public void dessinerAtelier(){
+        this.vue.getEspace_affichage().getChildren().clear();
         for(int i=0; i<this.vue.getModel().getMachine().size();i++){
             Text text = new Text(this.vue.getModel().getMachine().get(i).getRefEquipement());
             StackPane stack = new StackPane();
             Rectangle machine = new Rectangle();
             machine.setX(this.vue.getModel().getMachine().get(i).getX());
             machine.setY(this.vue.getModel().getMachine().get(i).getY());
-            machine.setWidth(30);
-            machine.setHeight(30);
+            machine.setWidth(35);
+            machine.setHeight(35);
             machine.setStroke(Color.BLACK);
             machine.setFill(Color.WHITE); 
 
@@ -91,13 +122,14 @@ public class AtelierControleur {
     }
 
     public void initialisation(){
-        File dossier = new File("data");
+        File dossier = new File("data/" + this.vue.getModel().getNom());
         if (!dossier.exists()) {
             dossier.mkdir(); // crée le dossier "data" s'il n'existe pas
         }
         this.vue.getModel().initialisation();
     }
 
-
-    
+    public void retour(){
+        this.vue.getSceneControleur().changeMainPane();
+    }
 }

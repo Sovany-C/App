@@ -6,9 +6,6 @@ import org.openjfx.Pane.MachinePane;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 
 public class MachineControleur {
 
@@ -36,19 +33,7 @@ public class MachineControleur {
     }
 
     public void sauvegarderMach(){
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter(new FileOutputStream("data/machines.txt"));
-            for (Equipement e : this.vue.getModel())
-                if(e instanceof Machine){
-                    Machine m = (Machine) e;
-                    pw.println(m.getRefEquipement()+";"+m.getdEquipement()+";"+m.getType()+";"+m.getX()+";"+m.getY()+";"+m.getCout());
-                }
-            pw.close();
-            System.out.println("Machine ajouté au fichier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Sauvegarde.sauvegarderMachine(this.vue.getAtelier());
     }
 
     public void modifierMachine(){

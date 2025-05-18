@@ -4,9 +4,7 @@ import org.openjfx.Model.*;
 import org.openjfx.Pane.OperationPane;
 
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,17 +55,7 @@ public class OperationControleur {
     }
 
     public void sauvegarderOperation(){
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter(new FileOutputStream("data/operations.txt"));
-            for (Operation op : this.vue.getModel()){
-                pw.println(op.getRefOperation()+";"+op.getdOperation()+";"+op.equipementString()+";"+op.getDureeOperation());
-            }
-            pw.close();
-            System.out.println("Operation ajouté au fichier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Sauvegarde.sauvegarderOperation(this.vue.getA());
     }
 
 

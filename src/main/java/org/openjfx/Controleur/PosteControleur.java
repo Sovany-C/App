@@ -5,9 +5,7 @@ import org.openjfx.Pane.PostePane;
 
 import javafx.collections.ObservableList;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -54,22 +52,8 @@ public class PosteControleur {
         choix.remove(selected);
     }
 
-    public void sauvegarderPoste(){
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter(new FileOutputStream("data/postes.txt"));
-            for (Equipement e : this.vue.getModel()){
-                if(e instanceof Poste){
-                    Poste p = (Poste) e;
-                    pw.println(p.getRefEquipement()+";"+p.getdEquipement()+";"+p.machineString());
-                }
-            }
-            pw.close();
-            System.out.println("Poste ajouté au fichier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+    public void sauvegarderPoste(Atelier a){
+        Sauvegarde.sauvegarderPoste(this.vue.getA());
     }
 
 

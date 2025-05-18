@@ -1,0 +1,30 @@
+.button {
+    -fx-font-size: 14px;
+    -fx-pref-width: 85px;
+    -fx-pref-height: 25px;
+    -fx-background-color: #e4e4e4;
+    -fx-text-fill: rgb(0, 0, 0);
+}
+
+/* Hover */
+.button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+/* Focus (sélection clavier) */
+.button:focused {
+    -fx-border-color: #4285f4;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+/* Clicked (pressed) */
+.button:pressed {
+    -fx-background-color: #c0c0c0;
+}
+
+
+.label{
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}

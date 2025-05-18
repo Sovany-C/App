@@ -7,13 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import org.openjfx.Pane.MainPane;
 
 public class Lecture {
     
     public static void lecturePoste(Atelier atelier){
-        File fichier = new File("data/postes.txt");
+        File fichier = new File("data/"+atelier.getNom()+"/postes.txt");
         if(fichier.exists()){
             String refPoste,dPoste;
             String[] machines;
@@ -60,7 +61,7 @@ public class Lecture {
     }
 
     public static void lectureMachine(Atelier atelier){
-        File fichier = new File("data/machines.txt");
+        File fichier = new File("data/"+atelier.getNom()+ "/machines.txt");
         if(fichier.exists()){
             String refMachine,dMachine,type;
             float x,y,cout;
@@ -94,7 +95,7 @@ public class Lecture {
     }
 
     public static void lectureOperateur(Atelier atelier){
-        File fichier = new File("data/operateurs.txt");
+        File fichier = new File("data/"+atelier.getNom()+ "/operateurs.txt");
         if(fichier.exists()){
             String code,nom,prenom;
             String[] machines;
@@ -126,6 +127,7 @@ public class Lecture {
                     }
                     Operateur op = new Operateur(code, nom, prenom, new ArrayList<>(competences));
                     atelier.getOperateurs().add(op);
+                    competences.clear();
                 }
                 flux.close();
             }
@@ -138,7 +140,7 @@ public class Lecture {
     }
 
     public static void lectureGamme(Atelier atelier){
-        File fichier = new File("data/gammes.txt");
+        File fichier = new File("data/"+atelier.getNom()+"/gammes.txt");
         if(fichier.exists()){
             String ref;
             String[] equipement, operations;
@@ -191,7 +193,7 @@ public class Lecture {
     }
 
     public static void lectureOperation(Atelier atelier){
-        File fichier = new File("data/operations.txt");
+        File fichier = new File("data/" +atelier.getNom()+"/operations.txt");
         if(fichier.exists()){
             String refOp, dOp;
             float duree;
@@ -235,7 +237,7 @@ public class Lecture {
     }
 
     public static void lectureProduit(Atelier atelier){
-        File fichier = new File("data/produits.txt");
+        File fichier = new File("data/"+atelier.getNom()+"/produits.txt");
         if(fichier.exists()){
             String codePro, dProd;
             String[] gammes;
@@ -276,4 +278,27 @@ public class Lecture {
         
     }
 
+    public static ArrayList<Atelier> lectureAtelier(){
+        ArrayList<Atelier> ateliers = new ArrayList<>();
+        File fichier = new File("data/ateliers.txt");
+
+        if(fichier.exists()){
+            try{
+                BufferedReader flux=new BufferedReader(new FileReader(fichier));
+                String lignelue;
+                while((lignelue=flux.readLine())!=null){
+                    ateliers.add(new Atelier(lignelue));
+                }
+                flux.close();
+            }
+            catch(FileNotFoundException err){
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
+                
+            catch(IOException err){
+                System.out.println("Erreur :\n"+err);}    
+        }
+        return ateliers;
+    }
+
+    
 }

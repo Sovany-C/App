@@ -43,7 +43,14 @@ public class ProduitPane extends VBox {
     private Button bt_supprimer;
 
     private GridPane pane_saisiedesinfo;
-    
+    private Atelier a;
+
+    public Atelier getA() {
+        return a;
+    }
+    public void setA(Atelier a) {
+        this.a = a;
+    }
     public ObservableList<Produit> getModel() {
         return model;
     }
@@ -145,6 +152,7 @@ public class ProduitPane extends VBox {
 
         this.model = a.getProduits();
         this.controleur = new ProduitControleur(this);
+        this.a = a;
 
         this.gammes = a.getGammes();
         this.codeProduit = new Label("Code:");
