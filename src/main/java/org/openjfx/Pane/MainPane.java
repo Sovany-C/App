@@ -19,12 +19,13 @@ import javafx.stage.Stage;
 public class MainPane extends VBox {
     
     private ArrayList<Atelier> model;
+    private ArrayList<AtelierPane> scenes;
     private MainControleur controleur;
     private SceneControleur sceneControleur;
 
     private TextField nom;
 
-    private Map<Atelier, Button> atelierBouton;
+    private Map<AtelierPane, Button> atelierBouton;
     private Button bt_creation;
 
     private Stage primaryStage;
@@ -38,10 +39,10 @@ public class MainPane extends VBox {
     public void setControleur(MainControleur controleur) {
         this.controleur = controleur;
     }
-    public Map<Atelier, Button> getAtelierBouton() {
+    public Map<AtelierPane, Button> getAtelierBouton() {
         return atelierBouton;
     }
-    public void setAtelierBouton(Map<Atelier, Button> atelierBouton) {
+    public void setAtelierBouton(Map<AtelierPane, Button> atelierBouton) {
         this.atelierBouton = atelierBouton;
     }
     public Button getBt_creation() {
@@ -86,13 +87,19 @@ public class MainPane extends VBox {
     public void setModel(ArrayList<Atelier> model) {
         this.model = model;
     }
+    public ArrayList<AtelierPane> getScenes() {
+        return scenes;
+    }
+    public void setScenes(ArrayList<AtelierPane> scenes) {
+        this.scenes = scenes;
+    }
 
     public MainPane(SceneControleur sceneControleur){
 
         this.model = new ArrayList<Atelier>();
         this.controleur = new MainControleur(this);
         this.sceneControleur = sceneControleur;
-
+        this.scenes = new ArrayList<AtelierPane>();
 
         this.nom = new TextField();
 

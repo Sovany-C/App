@@ -1,9 +1,5 @@
 package org.openjfx.Controleur;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-
 import org.openjfx.Model.Atelier;
 import org.openjfx.Model.Lecture;
 import org.openjfx.Model.Sauvegarde;
@@ -21,20 +17,23 @@ public class MainControleur {
 
     public void creationAte(){
         Atelier a = new Atelier(this.vue.getNom().getText().trim());
+        AtelierPane aPane = new AtelierPane(a, this.vue.getSceneControleur());
 
         Button bt_atelier = new Button(a.getNom());
+
         bt_atelier.setOnAction(evt -> {
-            openAtelier(a);
+            openAtelier(aPane);
         });
         
         this.vue.getNom().clear();
         this.vue.getModel().add(a);
-        this.vue.getAtelierBouton().put(a, bt_atelier);
+        this.vue.getScenes().add(aPane);
+        this.vue.getAtelierBouton().put(aPane, bt_atelier);
         this.vue.getBoutonContainer().getChildren().add(bt_atelier);
         
     }
 
-    public void openAtelier(Atelier a){
+    public void openAtelier(AtelierPane a){
         Sauvegarde.sauvegarderAtelier(this.vue.getModel());
         this.vue.getSceneControleur().changeAtelierPane(a);
     }
@@ -44,12 +43,13 @@ public class MainControleur {
         this.vue.getModel().addAll(Lecture.lectureAtelier());
         for(Atelier a : this.vue.getModel()){
             Button bt_atelier = new Button(a.getNom());
+            AtelierPane aPane = new AtelierPane(a, this.vue.getSceneControleur());
 
             bt_atelier.setOnAction(evt -> {
-                openAtelier(a);
+                openAtelier(aPane);
             });
         
-            this.vue.getAtelierBouton().put(a, bt_atelier);
+            this.vue.getAtelierBouton().put(aPane, bt_atelier);
             this.vue.getBoutonContainer().getChildren().add(bt_atelier);
         }
     }

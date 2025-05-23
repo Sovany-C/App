@@ -47,6 +47,15 @@ public class OperateurPane extends VBox {
     private GridPane pane_saisiedesinfo;
     private Atelier a;
 
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
+
     public Atelier getA() {
         return a;
     }
@@ -175,6 +184,8 @@ public class OperateurPane extends VBox {
         this.a = a;
 
         this.machines = a.getMachine();
+        this.error = new Label();
+        this.error.setVisible(false);
         this.codeOperateur = new Label("Code:");
         this.nomLabel = new Label("Nom:");
         this.prenomLabel = new Label("Prenom:");
@@ -194,6 +205,9 @@ public class OperateurPane extends VBox {
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
+        this.pane_saisiedesinfo.add(this.error,0,l);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
         this.pane_saisiedesinfo.add(this.codeOperateur, c, l);
         this.pane_saisiedesinfo.add(this.code,c+1,l);
         l++;

@@ -20,6 +20,9 @@ public class Equipement {
     
     // Constructeur
     public Equipement(String refEquipement, String dEquipement) {
+        if(refEquipement==null){
+            throw new IllegalArgumentException("Erreur: pas de référence");
+        }
         this.refEquipement = refEquipement;
         this.dEquipement = dEquipement;
     }

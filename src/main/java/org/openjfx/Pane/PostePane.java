@@ -44,6 +44,15 @@ public class PostePane extends VBox{
     private GridPane pane_saisiedesinfo;
     private Atelier atelier;
 
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
+
     public Atelier getA() {
         return atelier;
     }
@@ -156,9 +165,11 @@ public class PostePane extends VBox{
     public PostePane(Atelier a){
         this.model = a.getEquipements();
         this.controleur = new PosteControleur(this);
-        ObservableList<Machine> machines = this.atelier.getMachine();
         this.atelier = a;
-
+        ObservableList<Machine> machines = this.atelier.getMachine();
+        
+        this.error = new Label();
+        this.error.setVisible(false);
         this.refPoste = new Label("Référence:");
         this.dPoste = new Label("Désignation:");
         this.machinesLabel = new Label("Machines:");
@@ -176,17 +187,24 @@ public class PostePane extends VBox{
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
-        this.pane_saisiedesinfo.add(this.refPoste,0,0);
-        this.pane_saisiedesinfo.add(this.ref,1,0);
-        this.pane_saisiedesinfo.add(this.dPoste, 0, 1);
-        this.pane_saisiedesinfo.add(this.des, 1, 1);
-        this.pane_saisiedesinfo.add(this.machinesLabel, 0, 2);
-        this.pane_saisiedesinfo.add(this.listMachines, 1, 2);
-        this.pane_saisiedesinfo.add(this.modLabel,0,3);
+        int l=0;
+        this.pane_saisiedesinfo.add(this.error,0,l);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
+        this.pane_saisiedesinfo.add(this.refPoste,0,l);
+        this.pane_saisiedesinfo.add(this.ref,1,l);
+        this.pane_saisiedesinfo.add(this.dPoste, 0, l);
+        this.pane_saisiedesinfo.add(this.des, 1, l);
+        l++;
+        this.pane_saisiedesinfo.add(this.machinesLabel, 0, l);
+        this.pane_saisiedesinfo.add(this.listMachines, 1, l);
+        l++;
+        this.pane_saisiedesinfo.add(this.modLabel,0,l);
+        l++;
 
         ObservableList<Poste> posteObservable = this.atelier.getPostes();
         this.choix = new ComboBox<>(posteObservable);
-        this.pane_saisiedesinfo.add(choix, 1, 3);
+        this.pane_saisiedesinfo.add(choix, 1, l);
 
         this.tablePoste = new TableView<Poste>();
         this.tablePoste.setItems(posteObservable);
@@ -197,29 +215,29 @@ public class PostePane extends VBox{
         TableColumn<Poste,String> machCol = new TableColumn<Poste,String>("Machines");
         machCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().machineString()));
         this.tablePoste.getColumns().addAll(refCol,desCol,machCol);
-        this.pane_saisiedesinfo.add(tablePoste, 0, 7);
-        this.pane_saisiedesinfo.setColumnSpan(tablePoste, 5);
+        this.pane_saisiedesinfo.add(tablePoste, 0, 8);
+        GridPane.setColumnSpan(tablePoste, 5);
 
         this.bt_creer = new Button("Créer");
-        this.pane_saisiedesinfo.add(bt_creer, 0, 6);
+        this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {
             this.controleur.creationPoste(posteObservable);
         });
 
         this.bt_modifier = new Button("Modifier");
-        this.pane_saisiedesinfo.add(bt_modifier, 1, 6);
+        this.pane_saisiedesinfo.add(bt_modifier, 1, l);
         this.bt_modifier.setOnAction(evt -> {
             this.controleur.modifierPoste();
         });
 
         this.bt_supprimer = new Button("Supprimer");
-        this.pane_saisiedesinfo.add(bt_supprimer, 2, 6);
+        this.pane_saisiedesinfo.add(bt_supprimer, 2, l);
         this.bt_supprimer.setOnAction(evt -> {
             this.controleur.supprimerPoste(posteObservable);
         });
 
         this.bt_sauvegarder = new Button("Sauvegarder");
-        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, 6);
+        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, l);
         this.bt_sauvegarder.setOnAction(evt -> {
             this.controleur.sauvegarderPoste(a);
         });

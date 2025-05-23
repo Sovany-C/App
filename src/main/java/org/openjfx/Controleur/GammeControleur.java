@@ -16,17 +16,26 @@ public class GammeControleur {
     }
 
     public void creationGamme(){
-        List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
-        List<Equipement> equipements = new ArrayList<>();
-        for(Operation o : selection){
-            equipements.addAll(o.getEquipements());
+        try{
+            this.vue.getA().verifGamme(this.vue.getRef().getText().trim());
+            List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
+            List<Equipement> equipements = new ArrayList<>();
+            for(Operation o : selection){
+                equipements.addAll(o.getEquipements());
+            }
+            Gamme g = new Gamme(this.vue.getRef().getText(),
+                                new ArrayList<>(selection),
+                                new HashSet<>(equipements));
+            this.vue.getModel().add(g);
+            this.vue.getRef().clear();
+            System.out.println("Gamme: " + this.vue.getRef().getText() + " ajouté à la liste");
+            this.vue.getError().setVisible(false);    
         }
-        Gamme g = new Gamme(this.vue.getRef().getText(),
-                            new ArrayList<>(selection),
-                            new HashSet<>(equipements));
-        this.vue.getModel().add(g);
-        this.vue.getRef().clear();
-        System.out.println("Gamme: " + this.vue.getRef().getText() + " ajouté à la liste");
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void modifierGamme(){

@@ -15,21 +15,44 @@ public class MachineControleur {
         this.vue = v;
     }
 
-    public void creationMachine(ObservableList<Machine> choix){
-        TextField[] attributs = {this.vue.getRef(), this.vue.getDes(), this.vue.getType(), this.vue.getCx_val(), this.vue.getCy_val(), this.vue.getCout_val()};
-        Machine m = new Machine(attributs[0].getText().trim(),
-                                attributs[1].getText(),
-                                attributs[2].getText(),
-                                Float.parseFloat(attributs[3].getText()),
-                                Float.parseFloat(attributs[4].getText()),
-                                Float.parseFloat(attributs[5].getText()));
-        this.vue.getModel().add(m);
-        choix.add(m);
-        System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
-        for(int i=0; i<6; i++){
-            attributs[i].clear();
+    public void creationMachine(ObservableList<Machine> choix) throws NumberFormatException{
+
+        try{
+            this.vue.getAtelier().verifMachine(this.vue.getRef().getText().trim());
+            TextField[] attributs = {this.vue.getRef(), this.vue.getDes(), this.vue.getType(), this.vue.getCx_val(), this.vue.getCy_val(), this.vue.getCout_val()};
+            Float[] val = new Float[3];
+            for(int i=3; i<6;i++){
+                if(attributs[3].getText().trim().isEmpty()){
+                    val[i-3] = (float) 0;
+                }
+                else{
+                    val[i-3] = Float.parseFloat(attributs[3].getText().trim());
+                }
+            }
+            Machine m = new Machine(attributs[0].getText().trim(),
+                                    attributs[1].getText(),
+                                    attributs[2].getText(),
+                                    val[0],
+                                    val[1],
+                                    val[2]);
+            this.vue.getModel().add(m);
+            choix.add(m);
+            System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
+            for(int i=0; i<6; i++){
+                attributs[i].clear();
+            }
+            this.vue.getTableMachines().refresh();
+            this.vue.getError().setVisible(false);
         }
-        this.vue.getTableMachines().refresh();
+        catch(NumberFormatException e){
+            this.vue.getError().setText("Erreur: écriture valeur incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void sauvegarderMach(){

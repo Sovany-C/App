@@ -25,8 +25,8 @@ public class SceneControleur {
         scene.setRoot(this.main);
     }
 
-    public void changeAtelierPane(Atelier a) {
-        scene.setRoot(new AtelierPane(a,this));
+    public void changeAtelierPane(AtelierPane a) {
+        scene.setRoot(a);
     }
 
     public void closeStage(){

@@ -1,10 +1,8 @@
 package org.openjfx;
 
 import org.openjfx.Controleur.SceneControleur;
-import org.openjfx.Pane.*;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -16,7 +14,7 @@ public class App extends Application {
         navigation.closeStage();
         
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("Acceuil");
+        primaryStage.setTitle("Accueil");
         primaryStage.show();                   // Définir la visibilité (l'afficher)
     }
 

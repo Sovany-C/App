@@ -36,7 +36,11 @@ public class Machine extends Equipement{
     
     public Machine(String refMachine, String dMachine, String type, float x,
             float y, float cout) {
+        
         super(refMachine, dMachine);
+        if(cout < 0){
+            throw new IllegalArgumentException("Erreur: valeur négative");
+        }
         this.type = type;
         this.x = x;
         this.y = y;

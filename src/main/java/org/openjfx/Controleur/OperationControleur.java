@@ -17,16 +17,29 @@ public class OperationControleur {
     }
 
     public void creationOperation(){
-        List<Equipement> selection = this.vue.getListEquip().getSelectionModel().getSelectedItems();
-        Operation op = new Operation(this.vue.getRef().getText().trim(),
-                            this.vue.getDes().getText().trim(),
-                            new ArrayList<>(selection),
-                            Float.parseFloat(this.vue.getDuree_value().getText().trim()));
-        this.vue.getModel().add(op);
-        System.out.println("Operation: " + this.vue.getRef().getText() + " ajouté à la liste");
-        this.vue.getRef().clear();
-        this.vue.getDes().clear();
-        this.vue.getDuree_value().clear();
+        try{
+            this.vue.getA().verifOperation(this.vue.getRef().getText().trim());
+            List<Equipement> selection = this.vue.getListEquip().getSelectionModel().getSelectedItems();
+            Operation op = new Operation(this.vue.getRef().getText().trim(),
+                                this.vue.getDes().getText().trim(),
+                                new ArrayList<>(selection),
+                                Float.parseFloat(this.vue.getDuree_value().getText().trim()));
+            this.vue.getModel().add(op);
+            System.out.println("Operation: " + this.vue.getRef().getText() + " ajouté à la liste");
+            this.vue.getRef().clear();
+            this.vue.getDes().clear();
+            this.vue.getDuree_value().clear();   
+            this.vue.getError().setVisible(false);
+        }
+        catch(NumberFormatException e){
+            this.vue.getError().setText("Erreur: valeur saisie incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void modifierOperation(){

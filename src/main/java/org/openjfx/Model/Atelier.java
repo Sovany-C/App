@@ -120,7 +120,67 @@ public class Atelier {
         Lecture.lectureProduit(this);
         Lecture.lectureOperateur(this);
     }
-    
+
+    public void verifMachine(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Machine m : getMachine()){
+            if(m.getRefEquipement().equals(ref)){
+                throw new IllegalArgumentException("Erreur: machine existante");
+            }
+        }
+    }
+    public void verifGamme(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Gamme m : this.gammes){
+            if(m.getRefGamme().equals(ref)){
+                throw new IllegalArgumentException("Erreur: gamme existante");
+            }
+        }
+    }
+    public void verifOperateur(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Operateur m : this.operateurs){
+            if(m.getCode().equals(ref)){
+                throw new IllegalArgumentException("Erreur: gamme existante");
+            }
+        }
+    }
+    public void verifOperation(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Operation m: this.operations){
+            if(m.getRefOperation().equals(ref)){
+                throw new IllegalArgumentException("Erreur: gamme existante");
+            }
+        }
+    }
+    public void verifPoste(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Poste m : this.getPostes()){
+            if(m.getRefEquipement().equals(ref)){
+                throw new IllegalArgumentException("Erreur: gamme existante");
+            }
+        }
+    }
+    public void verifProduit(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Produit m : this.produits){
+            if(m.getCodeProduit().equals(ref)){
+                throw new IllegalArgumentException("Erreur: gamme existante");
+            }
+        }
+    }
 
     
 }

@@ -53,6 +53,9 @@ public class Operation {
 
     // Constructeur
     public Operation(String refOperation, String dOperation, ArrayList<Equipement> equipements, float dureeOperation) {
+        if(dureeOperation<0){
+            throw new IllegalArgumentException();
+        }
         this.refOperation = refOperation;
         this.dOperation = dOperation;
         this.equipements = equipements;

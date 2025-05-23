@@ -16,17 +16,26 @@ public class OperateurControleur {
     }
 
     public void creationOperateur(){
-        List<Machine> selection = this.vue.getListMachine().getSelectionModel().getSelectedItems();
-        Operateur op = new Operateur(this.vue.getCode().getText(),
-                                    this.vue.getNom().getText(),
-                                    this.vue.getPrenom().getText(),
-                                    new ArrayList<>(selection));
-        this.vue.getModel().add(op);
-        System.out.println("Operateur: " + this.vue.getCode().getText() + " ajouté à la liste");
-        this.vue.getCode().clear();
-        this.vue.getNom().clear();
-        this.vue.getPrenom().clear();
-        this.vue.getTableOperateurs().refresh();
+        try{
+            this.vue.getA().verifOperateur(this.vue.getCode().getText().trim());
+            List<Machine> selection = this.vue.getListMachine().getSelectionModel().getSelectedItems();
+            Operateur op = new Operateur(this.vue.getCode().getText(),
+                                        this.vue.getNom().getText(),
+                                        this.vue.getPrenom().getText(),
+                                        new ArrayList<>(selection));
+            this.vue.getModel().add(op);
+            System.out.println("Operateur: " + this.vue.getCode().getText() + " ajouté à la liste");
+            this.vue.getCode().clear();
+            this.vue.getNom().clear();
+            this.vue.getPrenom().clear();
+            this.vue.getTableOperateurs().refresh();
+            this.vue.getError().setVisible(false);
+        }
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void sauvegarderOperateur(){

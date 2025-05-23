@@ -18,15 +18,24 @@ public class PosteControleur {
     }
 
     public void creationPoste(ObservableList<Poste> choix){
-        List<Machine> selection = this.vue.getListMachines().getSelectionModel().getSelectedItems();
-        Poste p = new Poste(this.vue.getRef().getText(),
-                            this.vue.getDes().getText(),
-                            new HashSet<>(selection));
-        this.vue.getModel().add(p);
-        choix.add(p);
-        this.vue.getRef().clear();
-        this.vue.getDes().clear();
-        System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
+        try{
+            this.vue.getA().verifPoste(this.vue.getRef().getText().trim());
+            List<Machine> selection = this.vue.getListMachines().getSelectionModel().getSelectedItems();
+            Poste p = new Poste(this.vue.getRef().getText(),
+                                this.vue.getDes().getText(),
+                                new HashSet<>(selection));
+            this.vue.getModel().add(p);
+            choix.add(p);
+            this.vue.getRef().clear();
+            this.vue.getDes().clear();
+            System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
+            this.vue.getError().setVisible(false);   
+        }
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void modifierPoste(){

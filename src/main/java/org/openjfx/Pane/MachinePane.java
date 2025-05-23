@@ -52,7 +52,15 @@ public class MachinePane extends VBox {
     private Button bt_supprimer;
 
     private GridPane pane_saisiedesinfo;
-
+    
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
     public ObservableList<Equipement> getModel() {
         return model;
     }
@@ -161,10 +169,10 @@ public class MachinePane extends VBox {
     public void setChoix(ComboBox<Machine> choix) {
         this.choix = choix;
     }
-    public TableView getTableMachines() {
+    public TableView<Machine> getTableMachines() {
         return tableMachines;
     }
-    public void setTableMachines(TableView tableMachines) {
+    public void setTableMachines(TableView<Machine> tableMachines) {
         this.tableMachines = tableMachines;
     }
     public Button getBt_modifier() {
@@ -198,6 +206,7 @@ public class MachinePane extends VBox {
         this.controleur = new MachineControleur(this);
         this.atelier = a;
 
+        this.error = new Label("Erreur");
         this.refMachine = new Label("Référence:");
         this.dMachine = new Label("Désignation:");
         this.typeMachine = new Label("Type:");
@@ -219,6 +228,10 @@ public class MachinePane extends VBox {
         this.pane_saisiedesinfo.setVgap(5.5);
 
         int l=0;
+        this.pane_saisiedesinfo.add(this.error, 0, l);
+        this.error.setVisible(false);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
         this.pane_saisiedesinfo.add(this.refMachine, 0, l);
         this.pane_saisiedesinfo.add(this.ref,1,l);
         l++;
@@ -241,7 +254,7 @@ public class MachinePane extends VBox {
         ObservableList<Machine> machinesObservable = this.atelier.getMachine();
         this.choix = new ComboBox<>(machinesObservable);
         this.pane_saisiedesinfo.add(choix, 1,l);
-
+        l++;
         this.tableMachines = new TableView<Machine>();
         this.tableMachines.setItems(machinesObservable);
         TableColumn<Machine, String> refCol = new TableColumn<Machine, String>("Référence");
@@ -257,29 +270,29 @@ public class MachinePane extends VBox {
         TableColumn<Machine, Float> coutCol = new TableColumn<Machine, Float>("Cout");
         coutCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCout()));
         this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol);
-        this.pane_saisiedesinfo.add(tableMachines, 0, 8);
+        this.pane_saisiedesinfo.add(tableMachines, 0, 9);
         this.pane_saisiedesinfo.setColumnSpan(tableMachines,5);
 
         this.bt_creer = new Button("Créer");
-        this.pane_saisiedesinfo.add(bt_creer, 0, 7);
+        this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {
             this.controleur.creationMachine(machinesObservable);
         });
 
         this.bt_modifier = new Button("Modifier");
-        this.pane_saisiedesinfo.add(bt_modifier, 1, 7);
+        this.pane_saisiedesinfo.add(bt_modifier, 1, l);
         this.bt_modifier.setOnAction(evt -> {
             this.controleur.modifierMachine();
         });
 
         this.bt_supprimer = new Button("Supprimer");
-        this.pane_saisiedesinfo.add(bt_supprimer, 2, 7);
+        this.pane_saisiedesinfo.add(bt_supprimer, 2, l);
         this.bt_supprimer.setOnAction(evt -> {
             this.controleur.supprimerMach(machinesObservable);
         });
 
         this.bt_sauvegarder = new Button("Sauvegarder");
-        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, 7);
+        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, l);
         this.bt_sauvegarder.setOnAction(evt -> {
             this.controleur.sauvegarderMach();
         });

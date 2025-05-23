@@ -44,6 +44,14 @@ public class ProduitPane extends VBox {
 
     private GridPane pane_saisiedesinfo;
     private Atelier a;
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
 
     public Atelier getA() {
         return a;
@@ -147,7 +155,13 @@ public class ProduitPane extends VBox {
     public void setListGamme(ListView<Gamme> listGamme) {
         this.listGamme = listGamme;
     }
-    
+    public Label getMoLabel() {
+        return moLabel;
+    }
+    public void setMoLabel(Label moLabel) {
+        this.moLabel = moLabel;
+    }
+
     public ProduitPane(Atelier a){
 
         this.model = a.getProduits();
@@ -155,6 +169,8 @@ public class ProduitPane extends VBox {
         this.a = a;
 
         this.gammes = a.getGammes();
+        this.error = new Label();
+        this.error.setVisible(false);
         this.codeProduit = new Label("Code:");
         this.dProduit = new Label("Désignation:");
         this.gLabel = new Label("Gammes");
@@ -171,15 +187,22 @@ public class ProduitPane extends VBox {
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
-        this.pane_saisiedesinfo.add(this.codeProduit, 0, 0);
-        this.pane_saisiedesinfo.add(this.code,1,0);
-        this.pane_saisiedesinfo.add(this.dProduit,0,1);
-        this.pane_saisiedesinfo.add(this.des, 1,1);
-        this.pane_saisiedesinfo.add(this.gLabel, 0,2);
-        this.pane_saisiedesinfo.add(listGamme,1,2);
+        int l=0;
+        this.pane_saisiedesinfo.add(this.error,0,l);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
+        this.pane_saisiedesinfo.add(this.codeProduit, 0, l);
+        this.pane_saisiedesinfo.add(this.code,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.dProduit,0,l);
+        this.pane_saisiedesinfo.add(this.des, 1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.gLabel, 0,l);
+        this.pane_saisiedesinfo.add(listGamme,1,l);
+        l++;
 
         this.choix = new ComboBox<>(model);
-        this.pane_saisiedesinfo.add(choix, 0,6);
+        this.pane_saisiedesinfo.add(choix, 0,l);
 
         this.tableProduits = new TableView<Produit>();
         this.tableProduits.setItems(model);
@@ -194,25 +217,25 @@ public class ProduitPane extends VBox {
         this.pane_saisiedesinfo.setColumnSpan(tableProduits,5);
 
         this.bt_creer = new Button("Créer");
-        this.pane_saisiedesinfo.add(bt_creer, 0, 7);
+        this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {
             this.controleur.creationProduit();
         });
 
         this.bt_modifier = new Button("Modifier");
-        this.pane_saisiedesinfo.add(bt_modifier, 1, 7);
+        this.pane_saisiedesinfo.add(bt_modifier, 1, l);
         this.bt_modifier.setOnAction(evt -> {
             this.controleur.modifierProduit();
         });
 
         this.bt_supprimer = new Button("Supprimer");
-        this.pane_saisiedesinfo.add(bt_supprimer, 2, 7);
+        this.pane_saisiedesinfo.add(bt_supprimer, 2, l);
         this.bt_supprimer.setOnAction(evt -> {
             this.controleur.supprimerProduit();
         });
 
         this.bt_sauvegarder = new Button("Sauvegarder");
-        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, 7);
+        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, l);
         this.bt_sauvegarder.setOnAction(evt -> {
             this.controleur.sauvegarderProduit();
         });

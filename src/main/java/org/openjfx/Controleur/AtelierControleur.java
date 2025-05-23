@@ -4,7 +4,6 @@ import org.openjfx.Pane.*;
 
 import java.io.File;
 
-import org.openjfx.Model.Atelier;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

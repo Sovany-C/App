@@ -15,13 +15,22 @@ public class ProduitControleur {
     }
 
     public void creationProduit(){
-        List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
-        Produit m = new Produit(this.vue.getCode().getText().trim(), this.vue.getDes().getText().trim(), new ArrayList<>(selection));
-        this.vue.getModel().add(m);
-        System.out.println("Equipement: " + this.vue.getCode().getText() + " ajouté à la liste");
-        this.vue.getCode().clear();
-        this.vue.getDes().clear();
-        this.vue.getTableProduits().refresh();
+        try{
+            this.vue.getA().verifProduit(this.vue.getCode().getText().trim());
+            List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
+            Produit m = new Produit(this.vue.getCode().getText().trim(), this.vue.getDes().getText().trim(), new ArrayList<>(selection));
+            this.vue.getModel().add(m);
+            System.out.println("Equipement: " + this.vue.getCode().getText() + " ajouté à la liste");
+            this.vue.getCode().clear();
+            this.vue.getDes().clear();
+            this.vue.getTableProduits().refresh();
+            this.vue.getError().setVisible(false);    
+
+        }
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+        }
+        
     }
 
     public void sauvegarderProduit(){
