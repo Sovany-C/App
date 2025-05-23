@@ -179,7 +179,7 @@ public class ProduitPane extends VBox {
         this.des = new TextField();
 
         this.listGamme = new ListView<>();
-        this.listGamme.getItems().addAll(gammes);
+        this.listGamme.setItems(gammes);
         this.listGamme.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();

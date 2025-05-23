@@ -19,13 +19,18 @@ public class PosteControleur {
 
     public void creationPoste(ObservableList<Poste> choix){
         try{
-            this.vue.getA().verifPoste(this.vue.getRef().getText().trim());
+            this.vue.getAtelier().verifPoste(this.vue.getRef().getText().trim());
             List<Machine> selection = this.vue.getListMachines().getSelectionModel().getSelectedItems();
             Poste p = new Poste(this.vue.getRef().getText(),
                                 this.vue.getDes().getText(),
                                 new HashSet<>(selection));
             this.vue.getModel().add(p);
             choix.add(p);
+            for(Machine m: selection){
+                this.vue.getMachines().remove(m);
+            }
+            this.vue.getListMachines().getItems().addAll(this.vue.getMachines());
+            this.vue.getListMachines().refresh();
             this.vue.getRef().clear();
             this.vue.getDes().clear();
             System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
@@ -62,7 +67,7 @@ public class PosteControleur {
     }
 
     public void sauvegarderPoste(Atelier a){
-        Sauvegarde.sauvegarderPoste(this.vue.getA());
+        Sauvegarde.sauvegarderPoste(this.vue.getAtelier());
     }
 
 

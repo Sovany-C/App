@@ -101,6 +101,28 @@ public class Atelier {
         return machines;
     }
 
+    public ObservableList<Machine> getUniqueMachine(){
+        ObservableList<Machine> uniquemachines = FXCollections.observableArrayList();
+        boolean check;
+        for(Machine m : this.getMachine()){
+            check = false;
+            for(Poste p : this.getPostes()){
+                for(Machine pMach : p.getMachines()){
+                    if(pMach.getRefEquipement().equals(m.getRefEquipement())){
+                        check = true;
+                        break;
+                    }
+                }
+            }
+            if(!check){
+                uniquemachines.add(m);
+            }
+        }
+        
+        return uniquemachines;
+    }
+
+
     public ObservableList<Poste> getPostes(){
         ObservableList<Poste> postes = FXCollections.observableArrayList();
         for(Equipement e : this.getEquipements()){

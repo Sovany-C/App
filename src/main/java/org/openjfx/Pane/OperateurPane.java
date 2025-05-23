@@ -197,7 +197,7 @@ public class OperateurPane extends VBox {
         this.prenom = new TextField();
 
         this.listMachine = new ListView<>();
-        this.listMachine.getItems().addAll(machines);
+        this.listMachine.setItems(machines);
         this.listMachine.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();

@@ -197,7 +197,7 @@ public class OperationPane extends VBox {
         this.duree_value = new TextField();
 
         this.listEquip = new ListView<>();
-        this.listEquip.getItems().addAll(equipements);
+        this.listEquip.setItems(equipements);
         this.listEquip.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();

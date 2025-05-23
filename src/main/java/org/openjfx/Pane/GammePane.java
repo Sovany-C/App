@@ -168,7 +168,7 @@ public class GammePane extends VBox {
         this.ref = new TextField();
 
         this.listOperation = new ListView<>();
-        this.listOperation.getItems().addAll(operations);
+        this.listOperation.setItems(operations);
         this.listOperation.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();
