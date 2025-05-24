@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -19,7 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class PostePane extends VBox{    private ObservableList<Equipement> model;
+public class PostePane extends VBox{    
+    
+    private ObservableList<Equipement> model;
     private ObservableList<Machine> machines;
     private PosteControleur controleur;
     
@@ -30,11 +33,21 @@ public class PostePane extends VBox{    private ObservableList<Equipement> model
     
     private TextField ref;
     private TextField des;
-    private ListView<Machine> listMachines; private ComboBox<Poste> choix;   private Button bt_creer;
+    private ListView<Machine> listMachines; 
+    
+    private ComboBox<Poste> choix;   
+    
+    private Button bt_creer;
     private Button bt_sauvegarder;
     private Button bt_modifier;
-    private Button bt_supprimer;    private TableView<Poste> tablePoste;    private GridPane pane_saisiedesinfo;
-    private Atelier atelier;    private Label error;
+    private Button bt_supprimer;    
+    
+    private TableView<Poste> tablePoste;    
+    
+    private GridPane pane_saisiedesinfo;
+    private Atelier atelier;   
+    
+    private Label error;
     
     
     public ObservableList<Equipement> getModel() {
@@ -156,7 +169,6 @@ public class PostePane extends VBox{    private ObservableList<Equipement> model
         this.model = a.getEquipements();
         this.controleur = new PosteControleur(this);
         this.atelier = a;
-        this.machines = FXCollections.observableArrayList(this.atelier.getUniqueMachine());
         
         this.error = new Label();
         this.error.setVisible(false);
@@ -168,8 +180,9 @@ public class PostePane extends VBox{    private ObservableList<Equipement> model
         this.ref = new TextField();
         this.des = new TextField();     
         this.listMachines = new ListView<>();
-        this.listMachines.setItems(this.machines);        
+        this.listMachines.setItems(this.atelier.getMachine());        
         this.listMachines.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        this.listViewAff(a);
         
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
@@ -189,8 +202,7 @@ public class PostePane extends VBox{    private ObservableList<Equipement> model
         this.pane_saisiedesinfo.add(this.machinesLabel, 0, l);
         this.pane_saisiedesinfo.add(this.listMachines, 1, l);
         l++;
-        this.pane_saisiedesinfo.add(this.modLabel,0,l);
-        l++;        
+        this.pane_saisiedesinfo.add(this.modLabel,0,l);      
         
         ObservableList<Poste> posteObservable = this.atelier.getPostes();
         this.choix = new ComboBox<>(posteObservable);
@@ -206,6 +218,7 @@ public class PostePane extends VBox{    private ObservableList<Equipement> model
         TableColumn<Poste,String> machCol = new TableColumn<Poste,String>("Machines");
         machCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().machineString()));
         this.tablePoste.getColumns().addAll(refCol,desCol,machCol);
+        this.tablePoste.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         this.pane_saisiedesinfo.add(tablePoste, 0, 8);
         GridPane.setColumnSpan(tablePoste, 5);      
@@ -237,6 +250,24 @@ public class PostePane extends VBox{    private ObservableList<Equipement> model
         this.setPadding(new Insets(10, 50, 50, 50));
         this.setSpacing(10);
         this.getChildren().add(this.pane_saisiedesinfo);
+    }
+
+    public void listViewAff(Atelier a){
+        this.listMachines.setCellFactory(lv -> new ListCell<>() {
+        @Override
+        protected void updateItem(Machine item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+                setStyle("");
+            } else {
+                setText(item.getRefEquipement());
+            if (!a.getMachinelibre().contains(item)) {
+                setStyle("-fx-text-fill:rgb(230, 89, 89);"); 
+            }
+            }
+        }
+        });
     }
     
 }

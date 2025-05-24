@@ -32,7 +32,7 @@ public class OperateurControleur {
             this.vue.getError().setVisible(false);
         }
         catch(IllegalArgumentException e){
-            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setText(e.getMessage());
             this.vue.getError().setVisible(true);
         }
         

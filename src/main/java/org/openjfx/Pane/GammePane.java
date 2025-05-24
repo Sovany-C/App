@@ -203,8 +203,9 @@ public class GammePane extends VBox {
         TableColumn<Gamme, Float> dureeCol = new TableColumn<Gamme, Float>("Durée");
         dureeCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().dureeGamme()));
         this.tableGammes.getColumns().addAll(refCol, opCol,eqCol,coutCol,dureeCol);
+        this.tableGammes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableGammes, 0, 8);
-        this.pane_saisiedesinfo.setColumnSpan(tableGammes,5);
+        GridPane.setColumnSpan(tableGammes,5);
 
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, 7);

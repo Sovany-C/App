@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -32,6 +33,8 @@ public class AtelierPane extends VBox {
 
     private GridPane pane_saisiedesinfo;
     private Pane espace_affichage;
+    private VBox pane_VBox;
+    private HBox paneHBox;
 
     public Atelier getModel() {
         return model;
@@ -132,7 +135,7 @@ public class AtelierPane extends VBox {
 
         this.nom = new Label(a.getNom());
         this.nom.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family:Arial;");
-        this.plan = new Label("Plan de l'atelier");
+        this.plan = new Label("Plan de l'atelier : ");
         this.plan.setStyle("-fx-font-size: 18;");
     
         this.pane_saisiedesinfo = new GridPane();
@@ -189,26 +192,27 @@ public class AtelierPane extends VBox {
         });
         c++;
         l++;
-        this.pane_saisiedesinfo.add(this.plan, 0, l);
-        GridPane.setColumnSpan(this.plan, 3);
 
         this.bt_dessiner = new Button("Plan");
-        this.pane_saisiedesinfo.add(bt_dessiner, 3, l);
         this.bt_dessiner.setOnAction(evt -> {
             this.controleur.dessinerAtelier();
         });
 
         this.espace_affichage = new Pane();
-        this.espace_affichage.setPrefSize(400, 300);
-        this.espace_affichage.setMaxSize(600, 400);
-        this.espace_affichage.setStyle("-fx-background-color: #a9c0d6;");
+        this.espace_affichage.setPrefSize(1000, 600);
+        this.espace_affichage.setStyle("-fx-background-color:rgb(70, 79, 97);");
 
-        this.setPrefSize(1000, 500);
+        this.paneHBox = new HBox(10);
+        this.paneHBox.getChildren().addAll(this.plan, this.bt_dessiner);
+        this.pane_VBox = new VBox(10);
+        this.pane_VBox.getChildren().addAll(this.paneHBox, this.espace_affichage);
+
+        this.setPrefSize(900, 500);
         this.setPadding(new Insets(10, 50, 50, 50));
-        this.setSpacing(100);
+        this.setSpacing(20);
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(this.pane_saisiedesinfo);
-        this.getChildren().add(this.espace_affichage);
+        this.getChildren().add(this.pane_VBox);
     }
 
     

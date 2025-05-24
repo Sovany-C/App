@@ -21,23 +21,25 @@ public class PosteControleur {
         try{
             this.vue.getAtelier().verifPoste(this.vue.getRef().getText().trim());
             List<Machine> selection = this.vue.getListMachines().getSelectionModel().getSelectedItems();
+            for(Machine m: selection){
+                if(!this.vue.getAtelier().getMachinelibre().contains(m)){
+                    throw new IllegalArgumentException("Erreur: élément déjà utilisé");
+                }
+            }
             Poste p = new Poste(this.vue.getRef().getText(),
                                 this.vue.getDes().getText(),
                                 new HashSet<>(selection));
             this.vue.getModel().add(p);
             choix.add(p);
-            for(Machine m: selection){
-                this.vue.getMachines().remove(m);
-            }
-            this.vue.getListMachines().getItems().addAll(this.vue.getMachines());
-            this.vue.getListMachines().refresh();
+            
+            this.vue.listViewAff(this.vue.getAtelier());
             this.vue.getRef().clear();
             this.vue.getDes().clear();
             System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
             this.vue.getError().setVisible(false);   
         }
         catch(IllegalArgumentException e){
-            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setText(e.getMessage());
             this.vue.getError().setVisible(true);
         }
         

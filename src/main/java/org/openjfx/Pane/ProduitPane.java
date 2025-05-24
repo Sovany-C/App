@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -181,6 +182,7 @@ public class ProduitPane extends VBox {
         this.listGamme = new ListView<>();
         this.listGamme.setItems(gammes);
         this.listGamme.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        this.listViewAff(a);
 
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
@@ -203,6 +205,7 @@ public class ProduitPane extends VBox {
 
         this.choix = new ComboBox<>(model);
         this.pane_saisiedesinfo.add(choix, 0,l);
+        l++;
 
         this.tableProduits = new TableView<Produit>();
         this.tableProduits.setItems(model);
@@ -213,6 +216,7 @@ public class ProduitPane extends VBox {
         TableColumn<Produit, String> gamCol = new TableColumn<Produit, String>("Type");
         gamCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().gammeString()));
         this.tableProduits.getColumns().addAll(codeCol, desCol,gamCol);
+        this.tableProduits.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableProduits, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableProduits,5);
 
@@ -245,6 +249,24 @@ public class ProduitPane extends VBox {
         this.setSpacing(10);
         this.getChildren().add(this.pane_saisiedesinfo);
 
+    }
+
+    public void listViewAff(Atelier a){
+        this.listGamme.setCellFactory(lv -> new ListCell<>() {
+        @Override
+        protected void updateItem(Gamme item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+                setStyle("");
+            } else {
+                setText(item.getRefGamme());
+            if (!a.getGammelibre().contains(item)) {
+                setStyle("-fx-text-fill:rgb(230, 89, 89);"); 
+            }
+            }
+        }
+        });
     }
     
     

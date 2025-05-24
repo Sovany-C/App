@@ -235,6 +235,7 @@ public class OperateurPane extends VBox {
         TableColumn<Operateur, String> machCol = new TableColumn<Operateur, String>("Type");
         machCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().compString()));
         this.tableOperateurs.getColumns().addAll(codeCol, nomCol,prenomCol,machCol);
+        this.tableOperateurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableOperateurs, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableOperateurs,5);
 

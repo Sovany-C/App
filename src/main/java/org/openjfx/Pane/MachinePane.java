@@ -270,6 +270,7 @@ public class MachinePane extends VBox {
         TableColumn<Machine, Float> coutCol = new TableColumn<Machine, Float>("Cout");
         coutCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCout()));
         this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol);
+        this.tableMachines.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableMachines, 0, 9);
         this.pane_saisiedesinfo.setColumnSpan(tableMachines,5);
 

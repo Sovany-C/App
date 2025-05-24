@@ -14,7 +14,7 @@ public class App extends Application {
         navigation.closeStage();
         
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("Accueil");
+        primaryStage.setTitle("App");
         primaryStage.show();                   // Définir la visibilité (l'afficher)
     }
 

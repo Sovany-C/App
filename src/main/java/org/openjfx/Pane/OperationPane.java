@@ -232,6 +232,7 @@ public class OperationPane extends VBox {
         TableColumn<Operation, Float> dureeCol = new TableColumn<Operation, Float>("Durée");
         dureeCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getDureeOperation()));
         this.tableOperations.getColumns().addAll(refCol, desCol,equiCol,dureeCol);
+        this.tableOperations.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableOperations, c, l+6);
         this.pane_saisiedesinfo.setColumnSpan(tableOperations,5);
 

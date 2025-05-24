@@ -22,11 +22,11 @@ public class MachineControleur {
             TextField[] attributs = {this.vue.getRef(), this.vue.getDes(), this.vue.getType(), this.vue.getCx_val(), this.vue.getCy_val(), this.vue.getCout_val()};
             Float[] val = new Float[3];
             for(int i=3; i<6;i++){
-                if(attributs[3].getText().trim().isEmpty()){
+                if(attributs[i].getText().trim().isEmpty()){
                     val[i-3] = (float) 0;
                 }
                 else{
-                    val[i-3] = Float.parseFloat(attributs[3].getText().trim());
+                    val[i-3] = Float.parseFloat(attributs[i].getText().trim());
                 }
             }
             Machine m = new Machine(attributs[0].getText().trim(),
@@ -49,7 +49,7 @@ public class MachineControleur {
             this.vue.getError().setVisible(true);
         }
         catch(IllegalArgumentException e){
-            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setText(e.getMessage());
             this.vue.getError().setVisible(true);
         }
         

@@ -18,9 +18,17 @@ public class ProduitControleur {
         try{
             this.vue.getA().verifProduit(this.vue.getCode().getText().trim());
             List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
+
+            for(Gamme g : selection){
+                if(!this.vue.getA().getGammelibre().contains(g)){
+                    throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
+                }
+            }
             Produit m = new Produit(this.vue.getCode().getText().trim(), this.vue.getDes().getText().trim(), new ArrayList<>(selection));
             this.vue.getModel().add(m);
-            System.out.println("Equipement: " + this.vue.getCode().getText() + " ajouté à la liste");
+            System.out.println("Produit: " + this.vue.getCode().getText() + " ajouté à la liste");
+            
+            this.vue.listViewAff(this.vue.getA());
             this.vue.getCode().clear();
             this.vue.getDes().clear();
             this.vue.getTableProduits().refresh();
@@ -28,7 +36,8 @@ public class ProduitControleur {
 
         }
         catch(IllegalArgumentException e){
-            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setText(e.getMessage());
+            this.vue.getError().setVisible(true);
         }
         
     }

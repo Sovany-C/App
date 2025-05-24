@@ -18,6 +18,7 @@ public class MainControleur {
     public void creationAte(){
         Atelier a = new Atelier(this.vue.getNom().getText().trim());
         AtelierPane aPane = new AtelierPane(a, this.vue.getSceneControleur());
+        aPane.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
         Button bt_atelier = new Button(a.getNom());
 
@@ -44,6 +45,7 @@ public class MainControleur {
         for(Atelier a : this.vue.getModel()){
             Button bt_atelier = new Button(a.getNom());
             AtelierPane aPane = new AtelierPane(a, this.vue.getSceneControleur());
+            aPane.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
             bt_atelier.setOnAction(evt -> {
                 openAtelier(aPane);

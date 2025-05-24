@@ -36,7 +36,7 @@ public class OperationControleur {
             this.vue.getError().setVisible(true);
         }
         catch(IllegalArgumentException e){
-            this.vue.getError().setText("Erreur: information manquante ou incorrecte");
+            this.vue.getError().setText(e.getMessage());
             this.vue.getError().setVisible(true);
         }
         
