@@ -46,26 +46,42 @@ public class PosteControleur {
     }
 
     public void modifierPoste(){
-        Poste selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        if(selected != null){
-            if(!this.vue.getRef().getText().trim().isEmpty()){
-                selected.setRefEquipement(this.vue.getRef().getText().trim());
+        try{
+            Poste selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
+            if(selected != null){
+                if(!this.vue.getRef().getText().trim().isEmpty()){
+                    this.vue.getAtelier().verifPoste(this.vue.getRef().getText().trim());
+                    selected.setRefEquipement(this.vue.getRef().getText().trim());
+                }
+                if(!this.vue.getDes().getText().trim().isEmpty()){
+                    selected.setdEquipement(this.vue.getDes().getText().trim());
+                }
+                if(!this.vue.getListMachines().getSelectionModel().isEmpty()){
+                    List<Machine> selection = this.vue.getListMachines().getSelectionModel().getSelectedItems();
+                    for(Machine m: selection){
+                        if(!this.vue.getAtelier().getMachinelibre().contains(m) && !selected.getMachines().contains(selection)){
+                            throw new IllegalArgumentException("Erreur: élément déjà utilisé");
+                        }
+                    }
+                    selected.setMachines(new HashSet<>(selection));
+                }
             }
-            if(!this.vue.getDes().getText().trim().isEmpty()){
-                selected.setdEquipement(this.vue.getDes().getText().trim());
-            }
-            if(!this.vue.getListMachines().getSelectionModel().isEmpty()){
-                List<Machine> selection = this.vue.getListMachines().getSelectionModel().getSelectedItems();
-                selected.setMachines(new HashSet<>(selection));
-            }
+            this.vue.listViewAff(this.vue.getAtelier());
+            this.vue.getTablePoste().refresh();
+            this.vue.getError().setVisible(false);   
         }
-        this.vue.getTablePoste().refresh();
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText(e.getMessage());
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void supprimerPoste(ObservableList<Poste> choix){
         Poste selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);
         choix.remove(selected);
+        this.vue.listViewAff(this.vue.getAtelier());
     }
 
     public void sauvegarderPoste(Atelier a){

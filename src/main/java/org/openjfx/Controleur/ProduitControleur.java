@@ -47,28 +47,42 @@ public class ProduitControleur {
     }
 
     public void modifierProduit(){
-        Produit selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        if(selected != null){
-            if(!this.vue.getCode().getText().trim().isEmpty()){
-                selected.setCodeProduit(this.vue.getCode().getText().trim());
-            }
-            if(!this.vue.getDes().getText().trim().isEmpty()){
-                selected.setCodeProduit(this.vue.getDes().getText().trim());
-            }
-            if(!this.vue.getListGamme().getSelectionModel().isEmpty()){
-                List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
-                selected.setGammes(new ArrayList<>(selection));
-            }
-            int index = this.vue.getChoix().getSelectionModel().getSelectedIndex();
-            this.vue.getChoix().getItems().set(index, selected);
-            System.out.println("Produit modifié");
-            this.vue.getTableProduits().refresh();
+        try{
+            Produit selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
+            if(selected != null){
+                if(!this.vue.getCode().getText().trim().isEmpty()){
+                    selected.setCodeProduit(this.vue.getCode().getText().trim());
+                    this.vue.getA().verifProduit(this.vue.getCode().getText().trim());
+                }
+                if(!this.vue.getDes().getText().trim().isEmpty()){
+                    selected.setCodeProduit(this.vue.getDes().getText().trim());
+                }
+                if(!this.vue.getListGamme().getSelectionModel().isEmpty()){
+                    List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
+                     for(Gamme g : selection){
+                    if(!this.vue.getA().getGammelibre().contains(g) && !selected.getGammes().contains(selection)){
+                        throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
+                        }
+                    }
+                    selected.setGammes(new ArrayList<>(selection));
+                }
+                int index = this.vue.getChoix().getSelectionModel().getSelectedIndex();
+                this.vue.getChoix().getItems().set(index, selected);
+                this.vue.getTableProduits().refresh();
+                this.vue.listViewAff(this.vue.getA());
 
+            } 
         }
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText(e.getMessage());
+            this.vue.getError().setVisible(true);
+        }
+        
     }
 
     public void supprimerProduit(){
         Produit selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);
+        this.vue.listViewAff(this.vue.getA());
     }
 }

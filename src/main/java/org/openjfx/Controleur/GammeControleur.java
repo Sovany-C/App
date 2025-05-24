@@ -39,22 +39,32 @@ public class GammeControleur {
     }
 
     public void modifierGamme(){
-        Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        if(selected != null){
-            if(!this.vue.getRef().getText().trim().isEmpty()){
-                selected.setRefGamme(this.vue.getRef().getText().trim());
-            }
-            if(!this.vue.getListOperation().getSelectionModel().isEmpty()){
-                List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
-                List<Equipement> equipements = new ArrayList<>();
-                for(Operation o : selection){
-                equipements.addAll(o.getEquipements());
+        try{
+            Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
+            if(selected != null){
+                if(!this.vue.getRef().getText().trim().isEmpty()){
+                    this.vue.getA().verifGamme(this.vue.getRef().getText().trim());
+                    selected.setRefGamme(this.vue.getRef().getText().trim());
                 }
-                selected.setOperations(new ArrayList<>(selection));
-                selected.setEquipements(new HashSet<>(equipements));
+                if(!this.vue.getListOperation().getSelectionModel().isEmpty()){
+                    List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
+                    List<Equipement> equipements = new ArrayList<>();
+                    for(Operation o : selection){
+                    equipements.addAll(o.getEquipements());
+                    }
+                    selected.setOperations(new ArrayList<>(selection));
+                    selected.setEquipements(new HashSet<>(equipements));
+                }
             }
+            this.vue.getTableGammes().refresh(); 
+            this.vue.getError().setVisible(false);  
         }
-        this.vue.getTableGammes().refresh();
+        catch(IllegalArgumentException e){
+            this.vue.getError().setText(e.getMessage());
+            this.vue.getError().setVisible(true);
+        }
+
+        
     }
 
     public void supprimerGamme(){
