@@ -98,7 +98,6 @@ public class Sauvegarde {
 
     public static void sauvegarderAtelier(ArrayList<Atelier> ateliers){
         PrintWriter pw;
-        System.out.println(ateliers.size());
         try {
             pw = new PrintWriter(new FileOutputStream("data/ateliers.txt"));
             for (Atelier a : ateliers){

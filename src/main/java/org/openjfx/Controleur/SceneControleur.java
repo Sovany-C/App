@@ -18,6 +18,7 @@ public class SceneControleur {
         this.stage = stage;
         this.main = new MainPane(this);
         this.scene = new Scene(this.main, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
     }
 
@@ -25,8 +26,8 @@ public class SceneControleur {
         scene.setRoot(this.main);
     }
 
-    public void changeAtelierPane(Atelier a) {
-        scene.setRoot(new AtelierPane(a,this));
+    public void changeAtelierPane(AtelierPane a) {
+        scene.setRoot(a);
     }
 
     public void closeStage(){

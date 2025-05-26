@@ -101,6 +101,49 @@ public class Atelier {
         return machines;
     }
 
+    public ObservableList<Machine> getMachinelibre(){
+        ObservableList<Machine> uniquemachines = FXCollections.observableArrayList();
+        boolean check;
+        for(Machine m : this.getMachine()){
+            check = false;
+            for(Poste p : this.getPostes()){
+                for(Machine pMach : p.getMachines()){
+                    if(pMach.getRefEquipement().equals(m.getRefEquipement())){
+                        check = true;
+                        break;
+                    }
+                }
+            }
+            if(!check){
+                uniquemachines.add(m);
+            }
+        }
+        
+        return uniquemachines;
+    }
+
+    public ObservableList<Gamme> getGammelibre(){
+        ObservableList<Gamme> uniqueGammes = FXCollections.observableArrayList();
+        boolean check;
+        for(Gamme g : this.getGammes()){
+            check = false;
+            for(Produit p : this.getProduits()){
+                for(Gamme pGamme : p.getGammes()){
+                    if(pGamme.getRefGamme().equals(g.getRefGamme())){
+                        check = true;
+                        break;
+                    }
+                }
+            }
+            if(!check){
+                uniqueGammes.add(g);
+            }
+        }
+        
+        return uniqueGammes;
+    }
+
+
     public ObservableList<Poste> getPostes(){
         ObservableList<Poste> postes = FXCollections.observableArrayList();
         for(Equipement e : this.getEquipements()){
@@ -120,7 +163,67 @@ public class Atelier {
         Lecture.lectureProduit(this);
         Lecture.lectureOperateur(this);
     }
-    
+
+    public void verifMachine(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Machine m : getMachine()){
+            if(m.getRefEquipement().equals(ref)){
+                throw new IllegalArgumentException("Erreur: référence existante");
+            }
+        }
+    }
+    public void verifGamme(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Gamme m : this.gammes){
+            if(m.getRefGamme().equals(ref)){
+                throw new IllegalArgumentException("Erreur: référence existante");
+            }
+        }
+    }
+    public void verifOperateur(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Operateur m : this.operateurs){
+            if(m.getCode().equals(ref)){
+                throw new IllegalArgumentException("Erreur: référence existante");
+            }
+        }
+    }
+    public void verifOperation(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Operation m: this.operations){
+            if(m.getRefOperation().equals(ref)){
+                throw new IllegalArgumentException("Erreur: référence existante");
+            }
+        }
+    }
+    public void verifPoste(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Poste m : this.getPostes()){
+            if(m.getRefEquipement().equals(ref)){
+                throw new IllegalArgumentException("Erreur: référence existante");
+            }
+        }
+    }
+    public void verifProduit(String ref){
+        if(ref==null || ref.trim().isEmpty()){
+            throw new IllegalArgumentException("Erreur: référence null");
+        }
+        for(Produit m : this.produits){
+            if(m.getCodeProduit().equals(ref)){
+                throw new IllegalArgumentException("Erreur: référence existante");
+            }
+        }
+    }
 
     
 }

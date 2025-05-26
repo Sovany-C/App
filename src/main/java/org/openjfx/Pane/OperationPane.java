@@ -47,6 +47,14 @@ public class OperationPane extends VBox {
 
     private GridPane pane_saisiedesinfo;
     private Atelier a;
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
 
     public Atelier getA() {
         return a;
@@ -176,18 +184,20 @@ public class OperationPane extends VBox {
         this.a = a;
 
         this.equipements = a.getEquipements();
+        this.error = new Label();
+        this.error.setVisible(false);
         this.refOperation = new Label("Référence:");
         this.dOperation = new Label("Désignation:");
         this.duree = new Label("Durée:");
         this.eLabel = new Label("Equipement:");
-        this.moLabel = new Label("Modifier operation:");
+        this.moLabel = new Label("Modifier opération:");
 
         this.ref = new TextField();
         this.des = new TextField();
         this.duree_value = new TextField();
 
         this.listEquip = new ListView<>();
-        this.listEquip.getItems().addAll(equipements);
+        this.listEquip.setItems(equipements);
         this.listEquip.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();
@@ -195,6 +205,9 @@ public class OperationPane extends VBox {
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
+        this.pane_saisiedesinfo.add(this.error,0,l);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
         this.pane_saisiedesinfo.add(this.refOperation, c, l);
         this.pane_saisiedesinfo.add(this.ref,c+1,l);
         this.pane_saisiedesinfo.add(this.dOperation,c,l+1);
@@ -219,6 +232,7 @@ public class OperationPane extends VBox {
         TableColumn<Operation, Float> dureeCol = new TableColumn<Operation, Float>("Durée");
         dureeCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getDureeOperation()));
         this.tableOperations.getColumns().addAll(refCol, desCol,equiCol,dureeCol);
+        this.tableOperations.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableOperations, c, l+6);
         this.pane_saisiedesinfo.setColumnSpan(tableOperations,5);
 

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.openjfx.Pane.MainPane;
 
 public class Lecture {
     
@@ -44,7 +43,6 @@ public class Lecture {
                         }
                     }
                     Poste p = new Poste(refPoste, dPoste,new HashSet<>(machinePoste));
-                    p.affiche();
                     atelier.getEquipements().add(p);
                     machinePoste.clear();
                 }

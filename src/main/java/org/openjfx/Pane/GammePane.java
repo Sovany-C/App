@@ -46,6 +46,15 @@ public class GammePane extends VBox {
     private GridPane pane_saisiedesinfo;
     private Atelier a;
 
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
+
     public Atelier getA() {
         return a;
     }
@@ -150,6 +159,8 @@ public class GammePane extends VBox {
         this.a = a;
 
         this.operations = a.getOperations();
+        this.error = new Label();
+        this.error.setVisible(false);
         this.refGamme = new Label("Référence:");
         this.oLabel = new Label("Operations:");
         this.moLabel = new Label("Modifier gamme ");
@@ -157,7 +168,7 @@ public class GammePane extends VBox {
         this.ref = new TextField();
 
         this.listOperation = new ListView<>();
-        this.listOperation.getItems().addAll(operations);
+        this.listOperation.setItems(operations);
         this.listOperation.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.pane_saisiedesinfo = new GridPane();
@@ -165,6 +176,9 @@ public class GammePane extends VBox {
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
+        this.pane_saisiedesinfo.add(this.error,0,l);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
         this.pane_saisiedesinfo.add(this.refGamme, c, l);
         this.pane_saisiedesinfo.add(this.ref,c+1,l);
         l++;
@@ -189,8 +203,9 @@ public class GammePane extends VBox {
         TableColumn<Gamme, Float> dureeCol = new TableColumn<Gamme, Float>("Durée");
         dureeCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().dureeGamme()));
         this.tableGammes.getColumns().addAll(refCol, opCol,eqCol,coutCol,dureeCol);
+        this.tableGammes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableGammes, 0, 8);
-        this.pane_saisiedesinfo.setColumnSpan(tableGammes,5);
+        GridPane.setColumnSpan(tableGammes,5);
 
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, 7);

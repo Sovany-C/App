@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -44,6 +45,14 @@ public class ProduitPane extends VBox {
 
     private GridPane pane_saisiedesinfo;
     private Atelier a;
+    private Label error;
+    
+    public Label getError() {
+        return error;
+    }
+    public void setError(Label error) {
+        this.error = error;
+    }
 
     public Atelier getA() {
         return a;
@@ -147,7 +156,13 @@ public class ProduitPane extends VBox {
     public void setListGamme(ListView<Gamme> listGamme) {
         this.listGamme = listGamme;
     }
-    
+    public Label getMoLabel() {
+        return moLabel;
+    }
+    public void setMoLabel(Label moLabel) {
+        this.moLabel = moLabel;
+    }
+
     public ProduitPane(Atelier a){
 
         this.model = a.getProduits();
@@ -155,6 +170,8 @@ public class ProduitPane extends VBox {
         this.a = a;
 
         this.gammes = a.getGammes();
+        this.error = new Label();
+        this.error.setVisible(false);
         this.codeProduit = new Label("Code:");
         this.dProduit = new Label("Désignation:");
         this.gLabel = new Label("Gammes");
@@ -163,23 +180,32 @@ public class ProduitPane extends VBox {
         this.des = new TextField();
 
         this.listGamme = new ListView<>();
-        this.listGamme.getItems().addAll(gammes);
+        this.listGamme.setItems(gammes);
         this.listGamme.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        this.listViewAff(a);
 
         this.pane_saisiedesinfo = new GridPane();
         this.pane_saisiedesinfo.setAlignment(Pos.CENTER);
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
-        this.pane_saisiedesinfo.add(this.codeProduit, 0, 0);
-        this.pane_saisiedesinfo.add(this.code,1,0);
-        this.pane_saisiedesinfo.add(this.dProduit,0,1);
-        this.pane_saisiedesinfo.add(this.des, 1,1);
-        this.pane_saisiedesinfo.add(this.gLabel, 0,2);
-        this.pane_saisiedesinfo.add(listGamme,1,2);
+        int l=0;
+        this.pane_saisiedesinfo.add(this.error,0,l);
+        GridPane.setColumnSpan(this.error, 5);
+        l++;
+        this.pane_saisiedesinfo.add(this.codeProduit, 0, l);
+        this.pane_saisiedesinfo.add(this.code,1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.dProduit,0,l);
+        this.pane_saisiedesinfo.add(this.des, 1,l);
+        l++;
+        this.pane_saisiedesinfo.add(this.gLabel, 0,l);
+        this.pane_saisiedesinfo.add(listGamme,1,l);
+        l++;
 
         this.choix = new ComboBox<>(model);
-        this.pane_saisiedesinfo.add(choix, 0,6);
+        this.pane_saisiedesinfo.add(choix, 0,l);
+        l++;
 
         this.tableProduits = new TableView<Produit>();
         this.tableProduits.setItems(model);
@@ -190,29 +216,30 @@ public class ProduitPane extends VBox {
         TableColumn<Produit, String> gamCol = new TableColumn<Produit, String>("Type");
         gamCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().gammeString()));
         this.tableProduits.getColumns().addAll(codeCol, desCol,gamCol);
+        this.tableProduits.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.pane_saisiedesinfo.add(tableProduits, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableProduits,5);
 
         this.bt_creer = new Button("Créer");
-        this.pane_saisiedesinfo.add(bt_creer, 0, 7);
+        this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {
             this.controleur.creationProduit();
         });
 
         this.bt_modifier = new Button("Modifier");
-        this.pane_saisiedesinfo.add(bt_modifier, 1, 7);
+        this.pane_saisiedesinfo.add(bt_modifier, 1, l);
         this.bt_modifier.setOnAction(evt -> {
             this.controleur.modifierProduit();
         });
 
         this.bt_supprimer = new Button("Supprimer");
-        this.pane_saisiedesinfo.add(bt_supprimer, 2, 7);
+        this.pane_saisiedesinfo.add(bt_supprimer, 2, l);
         this.bt_supprimer.setOnAction(evt -> {
             this.controleur.supprimerProduit();
         });
 
         this.bt_sauvegarder = new Button("Sauvegarder");
-        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, 7);
+        this.pane_saisiedesinfo.add(bt_sauvegarder, 4, l);
         this.bt_sauvegarder.setOnAction(evt -> {
             this.controleur.sauvegarderProduit();
         });
@@ -222,6 +249,24 @@ public class ProduitPane extends VBox {
         this.setSpacing(10);
         this.getChildren().add(this.pane_saisiedesinfo);
 
+    }
+
+    public void listViewAff(Atelier a){
+        this.listGamme.setCellFactory(lv -> new ListCell<>() {
+        @Override
+        protected void updateItem(Gamme item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+                setStyle("");
+            } else {
+                setText(item.getRefGamme());
+            if (!a.getGammelibre().contains(item)) {
+                setStyle("-fx-text-fill:rgb(230, 89, 89);"); 
+            }
+            }
+        }
+        });
     }
     
     
