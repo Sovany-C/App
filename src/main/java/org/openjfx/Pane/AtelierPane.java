@@ -27,6 +27,7 @@ public class AtelierPane extends VBox {
     private Button bt_gamme;
     private Button bt_operateur;
     private Button bt_retour;
+    private Button bt_fiabilite;
 
     private Button bt_dessiner;
 
@@ -99,6 +100,7 @@ public class AtelierPane extends VBox {
     public void setBt_dessiner(Button bt_dessiner) {
         this.bt_dessiner = bt_dessiner;
     }
+    
     public Label getNom() {
         return nom;
     }
@@ -187,6 +189,8 @@ public class AtelierPane extends VBox {
         this.bt_operateur.setOnAction(evt -> {
             this.controleur.openOperateur();
         });
+
+        
         c++;
         l++;
         this.pane_saisiedesinfo.add(this.plan, 0, l);
@@ -197,6 +201,13 @@ public class AtelierPane extends VBox {
         this.bt_dessiner.setOnAction(evt -> {
             this.controleur.dessinerAtelier();
         });
+        c++;
+
+         this.bt_fiabilite = new Button("Fiabilite");
+         this.pane_saisiedesinfo.add(bt_fiabilite,c,l);
+         this.bt_fiabilite.setOnAction(evt -> {
+             this.controleur.openFiabilite();
+         });
 
         this.espace_affichage = new Pane();
         this.espace_affichage.setPrefSize(400, 300);
@@ -209,6 +220,14 @@ public class AtelierPane extends VBox {
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(this.pane_saisiedesinfo);
         this.getChildren().add(this.espace_affichage);
+
+        
+    }
+    public Button getBt_fiabilite() {
+        return bt_fiabilite;
+    }
+    public void setBt_fiabilite(Button bt_fiabilite) {
+        this.bt_fiabilite = bt_fiabilite;
     }
 
     

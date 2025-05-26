@@ -99,6 +99,19 @@ public class AtelierControleur {
         posteStage.show();
     }
 
+    public void openFiabilite(){
+        Scene scene = new Scene(new FiabilitePane(this.vue.getModel()), 800, 500);
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        Stage posteStage = new Stage();
+        posteStage.setScene(scene);
+        posteStage.setTitle("Fiabilite");
+        posteStage.show();
+    }
+
     public void dessinerAtelier(){
         this.vue.getEspace_affichage().getChildren().clear();
         for(int i=0; i<this.vue.getModel().getMachine().size();i++){
@@ -132,4 +145,5 @@ public class AtelierControleur {
     public void retour(){
         this.vue.getSceneControleur().changeMainPane();
     }
+    
 }
