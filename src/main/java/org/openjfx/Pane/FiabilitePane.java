@@ -22,7 +22,6 @@ import javafx.scene.layout.VBox;
 
 public class FiabilitePane extends VBox {
      private ObservableList<Equipement> model;
-    private FiabiliteControleur controleur;
     private Atelier atelier;
     
     private Label refMachine;
