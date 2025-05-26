@@ -199,7 +199,7 @@ public class AtelierPane extends VBox {
         });
 
         this.espace_affichage = new Pane();
-        this.espace_affichage.setPrefSize(1000, 600);
+        this.espace_affichage.setPrefSize(900, 600);
         this.espace_affichage.setStyle("-fx-background-color:rgb(70, 79, 97);");
 
         this.paneHBox = new HBox(10);

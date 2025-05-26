@@ -190,7 +190,7 @@ public class OperationPane extends VBox {
         this.dOperation = new Label("Désignation:");
         this.duree = new Label("Durée:");
         this.eLabel = new Label("Equipement:");
-        this.moLabel = new Label("Modifier operation:");
+        this.moLabel = new Label("Modifier opération:");
 
         this.ref = new TextField();
         this.des = new TextField();

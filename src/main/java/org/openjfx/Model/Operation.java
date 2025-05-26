@@ -54,7 +54,7 @@ public class Operation {
     // Constructeur
     public Operation(String refOperation, String dOperation, ArrayList<Equipement> equipements, float dureeOperation) {
         if(dureeOperation<0){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erreur: valeur négative");
         }
         this.refOperation = refOperation;
         this.dOperation = dOperation;
