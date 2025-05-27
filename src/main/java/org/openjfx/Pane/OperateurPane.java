@@ -49,6 +49,7 @@ public class OperateurPane extends VBox {
 
     private Label error;
     
+    // Getters et Setters
     public Label getError() {
         return error;
     }
@@ -224,6 +225,7 @@ public class OperateurPane extends VBox {
         this.choix = new ComboBox<>(model);
         this.pane_saisiedesinfo.add(choix, 1,l);
 
+        // Tableau d'affichage
         this.tableOperateurs = new TableView<Operateur>();
         this.tableOperateurs.setItems(model);
         TableColumn<Operateur, String> codeCol = new TableColumn<Operateur, String>("Code");
@@ -239,6 +241,7 @@ public class OperateurPane extends VBox {
         this.pane_saisiedesinfo.add(tableOperateurs, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableOperateurs,5);
 
+        // Boutons
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, 7);
         this.bt_creer.setOnAction(evt -> {

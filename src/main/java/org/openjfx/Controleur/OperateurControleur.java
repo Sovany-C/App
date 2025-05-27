@@ -15,16 +15,20 @@ public class OperateurControleur {
         this.vue = v;
     }
 
+    // Bouton Créer
     public void creationOperateur(){
         try{
             this.vue.getA().verifOperateur(this.vue.getCode().getText().trim());
+
             List<Machine> selection = this.vue.getListMachine().getSelectionModel().getSelectedItems();
             Operateur op = new Operateur(this.vue.getCode().getText(),
                                         this.vue.getNom().getText(),
                                         this.vue.getPrenom().getText(),
                                         new ArrayList<>(selection));
+
             this.vue.getModel().add(op);
             System.out.println("Operateur: " + this.vue.getCode().getText() + " ajouté à la liste");
+
             this.vue.getCode().clear();
             this.vue.getNom().clear();
             this.vue.getPrenom().clear();
@@ -38,16 +42,19 @@ public class OperateurControleur {
         
     }
 
+    // Bouton Sauvegarder
     public void sauvegarderOperateur(){
         Sauvegarde.sauvegarderOperateur(this.vue.getA());
     }
 
+    // Bouton Modifier
     public void modifierOperateur(){
         try{
             Operateur selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
                     if(selected != null){
                         if(!this.vue.getCode().getText().trim().isEmpty()){
                             this.vue.getA().verifOperateur(this.vue.getCode().getText().trim());
+
                             selected.setCode(this.vue.getCode().getText().trim());
                         }
                         if(!this.vue.getNom().getText().trim().isEmpty()){
@@ -60,9 +67,11 @@ public class OperateurControleur {
                             List<Machine> selection = this.vue.getListMachine().getSelectionModel().getSelectedItems();
                             selected.setCompetences(new ArrayList<>(selection));
                         }
+
                         int index = this.vue.getChoix().getSelectionModel().getSelectedIndex();
                         this.vue.getChoix().getItems().set(index, selected);
                         System.out.println("Operateur modifié");
+
                         this.vue.getTableOperateurs().refresh();
                         this.vue.getError().setVisible(false);
                     }
@@ -74,6 +83,7 @@ public class OperateurControleur {
         
     }
 
+    // Bouton Supprimer
     public void supprimerOperateur(){
         Operateur selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);

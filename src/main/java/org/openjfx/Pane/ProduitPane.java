@@ -47,6 +47,7 @@ public class ProduitPane extends VBox {
     private Atelier a;
     private Label error;
     
+    // Getters et Setters
     public Label getError() {
         return error;
     }
@@ -163,6 +164,7 @@ public class ProduitPane extends VBox {
         this.moLabel = moLabel;
     }
 
+    // Constructeur
     public ProduitPane(Atelier a){
 
         this.model = a.getProduits();
@@ -207,6 +209,7 @@ public class ProduitPane extends VBox {
         this.pane_saisiedesinfo.add(choix, 0,l);
         l++;
 
+        // Tableau d'affichage
         this.tableProduits = new TableView<Produit>();
         this.tableProduits.setItems(model);
         TableColumn<Produit, String> codeCol = new TableColumn<Produit, String>("Référence");
@@ -220,6 +223,7 @@ public class ProduitPane extends VBox {
         this.pane_saisiedesinfo.add(tableProduits, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableProduits,5);
 
+        // Boutons
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {
@@ -251,6 +255,7 @@ public class ProduitPane extends VBox {
 
     }
 
+    // Méthode affichage couleur des Gammes
     public void listViewAff(Atelier a){
         this.listGamme.setCellFactory(lv -> new ListCell<>() {
         @Override

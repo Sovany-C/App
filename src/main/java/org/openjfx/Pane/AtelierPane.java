@@ -37,6 +37,7 @@ public class AtelierPane extends VBox {
     private VBox pane_VBox;
     private HBox paneHBox;
 
+    // Getters et Setters
     public Atelier getModel() {
         return model;
     }
@@ -129,6 +130,7 @@ public class AtelierPane extends VBox {
         this.sceneControleur = sceneControleur;
     }
 
+    // Constructeur
     public AtelierPane(Atelier a, SceneControleur scene){
         int c=0 ,l=0;
         this.model = a;
@@ -150,6 +152,7 @@ public class AtelierPane extends VBox {
 
         this.controleur.initialisation();
 
+        // Boutons
         this.bt_retour = new Button("Retour");
         this.pane_saisiedesinfo.add(this.bt_retour,6,l);
         this.bt_retour.setOnAction(evt -> {

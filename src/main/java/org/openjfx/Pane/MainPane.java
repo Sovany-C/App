@@ -32,7 +32,7 @@ public class MainPane extends VBox {
     private VBox boutonContainer;
     private GridPane pane_saisiedesinfo;
 
-    
+    // Getters et Setters
     public MainControleur getControleur() {
         return controleur;
     }
@@ -94,6 +94,7 @@ public class MainPane extends VBox {
         this.scenes = scenes;
     }
 
+    // Constructeur
     public MainPane(SceneControleur sceneControleur){
 
         this.model = new ArrayList<Atelier>();
@@ -113,8 +114,6 @@ public class MainPane extends VBox {
 
         this.pane_saisiedesinfo.add(nom, 0, 0);
 
-        this.controleur.initialisation();
-
         this.bt_creation = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creation, 1, 0);
         this.bt_creation.setOnAction(evt ->{
@@ -127,6 +126,8 @@ public class MainPane extends VBox {
         this.setSpacing(100);
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(this.pane_saisiedesinfo);
+
+        this.controleur.initialisation();
     }
     
 

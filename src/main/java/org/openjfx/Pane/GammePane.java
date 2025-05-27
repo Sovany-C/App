@@ -48,13 +48,13 @@ public class GammePane extends VBox {
 
     private Label error;
     
+    // Getters et Setters
     public Label getError() {
         return error;
     }
     public void setError(Label error) {
         this.error = error;
     }
-
     public Atelier getA() {
         return a;
     }
@@ -152,6 +152,7 @@ public class GammePane extends VBox {
         this.moLabel = moLabel;
     }
 
+    // Constructeur
     public GammePane(Atelier a){
         int c=0, l=0;
         this.model = a.getGammes();
@@ -189,7 +190,7 @@ public class GammePane extends VBox {
         this.choix = new ComboBox<>(model);
         this.pane_saisiedesinfo.add(choix, c+1,l);
         
-
+        // Tableau d'affichage
         this.tableGammes = new TableView<Gamme>();
         this.tableGammes.setItems(model);
         TableColumn<Gamme, String> refCol = new TableColumn<Gamme, String>("Référence");
@@ -207,6 +208,7 @@ public class GammePane extends VBox {
         this.pane_saisiedesinfo.add(tableGammes, 0, 8);
         GridPane.setColumnSpan(tableGammes,5);
 
+        // Boutons
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, 7);
         this.bt_creer.setOnAction(evt -> {

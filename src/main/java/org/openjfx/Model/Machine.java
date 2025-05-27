@@ -18,22 +18,31 @@ public class Machine extends Equipement{
         return x;
     }
     public void setX(float x) {
+        if(x < 0 || x>1200){
+            throw new IllegalArgumentException("Erreur: valeur Cx <0 ou >1200");
+        }
         this.x = x;
     }
     public float getY() {
         return y;
     }
     public void setY(float y) {
+        if(y < 0 || y>500){
+            throw new IllegalArgumentException("Erreur: valeur Cy <0 ou >500");
+        }
         this.y = y;
     }
     public float getCout() {
         return cout;
     }
     public void setCout(float cout) {
+        if(cout < 0){
+            throw new IllegalArgumentException("Erreur: valeur négative");
+        }
         this.cout = cout;
     }
 
-    
+    // Constructeur
     public Machine(String refMachine, String dMachine, String type, float x,
             float y, float cout) {
         
@@ -54,6 +63,7 @@ public class Machine extends Equipement{
     }
 
     // Methodes
+    // -----------------------
     public String affiche(){
         return "Ref machine : " + this.getRefEquipement() + " | désignation : " + this.getdEquipement() + " | type : " + this.type + " | coordonnées : "
         + this.x + " , " + this.y + " | cout horaire : " + this.cout;
@@ -90,7 +100,9 @@ public class Machine extends Equipement{
                 break;
         }
     }
+    //----------------------------
 
+    
     public float cout(){
         return this.getCout();
     }

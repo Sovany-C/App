@@ -88,13 +88,13 @@ public class Gamme {
         this.operations.remove(op);
     }
     
-    public String opString(){
+    public String opString(){ // Renvoie un String de la liste des opérations
         return operations.stream()
                    .map(Operation::getRefOperation)
                    .collect(Collectors.joining(","));
     }
 
-    public String eqString(){
+    public String eqString(){ // Renvoie un String de la liste des équipements
         return equipements.stream()
                    .map(Equipement::getRefEquipement)
                    .collect(Collectors.joining(","));

@@ -49,6 +49,7 @@ public class OperationPane extends VBox {
     private Atelier a;
     private Label error;
     
+    // Getters et Setters
     public Label getError() {
         return error;
     }
@@ -177,6 +178,7 @@ public class OperationPane extends VBox {
         this.moLabel = moLabel;
     }
 
+    // Constructeur
     public OperationPane(Atelier a){
         int c=0, l=0;
         this.model = a.getOperations();
@@ -221,6 +223,7 @@ public class OperationPane extends VBox {
         this.choix = new ComboBox<>(model);
         this.pane_saisiedesinfo.add(choix, 1,l+4);
 
+        // Tableau d'affichage
         this.tableOperations = new TableView<Operation>();
         this.tableOperations.setItems(model);
         TableColumn<Operation, String> refCol = new TableColumn<Operation, String>("Référence");
@@ -236,6 +239,7 @@ public class OperationPane extends VBox {
         this.pane_saisiedesinfo.add(tableOperations, c, l+6);
         this.pane_saisiedesinfo.setColumnSpan(tableOperations,5);
 
+        // Boutons
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, c, l+5);
         this.bt_creer.setOnAction(evt -> {

@@ -48,6 +48,9 @@ public class Operation {
     }
 
     public void setDureeOperation(float dureeOperation) {
+        if(dureeOperation<0){
+            throw new IllegalArgumentException("Erreur: valeur négative");
+        }
         this.dureeOperation = dureeOperation;
     }
 
@@ -62,6 +65,7 @@ public class Operation {
         this.dureeOperation = dureeOperation;
     }
 
+    // Méthodes
     public String equipementString(){
         return this.equipements.stream()
                    .map(Equipement::getRefEquipement)

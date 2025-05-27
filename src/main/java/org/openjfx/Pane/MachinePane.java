@@ -55,6 +55,7 @@ public class MachinePane extends VBox {
     
     private Label error;
     
+    // Getters et Setters
     public Label getError() {
         return error;
     }
@@ -201,6 +202,7 @@ public class MachinePane extends VBox {
         this.atelier = atelier;
     }
 
+    // Constructeur
     public MachinePane(Atelier a){
         this.model = a.getEquipements();
         this.controleur = new MachineControleur(this);
@@ -255,6 +257,8 @@ public class MachinePane extends VBox {
         this.choix = new ComboBox<>(machinesObservable);
         this.pane_saisiedesinfo.add(choix, 1,l);
         l++;
+
+        // Tableau d'affichage
         this.tableMachines = new TableView<Machine>();
         this.tableMachines.setItems(machinesObservable);
         TableColumn<Machine, String> refCol = new TableColumn<Machine, String>("Référence");
@@ -274,6 +278,7 @@ public class MachinePane extends VBox {
         this.pane_saisiedesinfo.add(tableMachines, 0, 9);
         this.pane_saisiedesinfo.setColumnSpan(tableMachines,5);
 
+        // Boutons
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {

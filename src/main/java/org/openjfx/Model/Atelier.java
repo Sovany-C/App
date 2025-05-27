@@ -81,7 +81,7 @@ public class Atelier {
         this.operations = FXCollections.observableArrayList();
     }
     
-
+    // Méthodes
     public String affiche(){
         ArrayList<String> refEq = new ArrayList<>();
         for(Equipement e: this.equipements){
@@ -90,7 +90,7 @@ public class Atelier {
         return "Nom : " + this.nom + " | Equipement: " + refEq;
     }
 
-    public ObservableList<Machine> getMachine(){
+    public ObservableList<Machine> getMachine(){ //Extrait les machines d'équipements
         ObservableList<Machine> machines = FXCollections.observableArrayList();
         for(Equipement e : this.getEquipements()){
             if(e instanceof Machine){
@@ -101,7 +101,7 @@ public class Atelier {
         return machines;
     }
 
-    public ObservableList<Machine> getMachinelibre(){
+    public ObservableList<Machine> getMachinelibre(){ //Extrait les machines qui appartient à aucun poste
         ObservableList<Machine> uniquemachines = FXCollections.observableArrayList();
         boolean check;
         for(Machine m : this.getMachine()){
@@ -122,7 +122,7 @@ public class Atelier {
         return uniquemachines;
     }
 
-    public ObservableList<Gamme> getGammelibre(){
+    public ObservableList<Gamme> getGammelibre(){//Extrait les gammes non utilisées
         ObservableList<Gamme> uniqueGammes = FXCollections.observableArrayList();
         boolean check;
         for(Gamme g : this.getGammes()){
@@ -144,7 +144,7 @@ public class Atelier {
     }
 
 
-    public ObservableList<Poste> getPostes(){
+    public ObservableList<Poste> getPostes(){//Extrait les postes d'équipements
         ObservableList<Poste> postes = FXCollections.observableArrayList();
         for(Equipement e : this.getEquipements()){
             if(e instanceof Poste){
@@ -155,6 +155,7 @@ public class Atelier {
         return postes;
     }
 
+    // Recréer les élements de l'atelier
     public void initialisation(){
         Lecture.lectureMachine(this);
         Lecture.lecturePoste(this);
@@ -164,6 +165,7 @@ public class Atelier {
         Lecture.lectureOperateur(this);
     }
 
+    // Méthode de vérification des références
     public void verifMachine(String ref){
         if(ref==null || ref.trim().isEmpty()){
             throw new IllegalArgumentException("Erreur: référence null");

@@ -15,6 +15,7 @@ public class MainControleur {
         this.vue =v;
     }
 
+    // Bouton Créer
     public void creationAte(){
         Atelier a = new Atelier(this.vue.getNom().getText().trim());
         AtelierPane aPane = new AtelierPane(a, this.vue.getSceneControleur());
@@ -34,12 +35,13 @@ public class MainControleur {
         
     }
 
+    // Changement de scéne
     public void openAtelier(AtelierPane a){
         Sauvegarde.sauvegarderAtelier(this.vue.getModel());
         this.vue.getSceneControleur().changeAtelierPane(a);
     }
     
-
+    // Création ateliers sauvegardés
     public void initialisation(){
         this.vue.getModel().addAll(Lecture.lectureAtelier());
         for(Atelier a : this.vue.getModel()){

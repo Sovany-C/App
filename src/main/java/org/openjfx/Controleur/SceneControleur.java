@@ -22,6 +22,7 @@ public class SceneControleur {
         stage.setScene(scene);
     }
 
+    // Changement de scene
     public void changeMainPane() {
         scene.setRoot(this.main);
     }
@@ -30,6 +31,7 @@ public class SceneControleur {
         scene.setRoot(a);
     }
 
+    // Sauvegarde Atelier
     public void closeStage(){
         stage.setOnCloseRequest(evt->{
             Sauvegarde.sauvegarderAtelier(this.main.getModel());

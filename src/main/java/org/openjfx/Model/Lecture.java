@@ -9,10 +9,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 public class Lecture {
     
     public static void lecturePoste(Atelier atelier){
+        Alert alert = new Alert(AlertType.ERROR);
         File fichier = new File("data/"+atelier.getNom()+"/postes.txt");
         if(fichier.exists()){
             String refPoste,dPoste;
@@ -36,12 +41,16 @@ public class Lecture {
                             Machine m = (Machine) e;
                             for(String ref : machines){
                                 if(m.getRefEquipement().equals(ref)){
+                                    if(atelier.getMachinelibre().contains(m)){
+                                        throw new IllegalArgumentException("Erreur: élément déjà utilisé");
+                                    }
                                     machinePoste.add(m);
                                     break;
                                 }
                             }
                         }
                     }
+                    atelier.verifPoste(refPoste);
                     Poste p = new Poste(refPoste, dPoste,new HashSet<>(machinePoste));
                     atelier.getEquipements().add(p);
                     machinePoste.clear();
@@ -52,7 +61,15 @@ public class Lecture {
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
                 
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}    
+                System.out.println("Erreur :\n"+err);}
+            catch(IllegalArgumentException e){
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(e.getMessage()+" Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
+                System.out.println(e.getMessage());
+            }   
         }
         
 
@@ -79,16 +96,24 @@ public class Lecture {
                     y = Float.valueOf(mots[4]);
                     cout = Float.valueOf(mots[5]);
 
+                    atelier.verifMachine(refMachine);
                     Machine m = new Machine(refMachine, dMachine, type, x, y, cout);
                     atelier.getEquipements().add(m);
                 }
                 flux.close();
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+            }
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}
+                System.out.println("Erreur :\n"+err);
+            }
+            catch(NumberFormatException e){
+                System.out.println("Erreur: format des nombres incorrectes");
+            }
+            catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }   
         }
     }
 
@@ -123,6 +148,7 @@ public class Lecture {
                             }
                         }
                     }
+                    atelier.verifOperateur(code);
                     Operateur op = new Operateur(code, nom, prenom, new ArrayList<>(competences));
                     atelier.getOperateurs().add(op);
                     competences.clear();
@@ -133,7 +159,11 @@ public class Lecture {
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
                 
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}
+                System.out.println("Erreur :\n"+err);
+            }
+            catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }  
         }
     }
 
@@ -174,6 +204,8 @@ public class Lecture {
                                 }
                             }
                     }
+
+                    atelier.verifGamme(ref);
                     Gamme g = new Gamme(ref, new ArrayList<>(Listop), new HashSet<>(Listequi));
                     atelier.getGammes().add(g);
                     Listequi.clear();
@@ -185,7 +217,10 @@ public class Lecture {
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
                 
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}    
+                System.out.println("Erreur :\n"+err);}
+            catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }  
         }
         
     }
@@ -219,6 +254,7 @@ public class Lecture {
                                 }
                             }
                     }
+                    atelier.verifOperation(refOp);
                     Operation op = new Operation(refOp, dOp, new ArrayList<>(Listequi),duree);
                     atelier.getOperations().add(op);
                     Listequi.clear();
@@ -229,7 +265,10 @@ public class Lecture {
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
                 
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}    
+                System.out.println("Erreur :\n"+err);}
+            catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }  
         }
         
     }
@@ -261,6 +300,7 @@ public class Lecture {
                                 }
                             }
                     }
+                    atelier.verifPoste(codePro);
                     Produit pr = new Produit(codePro,dProd,new ArrayList<>(Listgamme));
                     atelier.getProduits().add(pr);
                     Listgamme.clear();
@@ -271,7 +311,10 @@ public class Lecture {
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
                 
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}    
+                System.out.println("Erreur :\n"+err);}
+            catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }   
         }
         
     }
@@ -293,7 +336,7 @@ public class Lecture {
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
                 
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}    
+                System.out.println("Erreur :\n"+err);}     
         }
         return ateliers;
     }

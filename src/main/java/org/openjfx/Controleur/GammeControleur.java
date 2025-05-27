@@ -15,9 +15,11 @@ public class GammeControleur {
         this.vue = v;
     }
 
+    // Bouton Créer
     public void creationGamme(){
         try{
             this.vue.getA().verifGamme(this.vue.getRef().getText().trim());
+
             List<Operation> selection = this.vue.getListOperation().getSelectionModel().getSelectedItems();
             List<Equipement> equipements = new ArrayList<>();
             for(Operation o : selection){
@@ -26,9 +28,12 @@ public class GammeControleur {
             Gamme g = new Gamme(this.vue.getRef().getText(),
                                 new ArrayList<>(selection),
                                 new HashSet<>(equipements));
+
             this.vue.getModel().add(g);
             this.vue.getRef().clear();
+
             System.out.println("Gamme: " + this.vue.getRef().getText() + " ajouté à la liste");
+
             this.vue.getError().setVisible(false);    
         }
         catch(IllegalArgumentException e){
@@ -38,12 +43,14 @@ public class GammeControleur {
         
     }
 
+    // Bouton Modifier
     public void modifierGamme(){
         try{
             Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
             if(selected != null){
                 if(!this.vue.getRef().getText().trim().isEmpty()){
                     this.vue.getA().verifGamme(this.vue.getRef().getText().trim());
+
                     selected.setRefGamme(this.vue.getRef().getText().trim());
                 }
                 if(!this.vue.getListOperation().getSelectionModel().isEmpty()){
@@ -63,15 +70,16 @@ public class GammeControleur {
             this.vue.getError().setText(e.getMessage());
             this.vue.getError().setVisible(true);
         }
-
         
     }
 
+    // Bouton Supprimer
     public void supprimerGamme(){
         Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);
     }
 
+    // Bouton Sauvegarder
     public void sauvegarderGamme(){
         Sauvegarde.sauvegarderGamme(this.vue.getA());
     }

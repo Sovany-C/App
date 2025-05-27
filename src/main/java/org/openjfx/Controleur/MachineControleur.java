@@ -15,10 +15,12 @@ public class MachineControleur {
         this.vue = v;
     }
 
+    // Bouton Créer
     public void creationMachine(ObservableList<Machine> choix) throws NumberFormatException{
 
         try{
             this.vue.getAtelier().verifMachine(this.vue.getRef().getText().trim());
+
             TextField[] attributs = {this.vue.getRef(), this.vue.getDes(), this.vue.getType(), this.vue.getCx_val(), this.vue.getCy_val(), this.vue.getCout_val()};
             Float[] val = new Float[3];
             for(int i=3; i<6;i++){
@@ -35,12 +37,15 @@ public class MachineControleur {
                                     val[0],
                                     val[1],
                                     val[2]);
+
             this.vue.getModel().add(m);
             choix.add(m);
+
             System.out.println("Equipement: " + this.vue.getRef().getText() + " ajouté à la liste");
             for(int i=0; i<6; i++){
                 attributs[i].clear();
             }
+
             this.vue.getTableMachines().refresh();
             this.vue.getError().setVisible(false);
         }
@@ -55,10 +60,12 @@ public class MachineControleur {
         
     }
 
+    // Bouton Sauvegarder
     public void sauvegarderMach(){
         Sauvegarde.sauvegarderMachine(this.vue.getAtelier());
     }
 
+    // Bouton Modifier
     public void modifierMachine(){
         try{
             Machine selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
@@ -91,11 +98,13 @@ public class MachineControleur {
                         }
                     }
                 }
+
                 int index = this.vue.getChoix().getSelectionModel().getSelectedIndex();
                 this.vue.getChoix().getItems().set(index, selected);
                 for(int i=0; i<6; i++){
                     attributs[i].clear();
                 }
+
                 System.out.println("Machine modifié");
                 this.vue.getTableMachines().refresh();
                 this.vue.getError().setVisible(false);
@@ -113,6 +122,7 @@ public class MachineControleur {
         
     }
 
+    // Bouton Supprimer
     public void supprimerMach(ObservableList<Machine> choix){
         Machine selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);

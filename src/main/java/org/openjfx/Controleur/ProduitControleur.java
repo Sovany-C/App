@@ -14,21 +14,23 @@ public class ProduitControleur {
         this.vue = v;
     }
 
+    // Bouton Créer
     public void creationProduit(){
         try{
             this.vue.getA().verifProduit(this.vue.getCode().getText().trim());
-            List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
 
+            List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
             for(Gamme g : selection){
                 if(!this.vue.getA().getGammelibre().contains(g)){
                     throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
                 }
             }
             Produit m = new Produit(this.vue.getCode().getText().trim(), this.vue.getDes().getText().trim(), new ArrayList<>(selection));
+            
             this.vue.getModel().add(m);
             System.out.println("Produit: " + this.vue.getCode().getText() + " ajouté à la liste");
-            
             this.vue.listViewAff(this.vue.getA());
+
             this.vue.getCode().clear();
             this.vue.getDes().clear();
             this.vue.getTableProduits().refresh();
@@ -42,16 +44,19 @@ public class ProduitControleur {
         
     }
 
+    // Bouton Sauvegarder
     public void sauvegarderProduit(){
         Sauvegarde.sauvegarderProduit(this.vue.getA());
     }
 
+    // Bouton Modifier
     public void modifierProduit(){
         try{
             Produit selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
             if(selected != null){
                 if(!this.vue.getCode().getText().trim().isEmpty()){
                     selected.setCodeProduit(this.vue.getCode().getText().trim());
+
                     this.vue.getA().verifProduit(this.vue.getCode().getText().trim());
                 }
                 if(!this.vue.getDes().getText().trim().isEmpty()){
@@ -80,6 +85,7 @@ public class ProduitControleur {
         
     }
 
+    // Bouton Supprimer
     public void supprimerProduit(){
         Produit selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);

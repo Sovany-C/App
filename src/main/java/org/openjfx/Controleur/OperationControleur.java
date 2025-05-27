@@ -16,14 +16,17 @@ public class OperationControleur {
         this.vue = v;
     }
 
+    // Bouton Créer
     public void creationOperation(){
         try{
             this.vue.getA().verifOperation(this.vue.getRef().getText().trim());
+
             List<Equipement> selection = this.vue.getListEquip().getSelectionModel().getSelectedItems();
             Operation op = new Operation(this.vue.getRef().getText().trim(),
                                 this.vue.getDes().getText().trim(),
                                 new ArrayList<>(selection),
                                 Float.parseFloat(this.vue.getDuree_value().getText().trim()));
+
             this.vue.getModel().add(op);
             System.out.println("Operation: " + this.vue.getRef().getText() + " ajouté à la liste");
             this.vue.getRef().clear();
@@ -42,6 +45,7 @@ public class OperationControleur {
         
     }
 
+    // Bouton Modifier
     public void modifierOperation(){
         try{
             Operation selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
@@ -74,11 +78,13 @@ public class OperationControleur {
         
     }
 
+    // Bouton Supprimer
     public void supprimerOperation(){
         Operation selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
         this.vue.getModel().remove(selected);
     }
 
+    // Bouton Sauvegarder
     public void sauvegarderOperation(){
         Sauvegarde.sauvegarderOperation(this.vue.getA());
     }

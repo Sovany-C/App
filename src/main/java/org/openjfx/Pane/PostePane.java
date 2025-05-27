@@ -49,7 +49,7 @@ public class PostePane extends VBox{
     
     private Label error;
     
-    
+    // Getters et Setters
     public ObservableList<Equipement> getModel() {
         return model;
     }
@@ -165,6 +165,7 @@ public class PostePane extends VBox{
         this.error = error;
     }
     
+    // Constructeur
     public PostePane(Atelier a){
         this.model = a.getEquipements();
         this.controleur = new PosteControleur(this);
@@ -209,6 +210,7 @@ public class PostePane extends VBox{
         this.pane_saisiedesinfo.add(choix, 1, l);   
         l++;
 
+        // Tableau d'affichage
         this.tablePoste = new TableView<Poste>();
         this.tablePoste.setItems(posteObservable);
         TableColumn<Poste, String> refCol = new TableColumn<Poste, String>("Référence");
@@ -223,6 +225,7 @@ public class PostePane extends VBox{
         this.pane_saisiedesinfo.add(tablePoste, 0, 8);
         GridPane.setColumnSpan(tablePoste, 5);      
         
+        // Boutons
         this.bt_creer = new Button("Créer");
         this.pane_saisiedesinfo.add(bt_creer, 0, l);
         this.bt_creer.setOnAction(evt -> {
@@ -252,6 +255,7 @@ public class PostePane extends VBox{
         this.getChildren().add(this.pane_saisiedesinfo);
     }
 
+    // Méthode affichage couleur de la ListView
     public void listViewAff(Atelier a){
         this.listMachines.setCellFactory(lv -> new ListCell<>() {
         @Override

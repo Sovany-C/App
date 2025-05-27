@@ -20,6 +20,7 @@ public class AtelierControleur {
         this.vue = v;
     }
 
+    // Ouverture fenêtre spécifique
     public void openMachine(){
         Scene scene = new Scene(new MachinePane(this.vue.getModel()),800,500);
         try {
@@ -111,6 +112,7 @@ public class AtelierControleur {
         posteStage.show();
     }
 
+    // Dessin plan atelier
     public void dessinerAtelier(){
         this.vue.getEspace_affichage().getChildren().clear();
         for(int i=0; i<this.vue.getModel().getMachine().size();i++){
@@ -133,6 +135,7 @@ public class AtelierControleur {
         }
     }
 
+    // Création des éléments à l'ouverture
     public void initialisation(){
         File dossier = new File("data/" + this.vue.getModel().getNom());
         if (!dossier.exists()) {
