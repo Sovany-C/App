@@ -54,18 +54,26 @@ public class Lecture {
                     Poste p = new Poste(refPoste, dPoste,new HashSet<>(machinePoste));
                     atelier.getEquipements().add(p);
                     machinePoste.clear();
+                    flux.close();
                 }
-                flux.close();
+                
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err +" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
+            }
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);}
+                System.out.println("Erreur :\n"+err);
+
+            }
             catch(IllegalArgumentException e){
                 Platform.runLater(() -> {
                     alert.setTitle("Erreur");
-                    alert.setHeaderText(e.getMessage()+" Atelier: " + atelier.getNom());
+                    alert.setHeaderText(e.getMessage()+" |Atelier: " + atelier.getNom());
                     alert.showAndWait();
                 });
                 System.out.println(e.getMessage());
@@ -76,6 +84,7 @@ public class Lecture {
     }
 
     public static void lectureMachine(Atelier atelier){
+        Alert alert = new Alert(AlertType.ERROR);
         File fichier = new File("data/"+atelier.getNom()+ "/machines.txt");
         if(fichier.exists()){
             String refMachine,dMachine,type;
@@ -104,6 +113,11 @@ public class Lecture {
             }
             catch(FileNotFoundException err){
                 System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err +" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
             }
             catch(IOException err){
                 System.out.println("Erreur :\n"+err);
@@ -112,12 +126,18 @@ public class Lecture {
                 System.out.println("Erreur: format des nombres incorrectes");
             }
             catch(IllegalArgumentException e){
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(e.getMessage()+" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
                 System.out.println(e.getMessage());
-            }   
+            }    
         }
     }
 
     public static void lectureOperateur(Atelier atelier){
+        Alert alert = new Alert(AlertType.ERROR);
         File fichier = new File("data/"+atelier.getNom()+ "/operateurs.txt");
         if(fichier.exists()){
             String code,nom,prenom;
@@ -156,18 +176,29 @@ public class Lecture {
                 flux.close();
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err +" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
+            }
             catch(IOException err){
                 System.out.println("Erreur :\n"+err);
             }
             catch(IllegalArgumentException e){
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(e.getMessage()+" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
                 System.out.println(e.getMessage());
-            }  
+            }    
         }
     }
 
     public static void lectureGamme(Atelier atelier){
+        Alert alert = new Alert(AlertType.ERROR);
         File fichier = new File("data/"+atelier.getNom()+"/gammes.txt");
         if(fichier.exists()){
             String ref;
@@ -214,18 +245,29 @@ public class Lecture {
                 flux.close();
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err +" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
+            }
             catch(IOException err){
                 System.out.println("Erreur :\n"+err);}
             catch(IllegalArgumentException e){
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(e.getMessage()+" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
                 System.out.println(e.getMessage());
-            }  
+            }   
         }
         
     }
 
     public static void lectureOperation(Atelier atelier){
+        Alert alert = new Alert(AlertType.ERROR);
         File fichier = new File("data/" +atelier.getNom()+"/operations.txt");
         if(fichier.exists()){
             String refOp, dOp;
@@ -262,18 +304,29 @@ public class Lecture {
                 flux.close();
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err +" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
+            } 
             catch(IOException err){
                 System.out.println("Erreur :\n"+err);}
             catch(IllegalArgumentException e){
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(e.getMessage()+" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
                 System.out.println(e.getMessage());
-            }  
+            }   
         }
         
     }
 
     public static void lectureProduit(Atelier atelier){
+        Alert alert = new Alert(AlertType.ERROR);
         File fichier = new File("data/"+atelier.getNom()+"/produits.txt");
         if(fichier.exists()){
             String codePro, dProd;
@@ -295,6 +348,9 @@ public class Lecture {
                     for(Gamme g : atelier.getGammes()){
                         for(String ref : gammes){
                                 if(g.getRefGamme().equals(ref)){
+                                    if(!atelier.getGammelibre().contains(g)){
+                                         throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
+                                    }
                                     Listgamme.add(g);
                                     break;
                                 }
@@ -308,11 +364,21 @@ public class Lecture {
                 flux.close();
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err +" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
+            }
             catch(IOException err){
                 System.out.println("Erreur :\n"+err);}
             catch(IllegalArgumentException e){
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(e.getMessage()+" |Atelier: " + atelier.getNom());
+                    alert.showAndWait();
+                });
                 System.out.println(e.getMessage());
             }   
         }
@@ -320,6 +386,7 @@ public class Lecture {
     }
 
     public static ArrayList<Atelier> lectureAtelier(){
+        Alert alert = new Alert(AlertType.ERROR);
         ArrayList<Atelier> ateliers = new ArrayList<>();
         File fichier = new File("data/ateliers.txt");
 
@@ -333,8 +400,13 @@ public class Lecture {
                 flux.close();
             }
             catch(FileNotFoundException err){
-                System.out.println("Erreur :le fichier n’existe pas!\n "+err);}
-                
+                System.out.println("Erreur :le fichier n’existe pas!\n "+err);
+                Platform.runLater(() -> {
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Erreur :le fichier n’existe pas!\n "+err);
+                    alert.showAndWait();
+                });
+            }
             catch(IOException err){
                 System.out.println("Erreur :\n"+err);}     
         }
