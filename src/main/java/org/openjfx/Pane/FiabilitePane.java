@@ -157,8 +157,8 @@ public class FiabilitePane extends VBox {
         cyCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getY()));
         TableColumn<Machine, Float> coutCol = new TableColumn<Machine, Float>("Cout");
         coutCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCout()));
-        TableColumn<Fiabilite, Float> rendementCol = new TableColumn<Fiabilite, Float>("Fiabilite");
-        rendementCol.setCellValueFactory(cellData -> new ReadOnlyObjectwrapper<>(cellData.getValue().getRendement()));
+        TableColumn<Fiabilite, Double> rendementCol = new TableColumn<Fiabilite, Double>("Fiabilite");
+        rendementCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getRendement()));
         this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol, rendementCol);
         this.pane_saisiedesinfo.add(tableMachines, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableMachines,5);

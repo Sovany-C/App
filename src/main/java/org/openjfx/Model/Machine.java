@@ -11,7 +11,9 @@ public class Machine extends Equipement{
     private String refMachine;
     private String dMachine;
 
+    
     // Getters & Setters
+    
     public String getType() {
         return type;
     }
@@ -61,6 +63,7 @@ public class Machine extends Equipement{
        public void setdMachine(String dMachine) {
            this.dMachine = dMachine;
        }
+       
 
     public int nbPannes = 0;
 
@@ -83,13 +86,13 @@ public class Machine extends Equipement{
     private ArrayList<String> evenements = new ArrayList<>();
     private double rendement;
 
-public double getRendement() {
-    return rendement;
-}
+    public double getRendement() {
+        return rendement;
+    }
 
-public void setRendement(double rendement) {
-    this.rendement = rendement;
-}
+    public void setRendement(double rendement) {
+        this.rendement = rendement;
+    }
 
 
     // Constructeur

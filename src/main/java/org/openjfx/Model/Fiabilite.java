@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.Comparator;
 
 public class Fiabilite{
 
@@ -73,9 +74,8 @@ public class Fiabilite{
             m.setRendement(rendement);
         }
     }
-    public static void triMachine(Machine[] machines) {
-        java.util.Arrays.sort((m1,m2) -> Double.compare(m2.getRendement(), m1.getRendement()));
-    }
+
+
 }
 
  
