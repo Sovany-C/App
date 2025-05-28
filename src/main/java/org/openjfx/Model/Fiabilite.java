@@ -71,6 +71,14 @@ public class Fiabilite{
         }
     }
 
+    public static void reinitialisation(Atelier atelier){
+        for (Machine m : atelier.getMachine()) {
+            m.setRendement(1);
+            m.setDuree(0);
+            m.setEtat("D");
+            m.setNbPannes(0);
+        }
+    }
 
 }
 

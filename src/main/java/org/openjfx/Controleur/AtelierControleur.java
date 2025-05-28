@@ -101,6 +101,7 @@ public class AtelierControleur {
     }
 
     public void openFiabilite(){
+        Fiabilite.reinitialisation(this.vue.getModel());
         Fiabilite.calculfiab(this.vue.getModel());
         Fiabilite.calculerFiabiliteMachines(this.vue.getModel());
         Scene scene = new Scene(new FiabilitePane(this.vue.getModel()), 800, 500);
