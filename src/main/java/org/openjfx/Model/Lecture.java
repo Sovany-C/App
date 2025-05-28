@@ -41,7 +41,7 @@ public class Lecture {
                             Machine m = (Machine) e;
                             for(String ref : machines){
                                 if(m.getRefEquipement().equals(ref)){
-                                    if(atelier.getMachinelibre().contains(m)){
+                                    if(!atelier.getMachinelibre().contains(m)){
                                         throw new IllegalArgumentException("Erreur: élément déjà utilisé");
                                     }
                                     machinePoste.add(m);
@@ -349,7 +349,7 @@ public class Lecture {
                         for(String ref : gammes){
                                 if(g.getRefGamme().equals(ref)){
                                     if(!atelier.getGammelibre().contains(g)){
-                                         throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
+                                        throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
                                     }
                                     Listgamme.add(g);
                                     break;
