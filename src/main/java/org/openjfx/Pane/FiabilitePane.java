@@ -35,14 +35,7 @@ public class FiabilitePane extends VBox {
 
     private TableView<Machine> tableMachines;
     private GridPane pane_saisiedesinfo;
-    private Node ref;
-    private Node type;
-    private Node cx_val;
-    private Node cy_val;
-    private Node cout_val;
     
-
-
     public ObservableList<Equipement> getModel() {
         return model;
     }
@@ -122,24 +115,6 @@ public class FiabilitePane extends VBox {
         this.pane_saisiedesinfo.setHgap(5.5);
         this.pane_saisiedesinfo.setVgap(5.5);
 
-        int l=0;
-        this.pane_saisiedesinfo.add(this.refMachine, 0, l);
-        this.pane_saisiedesinfo.add(this.ref,1,l);
-        l++;
-
-        this.pane_saisiedesinfo.add(this.typeMachine,0,l);
-        this.pane_saisiedesinfo.add(this.type,1,l);
-        l++;
-        this.pane_saisiedesinfo.add(this.cx,0,l);
-        this.pane_saisiedesinfo.add(this.cx_val,1,l);
-        l++;
-        this.pane_saisiedesinfo.add(this.cy,0,l);
-        this.pane_saisiedesinfo.add(this.cy_val,1,l);
-        l++;
-        this.pane_saisiedesinfo.add(this.cout,0,l);
-        this.pane_saisiedesinfo.add(this.cout_val,1,l);
-        l++;
-        this.pane_saisiedesinfo.add(this.moLabel,0,l);
         ObservableList<Machine> machinesObservable = this.atelier.getMachine();
         
 
@@ -157,15 +132,10 @@ public class FiabilitePane extends VBox {
         cyCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getY()));
         TableColumn<Machine, Float> coutCol = new TableColumn<Machine, Float>("Cout");
         coutCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCout()));
-<<<<<<< HEAD
-        TableColumn<Fiabilite, Double> rendementCol = new TableColumn<Fiabilite, Double>("Fiabilite");
+        TableColumn<Machine, Double> rendementCol = new TableColumn<Machine, Double>("Fiabilite");
         rendementCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getRendement()));
-        this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol, rendementCol);
-=======
-        TableColumn<Fiabilite, Float> rendementCol = new TableColumn<Fiabilite, Float>("Fiabilite");
-        rendementCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getRendement()));
+
         this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol,rendementCol);
->>>>>>> 297c951c965da73c44064a40d51e3d34649e352d
         this.pane_saisiedesinfo.add(tableMachines, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableMachines,5);
 

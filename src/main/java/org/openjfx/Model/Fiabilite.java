@@ -74,15 +74,8 @@ public class Fiabilite{
             m.setRendement(rendement);
         }
     }
-<<<<<<< HEAD
 
 
-=======
-    
-    public static void triMachine(Machine[] machines) {
-        java.util.Arrays.sort((m1,m2) -> Double.compare(m2.getRendement(), m1.getRendement()));
-    }
->>>>>>> 297c951c965da73c44064a40d51e3d34649e352d
 }
 
  
