@@ -81,7 +81,7 @@ public class OperationControleur {
     // Bouton Supprimer
     public void supprimerOperation(){
         Operation selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        this.vue.getModel().remove(selected);
+        this.vue.getA().removeOperation(selected);
     }
 
     // Bouton Sauvegarder

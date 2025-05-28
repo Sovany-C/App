@@ -125,7 +125,7 @@ public class MachineControleur {
     // Bouton Supprimer
     public void supprimerMach(ObservableList<Machine> choix){
         Machine selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        this.vue.getModel().remove(selected);
         choix.remove(selected);
+        this.vue.getAtelier().removeMachine(selected);
     }
 }

@@ -231,12 +231,12 @@ public class Atelier {
         this.getEquipements().remove(m);
         for(Poste p : this.getPostes()){
             if(p.getMachines().contains(m)){
-                this.removePoste(p);
+                this.getEquipements().remove(p);
             }
         }
         for(Gamme g : this.getGammes()){
             if(g.getEquipements().contains(m)){
-                this.removeGamme(g);
+                this.getGammes().remove(g);
             }
         }
         for(Operateur op : this.getOperateurs()){
@@ -246,7 +246,7 @@ public class Atelier {
         }
         for(Operation op : this.getOperations()){
             if(op.getEquipements().contains(m)){
-                this.removeOperation(op);
+                this.getOperations().remove(op);
             }
         }
 
@@ -255,10 +255,9 @@ public class Atelier {
         this.getGammes().remove(g);
         for(Produit p : this.getProduits()){
             if(p.getGammes().contains(g)){
-                this.removeProduit(p);
-            }
+                this.getProduits().remove(p);
+            } 
         }
-        
     }
     public void removeOperateur(Operateur op){
         this.getOperateurs().remove(op);
@@ -273,7 +272,7 @@ public class Atelier {
         this.getOperations().remove(op);
         for(Gamme g : this.getGammes()){
             if(g.getOperations().contains(op)){
-                this.removeGamme(g);
+                this.getOperations().remove(op);
             }
         }
         
@@ -282,7 +281,7 @@ public class Atelier {
         this.equipements.remove(p);
         for(Operation op : this.getOperations()){
             if(op.getEquipements().contains(p)){
-                this.removeOperation(op);
+                this.getOperations().remove(op);
             }
         }
         

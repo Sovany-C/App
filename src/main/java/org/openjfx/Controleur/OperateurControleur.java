@@ -86,6 +86,6 @@ public class OperateurControleur {
     // Bouton Supprimer
     public void supprimerOperateur(){
         Operateur selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        this.vue.getModel().remove(selected);
+        this.vue.getA().removeOperateur(selected);
     }
 }

@@ -87,7 +87,7 @@ public class PosteControleur {
     // Bouton Supprimer
     public void supprimerPoste(ObservableList<Poste> choix){
         Poste selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        this.vue.getModel().remove(selected);
+        this.vue.getAtelier().removePoste(selected);
         choix.remove(selected);
         this.vue.listViewAff(this.vue.getAtelier());
     }

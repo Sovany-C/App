@@ -76,7 +76,7 @@ public class GammeControleur {
     // Bouton Supprimer
     public void supprimerGamme(){
         Gamme selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        this.vue.getModel().remove(selected);
+        this.vue.getA().removeGamme(selected);
     }
 
     // Bouton Sauvegarder

@@ -88,7 +88,7 @@ public class ProduitControleur {
     // Bouton Supprimer
     public void supprimerProduit(){
         Produit selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
-        this.vue.getModel().remove(selected);
+        this.vue.getA().removeProduit(selected);
         this.vue.listViewAff(this.vue.getA());
     }
 }

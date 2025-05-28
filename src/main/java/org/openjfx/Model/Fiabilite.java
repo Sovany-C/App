@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 public class Fiabilite{
 
     public static Machine[]calculfiab( Atelier atelier){
-        ArrayList<Machine> Liste = atelier.getMachine();
+        ArrayList<Machine> Liste = (ArrayList<Machine>) atelier.getMachine();
         
         String chemin = "suiviMaintenance.txt";
         int n=Liste.size();

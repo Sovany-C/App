@@ -54,8 +54,8 @@ public class Lecture {
                     Poste p = new Poste(refPoste, dPoste,new HashSet<>(machinePoste));
                     atelier.getEquipements().add(p);
                     machinePoste.clear();
-                    flux.close();
                 }
+                flux.close();
                 
             }
             catch(FileNotFoundException err){
@@ -67,7 +67,7 @@ public class Lecture {
                 });
             }
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);
+                System.out.println("Erreur Poste :\n"+err);
 
             }
             catch(IllegalArgumentException e){
@@ -120,7 +120,7 @@ public class Lecture {
                 });
             }
             catch(IOException err){
-                System.out.println("Erreur :\n"+err);
+                System.out.println("Erreur Machine:\n"+err);
             }
             catch(NumberFormatException e){
                 System.out.println("Erreur: format des nombres incorrectes");
