@@ -64,8 +64,8 @@ public class ProduitControleur {
                 }
                 if(!this.vue.getListGamme().getSelectionModel().isEmpty()){
                     List<Gamme> selection = this.vue.getListGamme().getSelectionModel().getSelectedItems();
-                     for(Gamme g : selection){
-                    if(!this.vue.getA().getGammelibre().contains(g) && !selected.getGammes().contains(selection)){
+                    for(Gamme g : selection){
+                    if(!this.vue.getA().getGammelibre().contains(g) && !selected.getGammes().contains(g)){
                         throw new IllegalArgumentException("Erreur: Gamme déjà utilisé");
                         }
                     }

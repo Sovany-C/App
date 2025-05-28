@@ -15,7 +15,7 @@ public class Fiabilite{
 
     public static void calculfiab( Atelier atelier){
         
-        String chemin = "data/suiviMaintenance.txt";
+        String chemin = "data/" + atelier.getNom() + "/suiviMaintenance.txt";
         
         try (BufferedReader in = new BufferedReader(new FileReader(chemin))) {
             String ligne;

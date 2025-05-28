@@ -227,64 +227,82 @@ public class Atelier {
         }
     }
 
+    // Méthode suppression élément
     public void removeMachine(Machine m){
+        ArrayList<Poste> postesupp = new ArrayList<>();
         for(Poste p : this.getPostes()){
             if(p.getMachines().contains(m)){
-                this.removePoste(p);
+                postesupp.add(p);
             }
         }
+        for(Poste p : postesupp){
+            this.equipements.remove(p);
+        }
+
+        ArrayList<Gamme> gammesupp = new ArrayList<>();
         for(Gamme g : this.getGammes()){
             if(g.getEquipements().contains(m)){
-                for(Produit p : this.getProduits()){
-                if(p.getGammes().contains(g)){
-                this.getProduits().remove(p);
-                } 
-                }
-                this.getGammes().remove(g);
+                gammesupp.add(g);
             }
         }
+        for(Gamme g : gammesupp){
+            this.getGammes().remove(g);
+        }
+
         for(Operateur op : this.getOperateurs()){
             if(op.getCompetences().contains(m)){
                 op.getCompetences().remove(m);
             }
         }
-        for(Operation op : this.getOperations()){
-            if(op.getEquipements().contains(m)){
-                this.removeOperation(op);
+
+        ArrayList<Operation> operasupp = new ArrayList<>();
+        for(Operation ope : this.getOperations()){
+            if(ope.getEquipements().contains(m)){
+                operasupp.add(ope);
             }
         }
-        this.getEquipements().remove(m);
+        for(Operation ope : operasupp){
+            this.getOperations().remove(ope);
+        }
 
+        this.getEquipements().remove(m);
     }
+
     public void removeGamme(Gamme g){
         for(Produit p : this.getProduits()){
             if(p.getGammes().contains(g)){
-                this.removeProduit(p);
+                p.getGammes().remove(g);
             }
         }
         this.getGammes().remove(g);
     }
+
     public void removeOperateur(Operateur op){
-        for(Poste p : this.getPostes()){
-            if(p.getMachines().contains(op)){
-                this.getEquipements().remove(p);
-            }
-        }
-        this.getGammes().remove(op);
+        this.getOperateurs().remove(op);
     }
+
     public void removeOperation(Operation op){
+        ArrayList<Gamme> gammesupp = new ArrayList<>();
         for(Gamme g : this.getGammes()){
             if(g.getOperations().contains(op)){
-                this.removeGamme(g);
+                gammesupp.add(g);
             }
         }
+        for(Gamme g : gammesupp){
+            this.getGammes().remove(g);
+        }
+
         this.getOperations().remove(op);
     }
     public void removePoste(Poste p){
-        for(Operation op : this.getOperations()){
-            if(op.getEquipements().contains(p)){
-                this.removeOperation(op);
+        ArrayList<Operation> operasupp = new ArrayList<>();
+        for(Operation ope : this.getOperations()){
+            if(ope.getEquipements().contains(p)){
+                operasupp.add(ope);
             }
+        }
+        for(Operation ope : operasupp){
+            this.getOperations().remove(ope);
         }
         this.equipements.remove(p);
     }

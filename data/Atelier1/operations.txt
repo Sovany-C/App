@@ -1,3 +1,2 @@
-OPE02;;M03;5.2
+OPE02;;M03,M01;5.2
 OPE01;operation;M03,PT01;4.5
-OPE03;operation;M01,M02;2.0
