@@ -1,11 +1,15 @@
 package org.openjfx.Model;
 
+import java.util.ArrayList;
+
 public class Machine extends Equipement{
 
     private String type;
     private float x;
     private float y;
     private float cout;
+    private String refMachine;
+    private String dMachine;
 
     // Getters & Setters
     public String getType() {
@@ -41,6 +45,52 @@ public class Machine extends Equipement{
         }
         this.cout = cout;
     }
+       public int getNbPannes() {
+        return nbPannes;
+    }
+    
+    public String getRefMachine() {
+        return refMachine;
+    }
+       public void setRefMachine(String refMachine) {
+           this.refMachine = refMachine;
+       }
+       public String getdMachine() {
+           return dMachine;
+       }
+       public void setdMachine(String dMachine) {
+           this.dMachine = dMachine;
+       }
+
+    public int nbPannes = 0;
+
+    public void setNbPannes(int nbPannes) {
+        this.nbPannes = nbPannes;
+    }
+    public Machine(String ref) {
+        super(ref, ""); // Call the superclass constructor with appropriate arguments
+        this.refMachine = ref;
+        // Initialize other fields if necessary
+    }
+
+     public void ajouterEvenement(String evt) {
+        evenements.add(evt);
+    }
+
+    public ArrayList<String> getEvenements() {
+        return evenements;
+    }
+    private ArrayList<String> evenements = new ArrayList<>();
+    private double rendement;
+
+public double getRendement() {
+    return rendement;
+}
+
+public void setRendement(double rendement) {
+    this.rendement = rendement;
+}
+
 
     // Constructeur
     public Machine(String refMachine, String dMachine, String type, float x,
