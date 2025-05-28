@@ -35,6 +35,14 @@ public class SceneControleur {
     public void closeStage(){
         stage.setOnCloseRequest(evt->{
             Sauvegarde.sauvegarderAtelier(this.main.getModel());
+            for(Atelier a : this.main.getModel()){
+                Sauvegarde.sauvegarderMachine(a);
+                Sauvegarde.sauvegarderGamme(a);
+                Sauvegarde.sauvegarderOperateur(a);
+                Sauvegarde.sauvegarderOperation(a);
+                Sauvegarde.sauvegarderPoste(a);
+                Sauvegarde.sauvegarderProduit(a);
+            }
         });
     }
 }

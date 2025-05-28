@@ -228,7 +228,6 @@ public class Atelier {
     }
 
     public void removeMachine(Machine m){
-        this.getEquipements().remove(m);
         for(Poste p : this.getPostes()){
             if(p.getMachines().contains(m)){
                 this.getEquipements().remove(p);
@@ -236,6 +235,11 @@ public class Atelier {
         }
         for(Gamme g : this.getGammes()){
             if(g.getEquipements().contains(m)){
+                for(Produit p : this.getProduits()){
+                if(p.getGammes().contains(g)){
+                this.getProduits().remove(p);
+                } 
+                }
                 this.getGammes().remove(g);
             }
         }
@@ -249,42 +253,40 @@ public class Atelier {
                 this.getOperations().remove(op);
             }
         }
+        this.getEquipements().remove(m);
 
     }
     public void removeGamme(Gamme g){
-        this.getGammes().remove(g);
         for(Produit p : this.getProduits()){
             if(p.getGammes().contains(g)){
                 this.getProduits().remove(p);
             } 
         }
+        this.getGammes().remove(g);
     }
     public void removeOperateur(Operateur op){
-        this.getOperateurs().remove(op);
         for(Poste p : this.getPostes()){
-            if(p.getMachines().contains(p)){
+            if(p.getMachines().contains(op)){
                 this.getEquipements().remove(p);
             }
         }
-        
+        this.getGammes().remove(op);
     }
     public void removeOperation(Operation op){
-        this.getOperations().remove(op);
         for(Gamme g : this.getGammes()){
             if(g.getOperations().contains(op)){
                 this.getOperations().remove(op);
             }
         }
-        
+        this.getOperations().remove(op);
     }
     public void removePoste(Poste p){
-        this.equipements.remove(p);
         for(Operation op : this.getOperations()){
             if(op.getEquipements().contains(p)){
                 this.getOperations().remove(op);
             }
         }
-        
+        this.equipements.remove(p);
     }
     public void removeProduit(Produit p){
         this.getProduits().remove(p);

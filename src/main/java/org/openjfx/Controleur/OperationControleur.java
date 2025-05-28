@@ -51,6 +51,7 @@ public class OperationControleur {
             Operation selected = this.vue.getChoix().getSelectionModel().getSelectedItem();
             if(selected != null){
                 if(!this.vue.getRef().getText().trim().isEmpty()){
+                    this.vue.getA().verifOperation(this.vue.getRef().getText().trim());
                     selected.setRefOperation(this.vue.getRef().getText().trim());
                 }
                 if(!this.vue.getDes().getText().trim().isEmpty()){
