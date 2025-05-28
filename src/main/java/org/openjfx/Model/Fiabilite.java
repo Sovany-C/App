@@ -5,14 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
+
 import java.util.Comparator;
 
 public class Fiabilite{
 
     public static Machine[]calculfiab( Atelier atelier){
-        ArrayList<Machine> Liste = (ArrayList<Machine>) atelier.getMachine();
+        ObservableList<Machine> Liste = atelier.getMachine();
         
-        String chemin = "suiviMaintenance.txt";
+        String chemin = "data/suiviMaintenance.txt";
         int n=Liste.size();
         Machine[]M= new Machine[n+100];
         int e=0;
@@ -21,7 +25,7 @@ public class Fiabilite{
         try (BufferedReader in = new BufferedReader(new FileReader(chemin))) {
             String ligne;
             while ((ligne = in.readLine()) != null) {
-                StringTokenizer t = new StringTokenizer(ligne, " ");
+                StringTokenizer t = new StringTokenizer(ligne, ";");
                 String date = t.nextToken();
                 String heure = t.nextToken();
                 String ref = t.nextToken(); // machine

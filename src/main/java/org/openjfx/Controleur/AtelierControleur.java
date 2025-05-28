@@ -1,6 +1,7 @@
 package org.openjfx.Controleur;
 
 import org.openjfx.Pane.*;
+import org.openjfx.Model.*;
 
 import java.io.File;
 
@@ -100,6 +101,8 @@ public class AtelierControleur {
     }
 
     public void openFiabilite(){
+        Machine[] machines = Fiabilite.calculfiab(this.vue.getModel());
+        Fiabilite.calculerFiabiliteMachines(machines);
         Scene scene = new Scene(new FiabilitePane(this.vue.getModel()), 800, 500);
         try {
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
