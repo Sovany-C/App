@@ -1,1 +1,2 @@
-OP01;;;MC01,MC02,MC03
+OP01;Dupon;Pierre;MC03
+OP02;Pierre;Charle;MC01,MC02

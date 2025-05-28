@@ -228,7 +228,6 @@ public class Atelier {
     }
 
     public void removeMachine(Machine m){
-        this.getEquipements().remove(m);
         for(Poste p : this.getPostes()){
             if(p.getMachines().contains(m)){
                 this.removePoste(p);
@@ -236,7 +235,16 @@ public class Atelier {
         }
         for(Gamme g : this.getGammes()){
             if(g.getEquipements().contains(m)){
+<<<<<<< HEAD
                 this.removeGamme(g);
+=======
+                for(Produit p : this.getProduits()){
+                if(p.getGammes().contains(g)){
+                this.getProduits().remove(p);
+                } 
+                }
+                this.getGammes().remove(g);
+>>>>>>> 297c951c965da73c44064a40d51e3d34649e352d
             }
         }
         for(Operateur op : this.getOperateurs()){
@@ -249,43 +257,44 @@ public class Atelier {
                 this.removeOperation(op);
             }
         }
+        this.getEquipements().remove(m);
 
     }
     public void removeGamme(Gamme g){
-        this.getGammes().remove(g);
         for(Produit p : this.getProduits()){
             if(p.getGammes().contains(g)){
                 this.removeProduit(p);
             }
         }
+<<<<<<< HEAD
         
+=======
+        this.getGammes().remove(g);
+>>>>>>> 297c951c965da73c44064a40d51e3d34649e352d
     }
     public void removeOperateur(Operateur op){
-        this.getOperateurs().remove(op);
         for(Poste p : this.getPostes()){
-            if(p.getMachines().contains(p)){
+            if(p.getMachines().contains(op)){
                 this.getEquipements().remove(p);
             }
         }
-        
+        this.getGammes().remove(op);
     }
     public void removeOperation(Operation op){
-        this.getOperations().remove(op);
         for(Gamme g : this.getGammes()){
             if(g.getOperations().contains(op)){
                 this.removeGamme(g);
             }
         }
-        
+        this.getOperations().remove(op);
     }
     public void removePoste(Poste p){
-        this.equipements.remove(p);
         for(Operation op : this.getOperations()){
             if(op.getEquipements().contains(p)){
                 this.removeOperation(op);
             }
         }
-        
+        this.equipements.remove(p);
     }
     public void removeProduit(Produit p){
         this.getProduits().remove(p);
