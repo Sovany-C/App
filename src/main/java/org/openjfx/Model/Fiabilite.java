@@ -13,68 +13,60 @@ import java.util.Comparator;
 
 public class Fiabilite{
 
-    public static Machine[]calculfiab( Atelier atelier){
-        ObservableList<Machine> Liste = atelier.getMachine();
+    public static void calculfiab( Atelier atelier){
         
         String chemin = "data/suiviMaintenance.txt";
-        int n=Liste.size();
-        Machine[]M= new Machine[n+100];
-        int e=0;
-        
         
         try (BufferedReader in = new BufferedReader(new FileReader(chemin))) {
             String ligne;
             while ((ligne = in.readLine()) != null) {
-                StringTokenizer t = new StringTokenizer(ligne, ";");
-                String date = t.nextToken();
-                String heure = t.nextToken();
-                String ref = t.nextToken(); // machine
-                String event = t.nextToken();
-                String operateur = t.nextToken();
-                String cause = t.nextToken();
+                String[] t = ligne.split(";");
+                String date = t[0];
+                String[] heure = t[1].split(":");
+                String ref = t[2]; // machine
+                String event = t[3];
+                String operateur = t[4];
+                String cause = t[5];
 
-                boolean ajouter = true;
+                Float duree = Float.parseFloat(heure[0])*60+Float.parseFloat(heure[1]);
 
-                if (e == 0) {
-                    M[0] = new Machine(ref);
-                    M[0].nbPannes = 1;
-                    e++;
-                    continue;
-                }
-
-                for (int i = 0; i < e; i++) {
-                    if (M[i].getRefMachine().equals(ref)) {
-                        M[i].nbPannes++; // on incrémente directement
-                        M[i].ajouterEvenement(event + " par " + operateur + " (" + cause + ")");
-                        ajouter = false;
-                        break;
+                for(Machine m : atelier.getMachine()){
+                    if(m.getRefEquipement().equals(ref)){
+                        if(event.equals("A") && cause.equals("panne")){
+                            m.setNbPannes(m.getNbPannes()+1);
+                            m.setDuree(m.getDuree()-duree);
+                            m.setEtat("A");
+                        }
+                        if(event.equals("A") && cause.equals("maintenance")){
+                            m.setEtat("Maintenance");
+                        }
+                        if(event.equals("A") && cause.equals("accident")){
+                            m.setNbPannes(m.getNbPannes()+1);
+                            m.setEtat("Accident");
+                        }
+                        if(event.equals("D")){
+                            if(m.getEtat().equals("Maintenance")){
+                                m.setEtat("D");
+                            }
+                            if(m.getEtat().equals("A")) {
+                                m.setDuree(m.getDuree()+duree);
+                                m.setEtat("D");  
+                            }
+                        }
                     }
-                }
-
-                if (ajouter) {
-                    M[e] = new Machine(ref);
-                    M[e].nbPannes = 1;
-                    M[e].ajouterEvenement(event + " par " + operateur + " (" + cause + ")");
-                    e++;
                 }
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        Machine[] resultat = new Machine[e];
-        for (int i = 0; i < e; i++) {
-            resultat[i] = M[i];
-        }
-
-        return resultat;
     }
     
 
-    public static void calculerFiabiliteMachines(Machine[] machines) {
-        for (Machine m : machines) {
+    public static void calculerFiabiliteMachines(Atelier atelier) {
+        for (Machine m : atelier.getMachine()) {
             // Exemple simple : fiabilité = 1 / (1 + nbPannes)
-            double rendement = 1.0 / (1 + m.nbPannes);
+            double rendement = 1.0 / (1 + m.getNbPannes());
             m.setRendement(rendement);
         }
     }

@@ -101,8 +101,8 @@ public class AtelierControleur {
     }
 
     public void openFiabilite(){
-        Machine[] machines = Fiabilite.calculfiab(this.vue.getModel());
-        Fiabilite.calculerFiabiliteMachines(machines);
+        Fiabilite.calculfiab(this.vue.getModel());
+        Fiabilite.calculerFiabiliteMachines(this.vue.getModel());
         Scene scene = new Scene(new FiabilitePane(this.vue.getModel()), 800, 500);
         try {
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());

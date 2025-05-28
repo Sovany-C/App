@@ -195,8 +195,13 @@ public class AtelierPane extends VBox {
         this.bt_operateur.setOnAction(evt -> {
             this.controleur.openOperateur();
         });
-
-        
+        c++;
+         this.bt_fiabilite = new Button("Fiabilite");
+         this.pane_saisiedesinfo.add(bt_fiabilite,c,l);
+         this.bt_fiabilite.setOnAction(evt -> {
+             this.controleur.openFiabilite();
+        });
+    
         c++;
         l++;
 
@@ -206,14 +211,9 @@ public class AtelierPane extends VBox {
         });
         c++;
 
-         this.bt_fiabilite = new Button("Fiabilite");
-         this.pane_saisiedesinfo.add(bt_fiabilite,c,l);
-         this.bt_fiabilite.setOnAction(evt -> {
-             this.controleur.openFiabilite();
-         });
 
         this.espace_affichage = new Pane();
-        this.espace_affichage.setPrefSize(900, 600);
+        this.espace_affichage.setPrefSize(800, 600);
         this.espace_affichage.setStyle("-fx-background-color:rgb(70, 79, 97);");
 
         this.paneHBox = new HBox(10);
@@ -226,7 +226,7 @@ public class AtelierPane extends VBox {
         this.setSpacing(20);
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(this.pane_saisiedesinfo);
-        this.getChildren().add(this.espace_affichage);
+        this.getChildren().add(this.pane_VBox);
     }
 
     

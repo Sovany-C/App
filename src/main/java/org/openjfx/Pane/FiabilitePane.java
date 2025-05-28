@@ -31,7 +31,6 @@ public class FiabilitePane extends VBox {
     private Label cy;
     private Label rendement;
     private Label cout;
-    private Label moLabel;
 
     private TableView<Machine> tableMachines;
     private GridPane pane_saisiedesinfo;
@@ -134,8 +133,13 @@ public class FiabilitePane extends VBox {
         coutCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCout()));
         TableColumn<Machine, Double> rendementCol = new TableColumn<Machine, Double>("Fiabilite");
         rendementCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getRendement()));
+        TableColumn<Machine, Float> dureeCol = new TableColumn<Machine, Float>("Durée moyenne");
+        dureeCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getDuree()/cellData.getValue().getNbPannes()));
+        TableColumn<Machine, String> etatCol = new TableColumn<Machine, String>("Etat");
+        etatCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getEtat()));
 
-        this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol,rendementCol);
+
+        this.tableMachines.getColumns().addAll(refCol, desCol,typeCol,cxCol,cyCol,coutCol,rendementCol,dureeCol,etatCol);
         this.pane_saisiedesinfo.add(tableMachines, 0, 8);
         this.pane_saisiedesinfo.setColumnSpan(tableMachines,5);
 
